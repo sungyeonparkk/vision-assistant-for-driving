@@ -1,16 +1,13 @@
 {
     "instructions": [
-        "Describe the given driving scene in detail, including the actions and traffic situations.",
-        "Provide a detailed description of the given driving scene, capturing its key moments.",
-        "Give an elaborate explanation of the driving scene you see, including the traffic events and participants.",
-        "Share a comprehensive rundown of the presented driving scene, highlighting its main actions.",
-        "Offer a thorough analysis of the driving scene, discussing the driver's action and the cause.",
+        "Describe the following driving scene concisely, discussing the driver's action and the cause.",
+        "Provide a description of the given diriving situation.",
+        "Offer an explanation of the driving scene presented.",
+        "Describe the driving scene including the traffic events and participants.",
+        "Give an explanation of the contents of the driving scene with precision",
+        "Share a concise interpretation of the driving situation provided including the road objects and the traffic.",
+        "Present a compact description of the driver's actions and cause to explain these actions.",
         "Explain the driver's behavior in the scene, including the road objects and the traffic.",
-        "Clarify the contents of the displayed driving scene with great detail, focusing on its progression.",
-        "Characterize the driving scene using a well-detailed description, capturing driver's actions and reasons for these actions.",
-        "Walk through the important details of the driving scene, describing the driver's actions and cause to explain these actions.",
-        "Narrate the contents of the driving scene with precision, focusing on the driver's behavior and vehicle-driver interactions.",
-        "Examine the driving scene closely and share its details, including the interactions between the vehicle, traffic participants and environment.",
-        "Write an exhaustive depiction of the given driving scene, capturing driver’s manipulation of the vehicle."
+        "Write an informative summary of the driving scene, including the interactions between the vehicle, traffic participants and environment."
     ]
 }
