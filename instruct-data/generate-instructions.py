@@ -4,6 +4,7 @@ import openai
 import random
 from tqdm import tqdm
 from datetime import datetime
+import time
 
 from dotenv import load_dotenv
 
@@ -114,6 +115,7 @@ if __name__ == "__main__":
                 print(f"Error: {e} {count}")
                 with open(f"BDD-instruct_temp.json", "w", encoding="utf-8") as f:
                     json.dump(responses, f, ensure_ascii=False, indent=2)
+                time.sleep(1)
             else:
                 main_file.write(json.dumps(task) + '\n')
 
