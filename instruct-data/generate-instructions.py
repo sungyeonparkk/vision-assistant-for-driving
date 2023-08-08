@@ -2,11 +2,18 @@ import json
 import os
 import openai
 import random
+from tqdm import tqdm
+from datetime import datetime
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 if __name__ == "__main__":
-    openai.api_key = " "
     model = "gpt-4"
+    CURRENT_DATETIME = datetime.now().strftime("%m-%d_%H%M%S")
 
     with open("./BDD-captions.json", "r") as f:
         inputs = json.load(f)
@@ -45,56 +52,61 @@ if __name__ == "__main__":
     count = 0
 
     # restart_num = 6000
+    
+    print(f"Parsing {len(inputs)} inputs")
 
-    for item in inputs:
-        try:
-            count += 1
-            # 재시작할 때
-            # if count <= restart_num:
-            #     continue
-            if count % 100 == 0:
-                # 임시 저장본 덮어쓰기
+    with open(f"BDD-instruct-3k-{CURRENT_DATETIME}.jsonl", "w", encoding="utf-8") as main_file:
+        for item in tqdm(inputs):
+            try:
+                count += 1
+                # 재시작할 때
+                # if count <= restart_num:
+                #     continue
+                if count % 100 == 0:
+                    # 임시 저장본 덮어쓰기
+                    with open(f"BDD-instruct_temp.json", "w", encoding="utf-8") as f:
+                        json.dump(responses, f, ensure_ascii=False, indent=2)
+                    print(f"Saved temporary results at count {count}")
+
+                question = random.choice(questions)
+
+                messages = [{"role": "system", "content": system_message}]
+
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": "\n".join([sample1["desc"], sample1["instruct"]]),
+                    }
+                )
+                messages.append({"role": "assistant", "content": sample1["answer"]})
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": "\n".join([sample2["desc"], sample2["instruct"]]),
+                    }
+                )
+                messages.append({"role": "assistant", "content": sample2["answer"]})
+
+                messages.append(
+                    {"role": "user", "content": "\n".join([item["desc"], question])}
+                )
+
+                # uses gpt-3.5-turbo
+                chat_completion = openai.ChatCompletion.create(
+                    model=model, messages=messages
+                )
+                answer = chat_completion.choices[0].message.content
+
+                task = {"video_id": item["video_id"], "QA": {"q": question, "a": answer}}
+
+                responses.append(task)
+
+            except Exception as e:
+                print(f"Error: {e} {count}")
                 with open(f"BDD-instruct_temp.json", "w", encoding="utf-8") as f:
                     json.dump(responses, f, ensure_ascii=False, indent=2)
-                print(f"Saved temporary results at count {count}")
-
-            question = random.choice(questions)
-
-            messages = [{"role": "system", "content": system_message}]
-
-            messages.append(
-                {
-                    "role": "user",
-                    "content": "\n".join([sample1["desc"], sample1["instruct"]]),
-                }
-            )
-            messages.append({"role": "assistant", "content": sample1["answer"]})
-            messages.append(
-                {
-                    "role": "user",
-                    "content": "\n".join([sample2["desc"], sample2["instruct"]]),
-                }
-            )
-            messages.append({"role": "assistant", "content": sample2["answer"]})
-
-            messages.append(
-                {"role": "user", "content": "\n".join([item["desc"], question])}
-            )
-
-            # uses gpt-3.5-turbo
-            chat_completion = openai.ChatCompletion.create(
-                model=model, messages=messages
-            )
-            answer = chat_completion.choices[0].message.content
-
-            task = {"video_id": item["video_id"], "QA": {"q": question, "a": answer}}
-
-            responses.append(task)
-
-        except Exception as e:
-            print(f"Error: {e} {count}")
-            with open(f"BDD-instruct_temp.json", "w", encoding="utf-8") as f:
-                json.dump(responses, f, ensure_ascii=False, indent=2)
+            else:
+                main_file.write(json.dumps(task) + '\n')
 
     with open(f"BDD-instruct-3k.json", "w", encoding="utf-8") as f:
         json.dump(responses, f, ensure_ascii=False, indent=2)
