@@ -54,7 +54,7 @@ if __name__ == "__main__":
             #     continue
             if count % 100 == 0:
                 # 임시 저장본 덮어쓰기
-                with open(f"BDD-X-instruck_temp.json", "w", encoding="utf-8") as f:
+                with open(f"BDD-instruct_temp.json", "w", encoding="utf-8") as f:
                     json.dump(responses, f, ensure_ascii=False, indent=2)
                 print(f"Saved temporary results at count {count}")
 
@@ -93,8 +93,8 @@ if __name__ == "__main__":
 
         except Exception as e:
             print(f"Error: {e} {count}")
-            with open(f"BDD-X-instruck_temp.json", "w", encoding="utf-8") as f:
+            with open(f"BDD-instruct_temp.json", "w", encoding="utf-8") as f:
                 json.dump(responses, f, ensure_ascii=False, indent=2)
 
-    with open(f"BDD-X-instruck-3k.json", "w", encoding="utf-8") as f:
+    with open(f"BDD-instruct-3k.json", "w", encoding="utf-8") as f:
         json.dump(responses, f, ensure_ascii=False, indent=2)
