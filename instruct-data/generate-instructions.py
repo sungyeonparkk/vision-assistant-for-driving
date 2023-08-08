@@ -11,6 +11,9 @@ load_dotenv()
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
+MAX_NUM = 1000
+INPUT_RANDOM_SAMPLING = True
+
 if __name__ == "__main__":
     model = "gpt-4"
     CURRENT_DATETIME = datetime.now().strftime("%m-%d_%H%M%S")
@@ -30,16 +33,16 @@ if __name__ == "__main__":
         questions = questions["instructions"]
 
     system_message = f"""
-    As an AI visual assistant of a driver, you are watching road front-view for around 40 seconds.
-    You are given descriptions of driving situarions in chronological order, description of driving scene at the first line, detailing object types and its unique id, bounding boxes of objects(using
-    coordinates [bottom left x, top right x, bottom left y, and top right y]), actions of the your vehicle.
+    As an AI visual assistant of a driver, you are watching front-view road for around 40 seconds.
+    You are given the descriptions of driving situations in chronological order, description of driving scene at the first line, detailed object types and its unique id, bounding boxes of objects (using
+    coordinates [bottom left x, top right x, bottom left y, and top right y]), actions of your vehicle.
 
     When using the timing description, do not mention it directly with seconds (ex. at 19 seconds, from 00:00 to 00:19) and just utilize it to understand the temporal change of driving scene. 
 
-    And you can infer their relative postions like where other cars and pedestrians exist and are heading to and how close they are from your car from the bounding boxes. 
-    Also, if there are objects with same ids, you can guess how they move toward from your view. 
+    And you can infer their relative positions like where other cars and pedestrians exist and are heading to and how close they are from your car from the bounding boxes. 
+    Also, if there are objects with same id, you can guess where they move toward from your view. 
 
-    Base on this, you might guess why the driver acts like given descriptions related to the traffic situation.
+    Bases on this, you might guess how the driver will act given descriptions related to the traffic situation.
 
     Please use the sequence adverbs "first", "next", "then" and "finally" to describe this driving scene in detail, but don’t mention the specific time. Give as many
     details as possible. Say everything you see. The description should be more than 150 words and less than 200 words. 
@@ -56,7 +59,9 @@ if __name__ == "__main__":
     print(f"Parsing {len(inputs)} inputs")
 
     with open(f"BDD-instruct-3k-{CURRENT_DATETIME}.jsonl", "w", encoding="utf-8") as main_file:
-        for item in tqdm(inputs):
+        for index in tqdm(range(len(inputs))):
+            if index >= MAX_NUM:
+                break
             try:
                 count += 1
                 # 재시작할 때
@@ -68,6 +73,10 @@ if __name__ == "__main__":
                         json.dump(responses, f, ensure_ascii=False, indent=2)
                     print(f"Saved temporary results at count {count}")
 
+                item = inputs[index]
+                if INPUT_RANDOM_SAMPLING:
+                    item = random.choice(inputs)
+                
                 question = random.choice(questions)
 
                 messages = [{"role": "system", "content": system_message}]
