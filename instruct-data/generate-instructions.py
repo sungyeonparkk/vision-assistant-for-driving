@@ -12,7 +12,7 @@ load_dotenv()
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
-MAX_NUM = 1000
+MAX_NUM = 2000
 INPUT_RANDOM_SAMPLING = True
 
 if __name__ == "__main__":
