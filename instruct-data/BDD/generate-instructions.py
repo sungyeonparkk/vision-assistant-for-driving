@@ -23,13 +23,13 @@ if __name__ == "__main__":
         inputs = json.load(f)
 
     # Load samples
-    with open("./prompt/detailed_decription/caps-01.json", "r") as f:
+    with open("../prompt/detailed_decription/caps-01.json", "r") as f:
         sample1 = json.load(f)
 
-    with open("./prompt/detailed_decription/caps-02.json", "r") as f:
+    with open("../prompt/detailed_decription/caps-02.json", "r") as f:
         sample2 = json.load(f)
 
-    with open("./prompt/detailed_decription/instructions.json", "r") as f:
+    with open("../prompt/detailed_decription/instructions.json", "r") as f:
         questions = json.load(f)
         questions = questions["instructions"]
 
