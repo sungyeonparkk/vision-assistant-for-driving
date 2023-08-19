@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.environ.get('OPENAI_API_KEY')
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 MAX_NUM = 2000
 INPUT_RANDOM_SAMPLING = True
@@ -23,13 +23,13 @@ if __name__ == "__main__":
         inputs = json.load(f)
 
     # Load samples
-    with open("../prompt/detailed_decription/caps-01.json", "r") as f:
+    with open("../prompt/detailed_description/caps-01.json", "r") as f:
         sample1 = json.load(f)
 
-    with open("../prompt/detailed_decription/caps-02.json", "r") as f:
+    with open("../prompt/detailed_description/caps-02.json", "r") as f:
         sample2 = json.load(f)
 
-    with open("../prompt/detailed_decription/instructions.json", "r") as f:
+    with open("../prompt/detailed_description/instructions.json", "r") as f:
         questions = json.load(f)
         questions = questions["instructions"]
 
@@ -56,10 +56,12 @@ if __name__ == "__main__":
     count = 0
 
     # restart_num = 6000
-    
+
     print(f"Parsing {len(inputs)} inputs")
 
-    with open(f"BDD-instruct-3k-{CURRENT_DATETIME}.jsonl", "w", encoding="utf-8") as main_file:
+    with open(
+        f"BDD-instruct-3k-{CURRENT_DATETIME}.jsonl", "w", encoding="utf-8"
+    ) as main_file:
         for index in tqdm(range(len(inputs))):
             if index >= MAX_NUM:
                 break
@@ -77,7 +79,7 @@ if __name__ == "__main__":
                 item = inputs[index]
                 if INPUT_RANDOM_SAMPLING:
                     item = random.choice(inputs)
-                
+
                 question = random.choice(questions)
 
                 messages = [{"role": "system", "content": system_message}]
@@ -107,7 +109,10 @@ if __name__ == "__main__":
                 )
                 answer = chat_completion.choices[0].message.content
 
-                task = {"video_id": item["video_id"], "QA": {"q": question, "a": answer}}
+                task = {
+                    "video_id": item["video_id"],
+                    "QA": {"q": question, "a": answer},
+                }
 
                 responses.append(task)
 
@@ -117,7 +122,7 @@ if __name__ == "__main__":
                     json.dump(responses, f, ensure_ascii=False, indent=2)
                 time.sleep(1)
             else:
-                main_file.write(json.dumps(task) + '\n')
+                main_file.write(json.dumps(task) + "\n")
 
     with open(f"BDD-instruct-3k.json", "w", encoding="utf-8") as f:
         json.dump(responses, f, ensure_ascii=False, indent=2)
