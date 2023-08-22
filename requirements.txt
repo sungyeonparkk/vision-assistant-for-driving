@@ -1,5 +1,5 @@
 tqdm
-eva-decord
+decord
 timm
 einops
 opencv_python
