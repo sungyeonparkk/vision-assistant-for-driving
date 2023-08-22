@@ -1,2 +1,7 @@
 .env
 .dist
+
+.idea
+__pycache__
+output
+ckpt
