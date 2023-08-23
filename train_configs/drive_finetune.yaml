@@ -47,7 +47,7 @@ datasets:
   bdd_instruct:
     data_type: video
     build_info:
-      anno_dir: /root/vision-assistant-driving/data/BDD_train_data/BDD-Instruct-v2.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+      anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
       videos_dir: /input/BDD-X/BDD-X/BDD-X-videos/
     vis_processor:
       train:
