@@ -68,6 +68,7 @@ class BDD_Instruct_Dataset(BaseDataset):
         self.vis_root = vis_root
         self.resize_size = 224
         self.num_frm = 8
+        print(tokenizer_name)
         self.tokenizer = LlamaTokenizer.from_pretrained(
             tokenizer_name, use_fast=False, local_files_only=True
         )
