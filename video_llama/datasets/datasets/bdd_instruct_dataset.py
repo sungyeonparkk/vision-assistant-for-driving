@@ -68,7 +68,9 @@ class BDD_Instruct_Dataset(BaseDataset):
         self.vis_root = vis_root
         self.resize_size = 224
         self.num_frm = 8
-        self.tokenizer = LlamaTokenizer.from_pretrained(tokenizer_name, use_fast=False)
+        self.tokenizer = LlamaTokenizer.from_pretrained(
+            tokenizer_name, use_fast=False, local_files_only=True
+        )
         self.tokenizer.pad_token = self.tokenizer.unk_token
         self.tokenizer.add_tokens([DEFAULT_IMAGE_PATCH_TOKEN], special_tokens=True)
         self.IMAGE_PATCH_TOKEN_ID = self.tokenizer.get_vocab()[
