@@ -1,7 +1,9 @@
 .env
 .dist
+.DS_Store
 
 .idea
 __pycache__
 output
+input
 ckpt

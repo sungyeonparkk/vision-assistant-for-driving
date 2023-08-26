@@ -1,5 +1,5 @@
 tqdm
-decord
+eva-decord
 timm
 einops
 opencv_python
@@ -11,7 +11,7 @@ iopath
 webdataset
 ftfy
 SentencePiece
-transformers==4.28.0
+transformers==4.30.2
 gradio==3.24.1
 pytorchvideo
 gradio-client==0.0.8

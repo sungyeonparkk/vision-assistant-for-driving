@@ -269,6 +269,7 @@ class RunnerBase:
                 batch_sizes=batch_sizes,
                 is_trains=is_trains,
                 collate_fns=collate_fns,
+                torch_device=self.device
             )
 
             self._dataloaders = {k: v for k, v in zip(split_names, dataloaders)}
@@ -495,6 +496,7 @@ class RunnerBase:
         batch_sizes,
         is_trains,
         collate_fns,
+        torch_device,
         dataset_ratios=None,
     ):
         """
@@ -542,7 +544,7 @@ class RunnerBase:
                     collate_fn=collate_fn,
                     drop_last=True if is_train else False,
                 )
-                loader = PrefetchLoader(loader)
+                loader = PrefetchLoader(loader, torch_device)
 
                 if is_train:
                     loader = IterLoader(loader, use_distributed=self.use_distributed)

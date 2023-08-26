@@ -48,7 +48,7 @@ datasets:
     data_type: video
     build_info:
       anno_dir: ./data/BDD_train_data/BDD-instruct-3k.json
-      videos_dir: /Volumes/무제/BDD-X-videos/
+      videos_dir: input/BDD-X-videos/
     vis_processor:
       train:
         name: "alpro_video_train"

@@ -51,9 +51,12 @@ class PrefetchLoader(object):
     (copied and then modified from nvidia apex)
     """
 
-    def __init__(self, loader):
+    def __init__(self, loader, device):
         self.loader = loader
-        self.stream = torch.cuda.Stream()
+        if device == "cuda":
+            self.stream = torch.cuda.Stream(device)
+        else:
+            self.stream = torch.Stream()
 
     def __iter__(self):
         loader_it = iter(self.loader)
