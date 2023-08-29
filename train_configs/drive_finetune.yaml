@@ -47,7 +47,7 @@ datasets:
   bdd_instruct:
     data_type: video
     build_info:
-      anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+      anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2-filtered.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
       videos_dir: /input/BDD-X-1/
     vis_processor:
       train:
@@ -117,8 +117,8 @@ run:
   weight_decay: 0.05
   max_epoch: 3
   iters_per_epoch: 1000
-  batch_size_train: 4
-  batch_size_eval: 4
+  batch_size_train: 2
+  batch_size_eval: 2
   num_workers: 4
   warmup_steps: 1000
 
