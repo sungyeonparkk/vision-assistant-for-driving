@@ -1,0 +1,15 @@
+{
+    "instructions": [
+        "Tell me which district driver is driving now. City center or highway. And also tell me why you thought like that.",
+        "What situation can be predicted when the driver did not performed its second behavior?",
+        "Describe the following driving scene concisely, discussing the driver's action and the cause.",
+        "Provide a description of the given driving situation.",
+        "Offer an explanation of the driving scene presented.",
+        "Describe the driving scene including the traffic events and participants.",
+        "Give an explanation of the contents of the driving scene with precision",
+        "Share a concise interpretation of the driving situation provided including the road objects and the traffic.",
+        "Present a compact description of the driver's actions and cause to explain these actions.",
+        "Explain the driver's behavior in the scene, including the road objects and the traffic.",
+        "Write an informative summary of the driving scene, including the interactions between the vehicle, traffic participants and environment."
+    ]
+}
