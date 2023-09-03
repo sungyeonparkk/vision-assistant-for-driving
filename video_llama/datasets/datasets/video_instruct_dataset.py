@@ -48,9 +48,9 @@ class Video_Instruct_Dataset(BaseDataset):
         vis_root,
         ann_root,
         num_video_query_token=32,
-        tokenizer_name="/mnt/workspace/ckpt/vicuna-13b/",
+        tokenizer_name="/input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf",
         data_type="video",
-        model_type="vicuna",
+        model_type="llama_v2",
     ):
         """
         vis_root (string): Root directory of Llava images (e.g. webvid_eval/video/)

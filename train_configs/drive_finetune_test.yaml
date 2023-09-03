@@ -47,8 +47,8 @@ datasets:
   bdd_instruct:
     data_type: video
     build_info:
-      anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v3.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-      videos_dir: /input/BDD-X-1/
+      anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+      videos_dir: /input/BDD-X-sample/
     vis_processor:
       train:
         name: "alpro_video_train"

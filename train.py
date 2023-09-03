@@ -9,6 +9,7 @@ Adapted from salesforce@LAVIS and Vision-CAIR@MiniGPT-4. Below is the original c
 import argparse
 import os
 import random
+import wandb
 
 import numpy as np
 import torch
@@ -81,6 +82,10 @@ def main():
 
     cfg = Config(parse_args())
 
+    # Start wandb
+    run_name = f"{job_id}_{cfg.get_config()['run']['task']}_max-epoch={cfg.get_config()['run']['max_epoch']}_batch-size-train={cfg.get_config()['run']['batch_size_train']}"
+    wandb.init(project="video-llama-drive", name=run_name)
+
     init_distributed_mode(cfg.run_cfg)
 
     setup_seeds(cfg)
@@ -98,10 +103,12 @@ def main():
 
     model = task.build_model(cfg)
 
+    wandb.watch(model)
+
     runner = get_runner_class(cfg)(
         cfg=cfg, job_id=job_id, task=task, model=model, datasets=datasets
     )
-    runner.train()
+    runner.train(wandb)
 
 
 if __name__ == "__main__":

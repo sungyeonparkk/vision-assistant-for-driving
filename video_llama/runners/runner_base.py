@@ -24,7 +24,11 @@ from video_llama.common.dist_utils import (
 )
 from video_llama.common.registry import registry
 from video_llama.common.utils import is_url
-from video_llama.datasets.data_utils import concat_datasets, reorg_datasets_by_split, ChainDataset
+from video_llama.datasets.data_utils import (
+    concat_datasets,
+    reorg_datasets_by_split,
+    ChainDataset,
+)
 from video_llama.datasets.datasets.dataloader_utils import (
     IterLoader,
     MultiIterLoader,
@@ -161,7 +165,7 @@ class RunnerBase:
 
             if iters_per_epoch is None:
                 try:
-                    iters_per_epoch = len(self.dataloaders['train'])
+                    iters_per_epoch = len(self.dataloaders["train"])
                 except (AttributeError, TypeError):
                     iters_per_epoch = 10000
 
@@ -197,7 +201,6 @@ class RunnerBase:
             dict: {split_name: (tuples of) dataloader}
         """
         if self._dataloaders is None:
-
             # concatenate map-style datasets and chain wds.DataPipe datasets separately
             # training set becomes a tuple (ConcatDataset, ChainDataset), both are
             # optional but at least one of them is required. The resultant ConcatDataset
@@ -360,7 +363,7 @@ class RunnerBase:
         self.result_dir = result_dir
         self.output_dir = output_dir
 
-    def train(self):
+    def train(self, wandb):
         start_time = time.time()
         best_agg_metric = 0
         best_epoch = 0
@@ -377,6 +380,7 @@ class RunnerBase:
                 logging.info("Start training")
                 train_stats = self.train_epoch(cur_epoch)
                 self.log_stats(split_name="train", stats=train_stats)
+                wandb.log(train_stats)
 
             # evaluation phase
             if len(self.valid_splits) > 0:
@@ -396,7 +400,9 @@ class RunnerBase:
                             if agg_metrics > best_agg_metric and split_name == "val":
                                 best_epoch, best_agg_metric = cur_epoch, agg_metrics
 
-                                self._save_checkpoint(cur_epoch, is_best=True)
+                                self._save_checkpoint(
+                                    cur_epoch, is_best=True, wandb=wandb
+                                )
 
                             val_log.update({"best_epoch": best_epoch})
                             self.log_stats(val_log, split_name)
@@ -404,7 +410,7 @@ class RunnerBase:
             else:
                 # if no validation split is provided, we just save the checkpoint at the end of each epoch.
                 if not self.evaluate_only:
-                    self._save_checkpoint(cur_epoch, is_best=False)
+                    self._save_checkpoint(cur_epoch, is_best=False, wandb=wandb)
 
             if self.evaluate_only:
                 break
@@ -555,7 +561,7 @@ class RunnerBase:
             datasets, batch_sizes, is_trains, collate_fns
         ):
             if isinstance(dataset, list) or isinstance(dataset, tuple):
-                if hasattr(dataset[0], 'sample_ratio') and dataset_ratios is None:
+                if hasattr(dataset[0], "sample_ratio") and dataset_ratios is None:
                     dataset_ratios = [d.sample_ratio for d in dataset]
                 loader = MultiIterLoader(
                     loaders=[
@@ -572,7 +578,7 @@ class RunnerBase:
         return loaders
 
     @main_process
-    def _save_checkpoint(self, cur_epoch, is_best=False):
+    def _save_checkpoint(self, cur_epoch, is_best=False, wandb=None):
         """
         Save the checkpoint at the current epoch.
         """
@@ -598,6 +604,7 @@ class RunnerBase:
         )
         logging.info("Saving checkpoint at epoch {} to {}.".format(cur_epoch, save_to))
         torch.save(save_obj, save_to)
+        wandb.save(save_obj)
 
     def _reload_best_model(self, model):
         """
@@ -629,7 +636,9 @@ class RunnerBase:
             )
             checkpoint = torch.load(cached_file, map_location=self.device, strict=False)
         elif os.path.isfile(url_or_filename):
-            checkpoint = torch.load(url_or_filename, map_location=self.device, strict=False)
+            checkpoint = torch.load(
+                url_or_filename, map_location=self.device, strict=False
+            )
         else:
             raise RuntimeError("checkpoint url or path is invalid")
 
