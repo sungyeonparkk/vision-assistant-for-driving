@@ -19,3 +19,4 @@ torchaudio
 
 openai
 python-dotenv
+wandb
