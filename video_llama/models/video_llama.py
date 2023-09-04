@@ -81,6 +81,7 @@ class VideoLLAMA(Blip2Base):
         self.tokenizer = self.init_tokenizer()
         self.low_resource = low_resource
 
+        ## // Load image encoder of BLIP-2
         print('Loading VIT')
         self.visual_encoder, self.ln_vision = self.init_vision_encoder(
             vit_model, img_size, drop_path_rate, use_grad_checkpoint, vit_precision
