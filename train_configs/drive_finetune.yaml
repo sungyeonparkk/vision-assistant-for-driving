@@ -130,6 +130,7 @@ run:
 
   evaluate: False 
   train_splits: ["train"]
+  valid_splits: ["val"]
 
   device: "cuda"
   world_size: 1
