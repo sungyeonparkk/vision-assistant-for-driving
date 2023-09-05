@@ -34,8 +34,8 @@ model:
 
   # for llama_2_chat:
   end_sym: "</s>"
-  prompt_path: "prompts/alignment_image.txt"
-  prompt_template: '[INST] <<SYS>>\n \n<</SYS>>\n\n{} [/INST] '
+  # prompt_path: "prompts/alignment_image.txt"
+  # prompt_template: '[INST] <<SYS>>\n \n<</SYS>>\n\n{} [/INST] '
 
   # for vicuna:
   # end_sym: "###"

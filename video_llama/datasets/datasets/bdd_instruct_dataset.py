@@ -68,7 +68,6 @@ class BDD_Instruct_Dataset(BaseDataset):
         self.vis_root = vis_root
         self.resize_size = 224
         self.num_frm = 8
-        print(tokenizer_name)
         self.tokenizer = LlamaTokenizer.from_pretrained(
             tokenizer_name, use_fast=False, local_files_only=True
         )
@@ -96,7 +95,6 @@ class BDD_Instruct_Dataset(BaseDataset):
                 sample = self.annotation[index]
                 video_path = self._get_video_path(sample)
                 conversation_list = [sample["QA"]]
-                print(video_path, conversation_list)
                 video, msg = load_video(
                     video_path=video_path,
                     n_frms=self.num_frm,
