@@ -380,7 +380,9 @@ class RunnerBase:
                 logging.info("Start training")
                 train_stats = self.train_epoch(cur_epoch)
                 self.log_stats(split_name="train", stats=train_stats)
-                wandb.log(train_stats)
+                logged_stats = {key: float(value) for key, value in train_stats.items()}
+                logged_stats["epoch"] = cur_epoch
+                wandb.log(logged_stats)
 
             # evaluation phase
             if len(self.valid_splits) > 0:
@@ -604,7 +606,7 @@ class RunnerBase:
         )
         logging.info("Saving checkpoint at epoch {} to {}.".format(cur_epoch, save_to))
         torch.save(save_obj, save_to)
-        wandb.save(save_obj)
+        wandb.save(save_to)
 
     def _reload_best_model(self, model):
         """
