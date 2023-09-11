@@ -58,7 +58,7 @@ class PrefetchLoader(object):
     def __iter__(self):
         loader_it = iter(self.loader)
         self.preload(loader_it)
-        batch = self.next(loader_it)
+        batch = self.__next__(loader_it)
         while batch is not None:
             is_tuple = isinstance(batch, tuple)
             if is_tuple:
@@ -68,7 +68,7 @@ class PrefetchLoader(object):
                 yield task, batch
             else:
                 yield batch
-            batch = self.next(loader_it)
+            batch = self.__next__(loader_it)
 
     def __len__(self):
         return len(self.loader)
@@ -98,7 +98,7 @@ class PrefetchLoader(object):
             # self.next_input = self.next_input_gpu
             # self.next_target = self.next_target_gpu
 
-    def next(self, it):
+    def __next__(self, it):
         torch.cuda.current_stream().wait_stream(self.stream)
         batch = self.batch
         if batch is not None:

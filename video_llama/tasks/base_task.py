@@ -72,7 +72,8 @@ class BaseTask:
         return loss
 
     def valid_step(self, model, samples):
-        raise NotImplementedError
+        loss = model(samples)["loss"]
+        return loss
 
     def before_evaluation(self, model, dataset, **kwargs):
         model.before_evaluation(dataset=dataset, task_type=type(self))

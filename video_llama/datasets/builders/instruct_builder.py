@@ -25,8 +25,8 @@ class Instruct_Builder(BaseDatasetBuilder):
     def build(self):
         self.build_processors()
         datasets = dict()
-        
-        for split in ["train", "val"]:
+
+        for split in ["train"]:
             build_info = self.config.build_info[split]
             dataset_cls = self.train_dataset_cls
             if self.config.num_video_query_token:

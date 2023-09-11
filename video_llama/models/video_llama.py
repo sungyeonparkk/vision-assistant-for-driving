@@ -436,6 +436,7 @@ class VideoLLAMA(Blip2Base):
 
             if self.train_flag == 0:
                 num_patch_tokens = self.num_video_query_token
+                # output of video Qformer
                 img_embeds, atts_img = self.encode_videoQformer_visual(image)
             elif self.train_flag == 1:
                 num_patch_tokens = self.num_audio_query_token
@@ -444,10 +445,12 @@ class VideoLLAMA(Blip2Base):
                 
             temp_input_ids = copy.deepcopy(input_ids)
             temp_input_ids[temp_input_ids == im_patch_token_id] = 0
+            # get text embedding
             temp_input_embedding = self.llama_model.model.embed_tokens(temp_input_ids)
 
             new_input_embeds=[]
             cur_image_idx = 0
+            # Iteration for each sample(video)
             for cur_input_ids, cur_input_embeds in zip(input_ids, temp_input_embedding):
                 cur_image_features = img_embeds[cur_image_idx]
 
@@ -457,7 +460,7 @@ class VideoLLAMA(Blip2Base):
                 mask_index_start = masked_indices[0]
                 if (masked_indices != torch.arange(mask_index_start, mask_index_start+num_patch_tokens, device=masked_indices.device, dtype=masked_indices.dtype)).any():
                     raise ValueError("The image patch tokens should be consecutive.")
-                
+                # <ImageHere> * 32 (=Qformer query num) -> image feature 로 대체
                 cur_new_input_embeds = torch.cat((cur_input_embeds[:mask_index_start], cur_image_features, cur_input_embeds[mask_index_start+num_patch_tokens:]), dim=0)
                 new_input_embeds.append(cur_new_input_embeds)
                 
