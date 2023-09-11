@@ -25,29 +25,29 @@ class Instruct_Builder(BaseDatasetBuilder):
     def build(self):
         self.build_processors()
         datasets = dict()
-        split = "train"
 
-        build_info = self.config.build_info
-        dataset_cls = self.train_dataset_cls
-        if self.config.num_video_query_token:
-            num_video_query_token = self.config.num_video_query_token
-        else:
-            num_video_query_token = 32
+        for split in ["train"]:
+            build_info = self.config.build_info[split]
+            dataset_cls = self.train_dataset_cls
+            if self.config.num_video_query_token:
+                num_video_query_token = self.config.num_video_query_token
+            else:
+                num_video_query_token = 32
 
-        if self.config.tokenizer_name:
-            tokenizer_name = self.config.tokenizer_name
-        else:
-            tokenizer_name = "/mnt/workspace/ckpt/vicuna-13b/"
+            if self.config.tokenizer_name:
+                tokenizer_name = self.config.tokenizer_name
+            else:
+                tokenizer_name = "/mnt/workspace/ckpt/vicuna-13b/"
 
-        datasets[split] = dataset_cls(
-            vis_processor=self.vis_processors[split],
-            text_processor=self.text_processors[split],
-            vis_root=build_info.videos_dir,
-            ann_root=build_info.anno_dir,
-            num_video_query_token=num_video_query_token,
-            tokenizer_name=tokenizer_name,
-            data_type=self.config.data_type,
-        )
+            datasets[split] = dataset_cls(
+                vis_processor=self.vis_processors[split],
+                text_processor=self.text_processors[split],
+                vis_root=build_info.videos_dir,
+                ann_root=build_info.anno_dir,
+                num_video_query_token=num_video_query_token,
+                tokenizer_name=tokenizer_name,
+                data_type=self.config.data_type,
+            )
 
         return datasets
 
