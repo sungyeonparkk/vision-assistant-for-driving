@@ -38,8 +38,16 @@ class BaseDatasetBuilder:
 
         self.data_type = self.config.data_type
 
-        self.vis_processors = {"train": BaseProcessor(), "eval": BaseProcessor()}
-        self.text_processors = {"train": BaseProcessor(), "eval": BaseProcessor()}
+        self.vis_processors = {
+            "train": BaseProcessor(),
+            "val": BaseProcessor(),
+            "eval": BaseProcessor(),
+        }
+        self.text_processors = {
+            "train": BaseProcessor(),
+            "val": BaseProcessor(),
+            "eval": BaseProcessor(),
+        }
 
     def build_datasets(self):
         # download, split, etc...
