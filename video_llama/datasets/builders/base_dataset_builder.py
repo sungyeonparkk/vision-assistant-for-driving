@@ -62,16 +62,20 @@ class BaseDatasetBuilder:
 
         if vis_proc_cfg is not None:
             vis_train_cfg = vis_proc_cfg.get("train")
+            vis_val_cfg = vis_proc_cfg.get("val")
             vis_eval_cfg = vis_proc_cfg.get("eval")
 
             self.vis_processors["train"] = self._build_proc_from_cfg(vis_train_cfg)
+            self.vis_processors["val"] = self._build_proc_from_cfg(vis_val_cfg)
             self.vis_processors["eval"] = self._build_proc_from_cfg(vis_eval_cfg)
 
         if txt_proc_cfg is not None:
             txt_train_cfg = txt_proc_cfg.get("train")
+            txt_val_cfg = txt_proc_cfg.get("val")
             txt_eval_cfg = txt_proc_cfg.get("eval")
 
             self.text_processors["train"] = self._build_proc_from_cfg(txt_train_cfg)
+            self.text_processors["val"] = self._build_proc_from_cfg(txt_val_cfg)
             self.text_processors["eval"] = self._build_proc_from_cfg(txt_eval_cfg)
 
     @staticmethod

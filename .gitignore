@@ -7,3 +7,5 @@ __pycache__
 output
 input
 ckpt
+
+wandb/*
