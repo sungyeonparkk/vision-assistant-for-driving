@@ -425,7 +425,6 @@ class VideoLLAMA(Blip2Base):
         return inputs_llama, atts_llama
 
     def forward(self, samples):
-        # samples: [batch_size, num_token_ids]
         if 'conv_type' in samples.keys() and samples['conv_type']=='multi':
             
             im_patch_token_id = self.IMAGE_PATCH_TOKEN_ID
@@ -446,10 +445,12 @@ class VideoLLAMA(Blip2Base):
                 
             temp_input_ids = copy.deepcopy(input_ids)
             temp_input_ids[temp_input_ids == im_patch_token_id] = 0
+            # get text embedding
             temp_input_embedding = self.llama_model.model.embed_tokens(temp_input_ids)
 
             new_input_embeds=[]
             cur_image_idx = 0
+            # Iteration for each sample(video)
             for cur_input_ids, cur_input_embeds in zip(input_ids, temp_input_embedding):
                 cur_image_features = img_embeds[cur_image_idx]
 
