@@ -84,7 +84,7 @@ def main():
 
     # Start wandb
     run_name = f"{job_id}_{cfg.get_config()['run']['task']}_max-epoch={cfg.get_config()['run']['max_epoch']}_batch-size-train={cfg.get_config()['run']['batch_size_train']}"
-    wandb.init(project="video-llama-drive", name=run_name)
+    wandb.init(project="video-llama-drive", name=run_name, group="DDP")
 
     init_distributed_mode(cfg.run_cfg)
 
