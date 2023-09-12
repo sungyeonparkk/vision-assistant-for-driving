@@ -1,0 +1,206 @@
+| distributed init (rank 0, world 1): env://
+Loading VIT
+2023-09-11 19:17:45,651 [INFO]
+=====  Running Parameters    =====
+2023-09-11 19:17:45,653 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 3,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-11 19:17:45,653 [INFO]
+======  Dataset Attributes  ======
+2023-09-11 19:17:45,653 [INFO]
+======== bdd_instruct =======
+2023-09-11 19:17:45,654 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-11 19:17:45,654 [INFO]
+======  Model Attributes  ======
+2023-09-11 19:17:45,654 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-11 19:17:45,655 [INFO] Building datasets...
+Loading VIT Done
+Loading Q-Former
+2023-09-11 19:18:21,915 [INFO] freeze vision encoder
+2023-09-11 19:18:24,988 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-11 19:18:25,003 [INFO] freeze Qformer
+2023-09-11 19:18:25,004 [INFO] Loading Q-Former Done
+2023-09-11 19:18:25,004 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-11 19:18:25,095 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:18<00:00,  9.14s/it]
+2023-09-11 19:19:40,505 [INFO] Loading LLAMA Done
+2023-09-11 19:19:40,505 [INFO] Loading LLAMA proj
+2023-09-11 19:19:40,521 [INFO] LLAMA proj is not frozen
+2023-09-11 19:19:40,521 [INFO] Loading llama_proj Done
+2023-09-11 19:19:41,545 [INFO] video_Qformer is not frozen
+2023-09-11 19:19:41,675 [INFO] Start training
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+2023-09-11 19:19:45,783 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+2023-09-11 19:19:45,784 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-11 19:19:45,784 [INFO] Loaded 10 records for val split from the dataset.
+2023-09-11 19:19:45,800 [INFO] number of trainable parameters: 22104064
+2023-09-11 19:19:45,801 [INFO] Start training epoch 0, 5 iters per inner epoch.
+Train: data epoch: [0]  [0/5]  eta: 0:00:10  lr: 0.000001  loss: 2.2720  time: 2.0246  data: 0.0000  max mem: 32999
+2023-09-11 19:19:47,828 [INFO] Reducer buckets have been rebuilt in this iteration.
+2023-09-11 19:19:49,362 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-11 19:19:49,365 [INFO] Evaluating on val.
+2023-09-11 19:19:49,377 [INFO] Start training
+2023-09-11 19:19:49,396 [INFO] Start training epoch 1, 5 iters per inner epoch.
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.7118  data: 0.0000  max mem: 35726
+Train: data epoch: [0] Total time: 0:00:03 (0.7121 s / it)
+None
+Train: data epoch: [1]  [0/5]  eta: 0:00:15  lr: 0.000025  loss: 1.9663  time: 3.1738  data: 0.0000  max mem: 35726
+Train: data epoch: [1]  [4/5]  eta: 0:00:00  lr: 0.000017  loss: 1.9532  time: 0.9212  data: 0.0000  max mem: 35726
+Train: data epoch: [1] Total time: 0:00:04 (0.9216 s / it)
+None
+2023-09-11 19:19:54,005 [INFO] Averaged stats: lr: 0.0000  loss: 1.8955
+2023-09-11 19:19:54,008 [INFO] Evaluating on val.
+2023-09-11 19:19:54,020 [INFO] Start training
+2023-09-11 19:19:54,038 [INFO] Start training epoch 2, 5 iters per inner epoch.
+Train: data epoch: [2]  [0/5]  eta: 0:00:16  lr: 0.000015  loss: 1.7867  time: 3.2057  data: 0.0000  max mem: 35726
+Train: data epoch: [2]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 1.8583  time: 0.9404  data: 0.0000  max mem: 35726
+Train: data epoch: [2] Total time: 0:00:04 (0.9409 s / it)
+None
+2023-09-11 19:19:58,744 [INFO] Averaged stats: lr: 0.0000  loss: 1.8212
+2023-09-11 19:19:58,746 [INFO] Evaluating on val.
+2023-09-11 19:19:58,759 [INFO] Training time 0:00:17

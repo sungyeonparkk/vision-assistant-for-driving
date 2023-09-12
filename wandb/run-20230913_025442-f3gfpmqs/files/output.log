@@ -1,0 +1,515 @@
+| distributed init (rank 0, world 1): env://
+Loading VIT
+2023-09-13 02:54:50,654 [INFO]
+=====  Running Parameters    =====
+2023-09-13 02:54:50,655 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 100,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-13 02:54:50,655 [INFO]
+======  Dataset Attributes  ======
+2023-09-13 02:54:50,655 [INFO]
+======== bdd_instruct =======
+2023-09-13 02:54:50,655 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-13 02:54:50,655 [INFO]
+======  Model Attributes  ======
+2023-09-13 02:54:50,656 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-13 02:54:50,656 [INFO] Building datasets...
+2023-09-13 02:55:25,792 [INFO] freeze vision encoder
+Loading VIT Done
+Loading Q-Former
+2023-09-13 02:55:28,490 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-13 02:55:28,503 [INFO] freeze Qformer
+2023-09-13 02:55:28,503 [INFO] Loading Q-Former Done
+2023-09-13 02:55:28,503 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-13 02:55:28,592 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:13<00:00,  6.74s/it]
+2023-09-13 02:56:35,338 [INFO] Loading LLAMA Done
+2023-09-13 02:56:35,339 [INFO] Loading LLAMA proj
+2023-09-13 02:56:35,362 [INFO] LLAMA proj is not frozen
+2023-09-13 02:56:35,362 [INFO] Loading llama_proj Done
+2023-09-13 02:56:36,464 [INFO] video_Qformer is not frozen
+2023-09-13 02:56:36,638 [INFO] Start training
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+dict_keys(['train', 'val'])
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:56:40,969 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2023-09-13 02:56:40,969 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-13 02:56:40,970 [INFO] Loaded 10 records for val split from the dataset.
+2023-09-13 02:56:40,985 [INFO] number of trainable parameters: 22104064
+2023-09-13 02:56:40,985 [INFO] Start training epoch 0, 5 iters per inner epoch.
+Train: data epoch: [0]  [0/5]  eta: 0:00:12  lr: 0.000001  loss: 2.2720  time: 2.4420  data: 0.0000  max mem: 32989
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:56:43,431 [INFO] Reducer buckets have been rebuilt in this iteration.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.8333  data: 0.0000  max mem: 35723
+Train: data epoch: [0] Total time: 0:00:04 (0.8337 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:56:45,154 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-13 02:56:45,157 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.8896, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.4636  data: 1.8174  max mem: 35723
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:56:51,762 [INFO] Saving checkpoint at epoch 0 to /output/20230913025/checkpoint_best.pth.
+[34m[1mwandb[39m[22m: [33mWARNING[39m Saving files without folders. If you want to preserve sub directories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+2023-09-13 02:56:52,138 [INFO] Start training
+2023-09-13 02:56:52,159 [INFO] Start training epoch 1, 5 iters per inner epoch.
+[tensor(1.8896, device='cuda:0')]
+tensor(1.8760, device='cuda:0')
+{'agg_metrics': tensor(-1.8828, device='cuda:0'), 'val_result': [tensor(1.8896, device='cuda:0'), tensor(1.8760, device='cuda:0')], 'split_name': 'val', 'epoch': 0}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [1]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.9681  time: 3.1985  data: 0.0000  max mem: 35723
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:56:56,801 [INFO] Averaged stats: lr: 0.0000  loss: 1.8854
+2023-09-13 02:56:56,803 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [1]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.9252  time: 0.9279  data: 0.0000  max mem: 35733
+Train: data epoch: [1] Total time: 0:00:04 (0.9282 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.7828, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.2423  data: 1.4715  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[tensor(1.7828, device='cuda:0')]
+tensor(1.7852, device='cuda:0')
+{'agg_metrics': tensor(-1.7840, device='cuda:0'), 'val_result': [tensor(1.7828, device='cuda:0'), tensor(1.7852, device='cuda:0')], 'split_name': 'val', 'epoch': 1}
+2023-09-13 02:57:03,486 [INFO] Saving checkpoint at epoch 1 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:57:03,886 [INFO] Start training
+2023-09-13 02:57:03,907 [INFO] Start training epoch 2, 5 iters per inner epoch.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [2]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.7658  time: 3.2879  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:57:08,658 [INFO] Averaged stats: lr: 0.0000  loss: 1.7913
+2023-09-13 02:57:08,660 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [2]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.8285  time: 0.9499  data: 0.0000  max mem: 35733
+Train: data epoch: [2] Total time: 0:00:04 (0.9502 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.7188, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.0814  data: 1.4087  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[tensor(1.7188, device='cuda:0')]
+tensor(1.7196, device='cuda:0')
+{'agg_metrics': tensor(-1.7192, device='cuda:0'), 'val_result': [tensor(1.7188, device='cuda:0'), tensor(1.7196, device='cuda:0')], 'split_name': 'val', 'epoch': 2}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:57:15,081 [INFO] Saving checkpoint at epoch 2 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:57:15,477 [INFO] Start training
+2023-09-13 02:57:15,498 [INFO] Start training epoch 3, 5 iters per inner epoch.
+Train: data epoch: [3]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.6744  time: 3.2100  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:57:20,473 [INFO] Averaged stats: lr: 0.0000  loss: 1.7322
+2023-09-13 02:57:20,477 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [3]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.6910  time: 0.9946  data: 0.0000  max mem: 35733
+Train: data epoch: [3] Total time: 0:00:04 (0.9950 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.6533, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.1607  data: 1.4962  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:57:26,806 [INFO] Saving checkpoint at epoch 3 to /output/20230913025/checkpoint_best.pth.
+[tensor(1.6533, device='cuda:0')]
+tensor(1.6540, device='cuda:0')
+{'agg_metrics': tensor(-1.6537, device='cuda:0'), 'val_result': [tensor(1.6533, device='cuda:0'), tensor(1.6540, device='cuda:0')], 'split_name': 'val', 'epoch': 3}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:57:27,211 [INFO] Start training
+2023-09-13 02:57:27,232 [INFO] Start training epoch 4, 5 iters per inner epoch.
+Train: data epoch: [4]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.5922  time: 3.1946  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:57:31,859 [INFO] Averaged stats: lr: 0.0000  loss: 1.6804
+2023-09-13 02:57:31,863 [INFO] Evaluating on val.
+Train: data epoch: [4]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.7952  time: 0.9249  data: 0.0000  max mem: 35733
+Train: data epoch: [4] Total time: 0:00:04 (0.9253 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.6009, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.3446  data: 1.4030  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:57:38,450 [INFO] Saving checkpoint at epoch 4 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:57:38,843 [INFO] Start training
+2023-09-13 02:57:38,864 [INFO] Start training epoch 5, 5 iters per inner epoch.
+[tensor(1.6009, device='cuda:0')]
+tensor(1.6018, device='cuda:0')
+{'agg_metrics': tensor(-1.6014, device='cuda:0'), 'val_result': [tensor(1.6009, device='cuda:0'), tensor(1.6018, device='cuda:0')], 'split_name': 'val', 'epoch': 4}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [5]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.6095  time: 3.2201  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [5]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.5140  time: 0.9428  data: 0.0000  max mem: 35733
+Train: data epoch: [5] Total time: 0:00:04 (0.9431 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:57:43,580 [INFO] Averaged stats: lr: 0.0000  loss: 1.6214
+2023-09-13 02:57:43,651 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.5491, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.2577  data: 1.5483  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:57:50,051 [INFO] Saving checkpoint at epoch 5 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:57:50,442 [INFO] Start training
+2023-09-13 02:57:50,463 [INFO] Start training epoch 6, 5 iters per inner epoch.
+[tensor(1.5491, device='cuda:0')]
+tensor(1.5533, device='cuda:0')
+{'agg_metrics': tensor(-1.5512, device='cuda:0'), 'val_result': [tensor(1.5491, device='cuda:0'), tensor(1.5533, device='cuda:0')], 'split_name': 'val', 'epoch': 5}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [6]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5162  time: 3.2317  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [6]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4618  time: 0.9472  data: 0.0000  max mem: 35733
+Train: data epoch: [6] Total time: 0:00:04 (0.9475 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:57:55,201 [INFO] Averaged stats: lr: 0.0000  loss: 1.5691
+2023-09-13 02:57:55,206 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.4975, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.1856  data: 1.5101  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[tensor(1.4975, device='cuda:0')]
+tensor(1.4977, device='cuda:0')
+{'agg_metrics': tensor(-1.4976, device='cuda:0'), 'val_result': [tensor(1.4975, device='cuda:0'), tensor(1.4977, device='cuda:0')], 'split_name': 'val', 'epoch': 6}
+2023-09-13 02:58:01,570 [INFO] Saving checkpoint at epoch 6 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:58:01,966 [INFO] Start training
+2023-09-13 02:58:01,987 [INFO] Start training epoch 7, 5 iters per inner epoch.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [7]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5867  time: 3.2252  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:58:06,600 [INFO] Averaged stats: lr: 0.0000  loss: 1.5336
+2023-09-13 02:58:06,604 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [7]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4871  time: 0.9221  data: 0.0000  max mem: 35733
+Train: data epoch: [7] Total time: 0:00:04 (0.9225 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.4530, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.1489  data: 1.4137  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:58:12,848 [INFO] Saving checkpoint at epoch 7 to /output/20230913025/checkpoint_best.pth.
+[tensor(1.4530, device='cuda:0')]
+tensor(1.4541, device='cuda:0')
+{'agg_metrics': tensor(-1.4536, device='cuda:0'), 'val_result': [tensor(1.4530, device='cuda:0'), tensor(1.4541, device='cuda:0')], 'split_name': 'val', 'epoch': 7}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:58:13,254 [INFO] Start training
+2023-09-13 02:58:13,275 [INFO] Start training epoch 8, 5 iters per inner epoch.
+Train: data epoch: [8]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.6809  time: 3.2183  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:58:17,942 [INFO] Averaged stats: lr: 0.0000  loss: 1.4775
+2023-09-13 02:58:17,946 [INFO] Evaluating on val.
+Train: data epoch: [8]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4296  time: 0.9328  data: 0.0000  max mem: 35733
+Train: data epoch: [8] Total time: 0:00:04 (0.9332 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.4071, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.3253  data: 1.4459  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:58:24,513 [INFO] Saving checkpoint at epoch 8 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:58:24,931 [INFO] Start training
+2023-09-13 02:58:24,952 [INFO] Start training epoch 9, 5 iters per inner epoch.
+[tensor(1.4071, device='cuda:0')]
+tensor(1.4099, device='cuda:0')
+{'agg_metrics': tensor(-1.4085, device='cuda:0'), 'val_result': [tensor(1.4071, device='cuda:0'), tensor(1.4099, device='cuda:0')], 'split_name': 'val', 'epoch': 8}
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [9]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5103  time: 3.2403  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [9]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4005  time: 0.9385  data: 0.0000  max mem: 35733
+Train: data epoch: [9] Total time: 0:00:04 (0.9388 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+2023-09-13 02:58:29,647 [INFO] Averaged stats: lr: 0.0000  loss: 1.4339
+2023-09-13 02:58:29,651 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.3602, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.1144  data: 1.4013  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[tensor(1.3602, device='cuda:0')]
+tensor(1.3588, device='cuda:0')
+{'agg_metrics': tensor(-1.3595, device='cuda:0'), 'val_result': [tensor(1.3602, device='cuda:0'), tensor(1.3588, device='cuda:0')], 'split_name': 'val', 'epoch': 9}
+2023-09-13 02:58:35,845 [INFO] Saving checkpoint at epoch 9 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:58:36,244 [INFO] Start training
+2023-09-13 02:58:36,265 [INFO] Start training epoch 10, 5 iters per inner epoch.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [10]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.1863  time: 3.0814  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:58:40,843 [INFO] Averaged stats: lr: 0.0000  loss: 1.3762
+2023-09-13 02:58:40,847 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [10]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.3895  time: 0.9151  data: 0.0000  max mem: 35733
+Train: data epoch: [10] Total time: 0:00:04 (0.9154 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.3267, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.3878  data: 1.4895  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[tensor(1.3267, device='cuda:0')]
+tensor(1.3272, device='cuda:0')
+{'agg_metrics': tensor(-1.3269, device='cuda:0'), 'val_result': [tensor(1.3267, device='cuda:0'), tensor(1.3272, device='cuda:0')], 'split_name': 'val', 'epoch': 10}
+2023-09-13 02:58:47,904 [INFO] Saving checkpoint at epoch 10 to /output/20230913025/checkpoint_best.pth.
+2023-09-13 02:58:48,302 [INFO] Start training
+2023-09-13 02:58:48,322 [INFO] Start training epoch 11, 5 iters per inner epoch.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [11]  [0/5]  eta: 0:00:15  lr: 0.000029  loss: 1.3022  time: 3.1597  data: 0.0000  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+2023-09-13 02:58:52,972 [INFO] Averaged stats: lr: 0.0000  loss: 1.3330
+2023-09-13 02:58:52,975 [INFO] Evaluating on val.
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7fafd4158640>
+Train: data epoch: [11]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.1743  time: 0.9294  data: 0.0000  max mem: 35733
+Train: data epoch: [11] Total time: 0:00:04 (0.9297 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7fafd4158580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[]
+tensor(1.2698, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.2045  data: 1.4340  max mem: 35733
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7fafd4158760>
+[tensor(1.2698, device='cuda:0')]
+tensor(1.2598, device='cuda:0')
+{'agg_metrics': tensor(-1.2648, device='cuda:0'), 'val_result': [tensor(1.2698, device='cuda:0'), tensor(1.2598, device='cuda:0')], 'split_name': 'val', 'epoch': 11}
+2023-09-13 02:58:59,380 [INFO] Saving checkpoint at epoch 11 to /output/20230913025/checkpoint_best.pth.
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 403, in train
+    self._save_checkpoint(cur_epoch, is_best=True, wandb=wandb)
+  File "/root/vision-assistant-for-driving/video_llama/common/dist_utils.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 625, in _save_checkpoint
+    torch.save(save_obj, save_to)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/serialization.py", line 441, in save
+    _save(obj, opened_zipfile, pickle_module, pickle_protocol)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/serialization.py", line 668, in _save
+    zip_file.write_record(name, storage.data_ptr(), num_bytes)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 403, in train
+    self._save_checkpoint(cur_epoch, is_best=True, wandb=wandb)
+  File "/root/vision-assistant-for-driving/video_llama/common/dist_utils.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 625, in _save_checkpoint
+    torch.save(save_obj, save_to)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/serialization.py", line 441, in save
+    _save(obj, opened_zipfile, pickle_module, pickle_protocol)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/serialization.py", line 668, in _save
+    zip_file.write_record(name, storage.data_ptr(), num_bytes)
+KeyboardInterrupt

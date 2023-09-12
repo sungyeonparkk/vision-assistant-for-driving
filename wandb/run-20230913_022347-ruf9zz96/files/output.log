@@ -1,0 +1,249 @@
+
+| distributed init (rank 0, world 1): env://
+2023-09-13 02:23:56,143 [INFO]
+=====  Running Parameters    =====
+2023-09-13 02:23:56,144 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 100,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-13 02:23:56,144 [INFO]
+======  Dataset Attributes  ======
+2023-09-13 02:23:56,144 [INFO]
+======== bdd_instruct =======
+2023-09-13 02:23:56,145 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-13 02:23:56,145 [INFO]
+======  Model Attributes  ======
+2023-09-13 02:23:56,145 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-13 02:23:56,146 [INFO] Building datasets...
+Loading VIT
+Loading VIT Done
+Loading Q-Former
+2023-09-13 02:24:34,002 [INFO] freeze vision encoder
+2023-09-13 02:24:36,782 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-13 02:24:36,795 [INFO] freeze Qformer
+2023-09-13 02:24:36,795 [INFO] Loading Q-Former Done
+2023-09-13 02:24:36,795 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-13 02:24:36,888 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:28<00:00, 14.29s/it]
+2023-09-13 02:26:00,938 [INFO] Loading LLAMA Done
+2023-09-13 02:26:00,939 [INFO] Loading LLAMA proj
+2023-09-13 02:26:00,955 [INFO] LLAMA proj is not frozen
+2023-09-13 02:26:00,955 [INFO] Loading llama_proj Done
+2023-09-13 02:26:01,981 [INFO] video_Qformer is not frozen
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+2023-09-13 02:26:02,715 [INFO] Start training
+2023-09-13 02:26:07,402 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2023-09-13 02:26:07,403 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-13 02:26:07,403 [INFO] Loaded 10 records for val split from the dataset.
+2023-09-13 02:26:07,418 [INFO] number of trainable parameters: 22104064
+2023-09-13 02:26:07,418 [INFO] Start training epoch 0, 5 iters per inner epoch.
+dict_keys(['train', 'val'])
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7f80796866a0>
+2023-09-13 02:26:09,622 [INFO] Reducer buckets have been rebuilt in this iteration.
+Train: data epoch: [0]  [0/5]  eta: 0:00:11  lr: 0.000001  loss: 2.2720  time: 2.2007  data: 0.0000  max mem: 32999
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7f80796866a0>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7f80796866a0>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7f80796866a0>
+ld :  <video_llama.datasets.datasets.dataloader_utils.IterLoader object at 0x7f80796866a0>
+2023-09-13 02:26:11,152 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-13 02:26:11,155 [INFO] Evaluating on val.
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.7463  data: 0.0000  max mem: 35722
+Train: data epoch: [0] Total time: 0:00:03 (0.7466 s / it)
+Data Loader :  <video_llama.datasets.datasets.dataloader_utils.MultiIterLoader object at 0x7f8079686580>
+Metric logger :
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7f8079686760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7f8079686760>
+[]
+tensor(1.8896, device='cuda:0')
+Evaluation  [0/1]  eta: 0:00:03    time: 3.1725  data: 1.4549  max mem: 35722
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7f8079686760>
+ld :  <video_llama.datasets.datasets.dataloader_utils.PrefetchLoader object at 0x7f8079686760>
+2023-09-13 02:26:17,513 [INFO] Saving checkpoint at epoch 0 to /output/20230913022/checkpoint_best.pth.
+[34m[1mwandb[39m[22m: [33mWARNING[39m Saving files without folders. If you want to preserve sub directories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 406, in train
+    self.log_stats(val_log, split_name)
+  File "/root/vision-assistant-for-driving/video_llama/common/dist_utils.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 660, in log_stats
+    f.write(json.dumps(log_stats) + "\n")
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Tensor is not JSON serializable
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 406, in train
+    self.log_stats(val_log, split_name)
+  File "/root/vision-assistant-for-driving/video_llama/common/dist_utils.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 660, in log_stats
+    f.write(json.dumps(log_stats) + "\n")
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Tensor is not JSON serializable
+[tensor(1.8896, device='cuda:0')]
+tensor(1.8760, device='cuda:0')
+{'agg_metrics': tensor(1.8828, device='cuda:0'), 'val_result': [tensor(1.8896, device='cuda:0'), tensor(1.8760, device='cuda:0')], 'split_name': 'val', 'epoch': 0}

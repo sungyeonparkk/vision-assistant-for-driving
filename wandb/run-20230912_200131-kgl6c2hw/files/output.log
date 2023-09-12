@@ -1,0 +1,882 @@
+| distributed init (rank 0, world 1): env://
+Loading VIT
+2023-09-12 20:01:36,625 [INFO]
+=====  Running Parameters    =====
+2023-09-12 20:01:36,626 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 100,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-12 20:01:36,626 [INFO]
+======  Dataset Attributes  ======
+2023-09-12 20:01:36,626 [INFO]
+======== bdd_instruct =======
+2023-09-12 20:01:36,627 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-12 20:01:36,627 [INFO]
+======  Model Attributes  ======
+2023-09-12 20:01:36,627 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-12 20:01:36,627 [INFO] Building datasets...
+Loading VIT Done
+Loading Q-Former
+2023-09-12 20:02:08,670 [INFO] freeze vision encoder
+2023-09-12 20:02:12,681 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-12 20:02:12,699 [INFO] freeze Qformer
+2023-09-12 20:02:12,700 [INFO] Loading Q-Former Done
+2023-09-12 20:02:12,700 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-12 20:02:12,798 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:15<00:00,  7.79s/it]
+2023-09-12 20:03:22,434 [INFO] Loading LLAMA Done
+2023-09-12 20:03:22,434 [INFO] Loading LLAMA proj
+2023-09-12 20:03:22,450 [INFO] LLAMA proj is not frozen
+2023-09-12 20:03:22,450 [INFO] Loading llama_proj Done
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+2023-09-12 20:03:23,507 [INFO] video_Qformer is not frozen
+2023-09-12 20:03:23,693 [INFO] Start training
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+2023-09-12 20:03:27,475 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2023-09-12 20:03:27,475 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-12 20:03:27,475 [INFO] Loaded 10 records for val split from the dataset.
+2023-09-12 20:03:27,490 [INFO] number of trainable parameters: 22104064
+2023-09-12 20:03:27,491 [INFO] Start training epoch 0, 5 iters per inner epoch.
+2023-09-12 20:03:30,268 [INFO] Reducer buckets have been rebuilt in this iteration.
+Train: data epoch: [0]  [0/5]  eta: 0:00:12  lr: 0.000001  loss: 2.2720  time: 2.5621  data: 0.0000  max mem: 32988
+2023-09-12 20:03:31,764 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-12 20:03:31,767 [INFO] Evaluating on val.
+2023-09-12 20:03:31,781 [INFO] Start training
+2023-09-12 20:03:31,800 [INFO] Start training epoch 1, 5 iters per inner epoch.
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.8541  data: 0.0000  max mem: 35724
+Train: data epoch: [0] Total time: 0:00:04 (0.8544 s / it)
+Train: data epoch: [1]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.9663  time: 3.2555  data: 0.0000  max mem: 35724
+2023-09-12 20:03:36,499 [INFO] Averaged stats: lr: 0.0000  loss: 1.8879
+2023-09-12 20:03:36,502 [INFO] Evaluating on val.
+2023-09-12 20:03:36,515 [INFO] Start training
+2023-09-12 20:03:36,534 [INFO] Start training epoch 2, 5 iters per inner epoch.
+Train: data epoch: [1]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.9333  time: 0.9393  data: 0.0000  max mem: 35724
+Train: data epoch: [1] Total time: 0:00:04 (0.9397 s / it)
+Train: data epoch: [2]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.7643  time: 3.2830  data: 0.0000  max mem: 35724
+Train: data epoch: [2]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.8292  time: 0.9498  data: 0.0000  max mem: 35724
+Train: data epoch: [2] Total time: 0:00:04 (0.9501 s / it)
+2023-09-12 20:03:41,286 [INFO] Averaged stats: lr: 0.0000  loss: 1.7928
+2023-09-12 20:03:41,289 [INFO] Evaluating on val.
+2023-09-12 20:03:41,302 [INFO] Start training
+2023-09-12 20:03:41,320 [INFO] Start training epoch 3, 5 iters per inner epoch.
+Train: data epoch: [3]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.6741  time: 3.3418  data: 0.0000  max mem: 35724
+2023-09-12 20:03:46,132 [INFO] Averaged stats: lr: 0.0000  loss: 1.7303
+2023-09-12 20:03:46,135 [INFO] Evaluating on val.
+2023-09-12 20:03:46,148 [INFO] Start training
+2023-09-12 20:03:46,166 [INFO] Start training epoch 4, 5 iters per inner epoch.
+Train: data epoch: [3]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.6887  time: 0.9620  data: 0.0000  max mem: 35724
+Train: data epoch: [3] Total time: 0:00:04 (0.9623 s / it)
+Train: data epoch: [4]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5905  time: 3.2366  data: 0.0000  max mem: 35724
+Train: data epoch: [4]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.7931  time: 0.9396  data: 0.0000  max mem: 35724
+Train: data epoch: [4] Total time: 0:00:04 (0.9400 s / it)
+2023-09-12 20:03:50,867 [INFO] Averaged stats: lr: 0.0000  loss: 1.6811
+2023-09-12 20:03:50,871 [INFO] Evaluating on val.
+2023-09-12 20:03:50,886 [INFO] Start training
+2023-09-12 20:03:50,905 [INFO] Start training epoch 5, 5 iters per inner epoch.
+Train: data epoch: [5]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.6205  time: 3.1338  data: 0.0000  max mem: 35724
+Train: data epoch: [5]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.5089  time: 0.9271  data: 0.0000  max mem: 35724
+Train: data epoch: [5] Total time: 0:00:04 (0.9276 s / it)
+2023-09-12 20:03:55,543 [INFO] Averaged stats: lr: 0.0000  loss: 1.6230
+2023-09-12 20:03:55,548 [INFO] Evaluating on val.
+2023-09-12 20:03:55,562 [INFO] Start training
+2023-09-12 20:03:55,581 [INFO] Start training epoch 6, 5 iters per inner epoch.
+Train: data epoch: [6]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5200  time: 3.2235  data: 0.0000  max mem: 35724
+2023-09-12 20:04:00,303 [INFO] Averaged stats: lr: 0.0000  loss: 1.5721
+2023-09-12 20:04:00,307 [INFO] Evaluating on val.
+2023-09-12 20:04:00,320 [INFO] Start training
+2023-09-12 20:04:00,338 [INFO] Start training epoch 7, 5 iters per inner epoch.
+Train: data epoch: [6]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4715  time: 0.9440  data: 0.0000  max mem: 35724
+Train: data epoch: [6] Total time: 0:00:04 (0.9443 s / it)
+Train: data epoch: [7]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5845  time: 3.2200  data: 0.0000  max mem: 35724
+Train: data epoch: [7]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4863  time: 0.9202  data: 0.0000  max mem: 35724
+Train: data epoch: [7] Total time: 0:00:04 (0.9205 s / it)
+2023-09-12 20:04:04,941 [INFO] Averaged stats: lr: 0.0000  loss: 1.5338
+2023-09-12 20:04:04,945 [INFO] Evaluating on val.
+2023-09-12 20:04:04,958 [INFO] Start training
+2023-09-12 20:04:04,976 [INFO] Start training epoch 8, 5 iters per inner epoch.
+Train: data epoch: [8]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.6832  time: 3.2403  data: 0.0000  max mem: 35724
+2023-09-12 20:04:09,664 [INFO] Averaged stats: lr: 0.0000  loss: 1.4794
+2023-09-12 20:04:09,668 [INFO] Evaluating on val.
+2023-09-12 20:04:09,681 [INFO] Start training
+2023-09-12 20:04:09,701 [INFO] Start training epoch 9, 5 iters per inner epoch.
+Train: data epoch: [8]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4265  time: 0.9371  data: 0.0000  max mem: 35724
+Train: data epoch: [8] Total time: 0:00:04 (0.9374 s / it)
+Train: data epoch: [9]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5141  time: 3.2270  data: 0.0000  max mem: 35724
+2023-09-12 20:04:14,390 [INFO] Averaged stats: lr: 0.0000  loss: 1.4311
+2023-09-12 20:04:14,394 [INFO] Evaluating on val.
+2023-09-12 20:04:14,407 [INFO] Start training
+2023-09-12 20:04:14,425 [INFO] Start training epoch 10, 5 iters per inner epoch.
+Train: data epoch: [9]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.3966  time: 0.9373  data: 0.0000  max mem: 35724
+Train: data epoch: [9] Total time: 0:00:04 (0.9377 s / it)
+Train: data epoch: [10]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.1973  time: 3.1798  data: 0.0000  max mem: 35724
+Train: data epoch: [10]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.3875  time: 0.9330  data: 0.0000  max mem: 35724
+Train: data epoch: [10] Total time: 0:00:04 (0.9334 s / it)
+2023-09-12 20:04:19,093 [INFO] Averaged stats: lr: 0.0000  loss: 1.3755
+2023-09-12 20:04:19,097 [INFO] Evaluating on val.
+2023-09-12 20:04:19,110 [INFO] Start training
+2023-09-12 20:04:19,128 [INFO] Start training epoch 11, 5 iters per inner epoch.
+Train: data epoch: [11]  [0/5]  eta: 0:00:15  lr: 0.000029  loss: 1.3089  time: 3.1794  data: 0.0000  max mem: 35724
+2023-09-12 20:04:23,887 [INFO] Averaged stats: lr: 0.0000  loss: 1.3372
+2023-09-12 20:04:23,890 [INFO] Evaluating on val.
+2023-09-12 20:04:23,903 [INFO] Start training
+2023-09-12 20:04:23,921 [INFO] Start training epoch 12, 5 iters per inner epoch.
+Train: data epoch: [11]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.1777  time: 0.9513  data: 0.0000  max mem: 35724
+Train: data epoch: [11] Total time: 0:00:04 (0.9516 s / it)
+Train: data epoch: [12]  [0/5]  eta: 0:00:16  lr: 0.000029  loss: 1.5050  time: 3.2876  data: 0.0000  max mem: 35724
+2023-09-12 20:04:28,649 [INFO] Averaged stats: lr: 0.0000  loss: 1.2676
+2023-09-12 20:04:28,653 [INFO] Evaluating on val.
+2023-09-12 20:04:28,665 [INFO] Start training
+2023-09-12 20:04:28,688 [INFO] Start training epoch 13, 5 iters per inner epoch.
+Train: data epoch: [12]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 0.9964  time: 0.9451  data: 0.0000  max mem: 35724
+Train: data epoch: [12] Total time: 0:00:04 (0.9454 s / it)
+Train: data epoch: [13]  [0/5]  eta: 0:00:16  lr: 0.000029  loss: 1.3553  time: 3.2740  data: 0.0000  max mem: 35724
+Train: data epoch: [13]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.1595  time: 0.9530  data: 0.0000  max mem: 35724
+Train: data epoch: [13] Total time: 0:00:04 (0.9534 s / it)
+2023-09-12 20:04:33,456 [INFO] Averaged stats: lr: 0.0000  loss: 1.2389
+2023-09-12 20:04:33,460 [INFO] Evaluating on val.
+2023-09-12 20:04:33,475 [INFO] Start training
+2023-09-12 20:04:33,495 [INFO] Start training epoch 14, 5 iters per inner epoch.
+Train: data epoch: [14]  [0/5]  eta: 0:00:16  lr: 0.000029  loss: 1.2391  time: 3.2217  data: 0.0000  max mem: 35724
+2023-09-12 20:04:38,171 [INFO] Averaged stats: lr: 0.0000  loss: 1.1954
+2023-09-12 20:04:38,175 [INFO] Evaluating on val.
+2023-09-12 20:04:38,187 [INFO] Start training
+2023-09-12 20:04:38,205 [INFO] Start training epoch 15, 5 iters per inner epoch.
+Train: data epoch: [14]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.2309  time: 0.9347  data: 0.0000  max mem: 35724
+Train: data epoch: [14] Total time: 0:00:04 (0.9350 s / it)
+Train: data epoch: [15]  [0/5]  eta: 0:00:16  lr: 0.000029  loss: 1.0926  time: 3.2092  data: 0.0000  max mem: 35724
+2023-09-12 20:04:42,881 [INFO] Averaged stats: lr: 0.0000  loss: 1.1332
+2023-09-12 20:04:42,885 [INFO] Evaluating on val.
+Train: data epoch: [15]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 1.3156  time: 0.9345  data: 0.0000  max mem: 35724
+Train: data epoch: [15] Total time: 0:00:04 (0.9350 s / it)
+2023-09-12 20:04:42,897 [INFO] Start training
+2023-09-12 20:04:42,915 [INFO] Start training epoch 16, 5 iters per inner epoch.
+Train: data epoch: [16]  [0/5]  eta: 0:00:16  lr: 0.000029  loss: 1.1306  time: 3.2695  data: 0.0000  max mem: 35724
+2023-09-12 20:04:47,839 [INFO] Averaged stats: lr: 0.0000  loss: 1.0679
+2023-09-12 20:04:47,843 [INFO] Evaluating on val.
+2023-09-12 20:04:47,855 [INFO] Start training
+2023-09-12 20:04:47,873 [INFO] Start training epoch 17, 5 iters per inner epoch.
+Train: data epoch: [16]  [4/5]  eta: 0:00:00  lr: 0.000029  loss: 0.9414  time: 0.9842  data: 0.0000  max mem: 35724
+Train: data epoch: [16] Total time: 0:00:04 (0.9845 s / it)
+Train: data epoch: [17]  [0/5]  eta: 0:00:16  lr: 0.000029  loss: 0.9317  time: 3.2197  data: 0.0000  max mem: 35724
+2023-09-12 20:04:52,558 [INFO] Averaged stats: lr: 0.0000  loss: 1.0267
+2023-09-12 20:04:52,562 [INFO] Evaluating on val.
+2023-09-12 20:04:52,574 [INFO] Start training
+2023-09-12 20:04:52,592 [INFO] Start training epoch 18, 5 iters per inner epoch.
+Train: data epoch: [17]  [4/5]  eta: 0:00:00  lr: 0.000028  loss: 1.0582  time: 0.9364  data: 0.0000  max mem: 35724
+Train: data epoch: [17] Total time: 0:00:04 (0.9368 s / it)
+Train: data epoch: [18]  [0/5]  eta: 0:00:15  lr: 0.000028  loss: 1.1089  time: 3.1845  data: 0.0000  max mem: 35724
+Train: data epoch: [18]  [4/5]  eta: 0:00:00  lr: 0.000028  loss: 0.8796  time: 0.9298  data: 0.0000  max mem: 35724
+Train: data epoch: [18] Total time: 0:00:04 (0.9302 s / it)
+2023-09-12 20:04:57,244 [INFO] Averaged stats: lr: 0.0000  loss: 0.9910
+2023-09-12 20:04:57,248 [INFO] Evaluating on val.
+2023-09-12 20:04:57,260 [INFO] Start training
+2023-09-12 20:04:57,278 [INFO] Start training epoch 19, 5 iters per inner epoch.
+Train: data epoch: [19]  [0/5]  eta: 0:00:16  lr: 0.000028  loss: 1.1055  time: 3.2404  data: 0.0000  max mem: 35724
+2023-09-12 20:05:01,967 [INFO] Averaged stats: lr: 0.0000  loss: 0.9522
+2023-09-12 20:05:01,971 [INFO] Evaluating on val.
+2023-09-12 20:05:01,984 [INFO] Start training
+2023-09-12 20:05:02,003 [INFO] Start training epoch 20, 5 iters per inner epoch.
+Train: data epoch: [19]  [4/5]  eta: 0:00:00  lr: 0.000028  loss: 0.9512  time: 0.9373  data: 0.0000  max mem: 35724
+Train: data epoch: [19] Total time: 0:00:04 (0.9377 s / it)
+Train: data epoch: [20]  [0/5]  eta: 0:00:16  lr: 0.000028  loss: 0.9777  time: 3.2656  data: 0.0000  max mem: 35724
+2023-09-12 20:05:06,710 [INFO] Averaged stats: lr: 0.0000  loss: 0.9035
+2023-09-12 20:05:06,714 [INFO] Evaluating on val.
+2023-09-12 20:05:06,727 [INFO] Start training
+2023-09-12 20:05:06,745 [INFO] Start training epoch 21, 5 iters per inner epoch.
+Train: data epoch: [20]  [4/5]  eta: 0:00:00  lr: 0.000028  loss: 0.9599  time: 0.9409  data: 0.0000  max mem: 35724
+Train: data epoch: [20] Total time: 0:00:04 (0.9414 s / it)
+Train: data epoch: [21]  [0/5]  eta: 0:00:15  lr: 0.000028  loss: 0.7325  time: 3.1470  data: 0.0000  max mem: 35724
+Train: data epoch: [21]  [4/5]  eta: 0:00:00  lr: 0.000028  loss: 0.9076  time: 0.9295  data: 0.0000  max mem: 35724
+Train: data epoch: [21] Total time: 0:00:04 (0.9298 s / it)
+2023-09-12 20:05:11,395 [INFO] Averaged stats: lr: 0.0000  loss: 0.8937
+2023-09-12 20:05:11,399 [INFO] Evaluating on val.
+2023-09-12 20:05:11,411 [INFO] Start training
+2023-09-12 20:05:11,429 [INFO] Start training epoch 22, 5 iters per inner epoch.
+Train: data epoch: [22]  [0/5]  eta: 0:00:16  lr: 0.000028  loss: 0.9125  time: 3.2226  data: 0.0000  max mem: 35724
+2023-09-12 20:05:16,115 [INFO] Averaged stats: lr: 0.0000  loss: 0.8258
+2023-09-12 20:05:16,119 [INFO] Evaluating on val.
+2023-09-12 20:05:16,132 [INFO] Start training
+2023-09-12 20:05:16,150 [INFO] Start training epoch 23, 5 iters per inner epoch.
+Train: data epoch: [22]  [4/5]  eta: 0:00:00  lr: 0.000028  loss: 1.0478  time: 0.9367  data: 0.0000  max mem: 35724
+Train: data epoch: [22] Total time: 0:00:04 (0.9370 s / it)
+Train: data epoch: [23]  [0/5]  eta: 0:00:16  lr: 0.000028  loss: 0.7865  time: 3.2562  data: 0.0000  max mem: 35724
+2023-09-12 20:05:20,910 [INFO] Averaged stats: lr: 0.0000  loss: 0.7921
+2023-09-12 20:05:20,916 [INFO] Evaluating on val.
+2023-09-12 20:05:20,929 [INFO] Start training
+Train: data epoch: [23]  [4/5]  eta: 0:00:00  lr: 0.000027  loss: 0.6850  time: 0.9515  data: 0.0000  max mem: 35724
+Train: data epoch: [23] Total time: 0:00:04 (0.9520 s / it)
+2023-09-12 20:05:20,948 [INFO] Start training epoch 24, 5 iters per inner epoch.
+Train: data epoch: [24]  [0/5]  eta: 0:00:15  lr: 0.000027  loss: 0.7112  time: 3.1880  data: 0.0000  max mem: 35724
+Train: data epoch: [24]  [4/5]  eta: 0:00:00  lr: 0.000027  loss: 0.7360  time: 0.9292  data: 0.0000  max mem: 35724
+Train: data epoch: [24] Total time: 0:00:04 (0.9295 s / it)
+2023-09-12 20:05:25,596 [INFO] Averaged stats: lr: 0.0000  loss: 0.7657
+2023-09-12 20:05:25,600 [INFO] Evaluating on val.
+2023-09-12 20:05:25,612 [INFO] Start training
+2023-09-12 20:05:25,630 [INFO] Start training epoch 25, 5 iters per inner epoch.
+Train: data epoch: [25]  [0/5]  eta: 0:00:16  lr: 0.000027  loss: 0.8148  time: 3.2101  data: 0.0000  max mem: 35724
+2023-09-12 20:05:30,328 [INFO] Averaged stats: lr: 0.0000  loss: 0.6895
+2023-09-12 20:05:30,331 [INFO] Evaluating on val.
+2023-09-12 20:05:30,344 [INFO] Start training
+2023-09-12 20:05:30,363 [INFO] Start training epoch 26, 5 iters per inner epoch.
+Train: data epoch: [25]  [4/5]  eta: 0:00:00  lr: 0.000027  loss: 0.5124  time: 0.9392  data: 0.0000  max mem: 35724
+Train: data epoch: [25] Total time: 0:00:04 (0.9395 s / it)
+Train: data epoch: [26]  [0/5]  eta: 0:00:16  lr: 0.000027  loss: 0.6507  time: 3.2445  data: 0.0000  max mem: 35724
+Train: data epoch: [26]  [4/5]  eta: 0:00:00  lr: 0.000027  loss: 0.7429  time: 0.9434  data: 0.0000  max mem: 35724
+Train: data epoch: [26] Total time: 0:00:04 (0.9438 s / it)
+2023-09-12 20:05:35,082 [INFO] Averaged stats: lr: 0.0000  loss: 0.6466
+2023-09-12 20:05:35,086 [INFO] Evaluating on val.
+2023-09-12 20:05:35,100 [INFO] Start training
+2023-09-12 20:05:35,118 [INFO] Start training epoch 27, 5 iters per inner epoch.
+Train: data epoch: [27]  [0/5]  eta: 0:00:16  lr: 0.000027  loss: 0.6017  time: 3.2549  data: 0.0000  max mem: 35724
+2023-09-12 20:05:39,871 [INFO] Averaged stats: lr: 0.0000  loss: 0.6439
+2023-09-12 20:05:39,875 [INFO] Evaluating on val.
+2023-09-12 20:05:39,888 [INFO] Start training
+2023-09-12 20:05:39,907 [INFO] Start training epoch 28, 5 iters per inner epoch.
+Train: data epoch: [27]  [4/5]  eta: 0:00:00  lr: 0.000026  loss: 0.5794  time: 0.9500  data: 0.0000  max mem: 35724
+Train: data epoch: [27] Total time: 0:00:04 (0.9504 s / it)
+Train: data epoch: [28]  [0/5]  eta: 0:00:15  lr: 0.000026  loss: 0.4260  time: 3.1899  data: 0.0000  max mem: 35724
+2023-09-12 20:05:44,586 [INFO] Averaged stats: lr: 0.0000  loss: 0.5883
+2023-09-12 20:05:44,590 [INFO] Evaluating on val.
+2023-09-12 20:05:44,602 [INFO] Start training
+2023-09-12 20:05:44,620 [INFO] Start training epoch 29, 5 iters per inner epoch.
+Train: data epoch: [28]  [4/5]  eta: 0:00:00  lr: 0.000026  loss: 0.6418  time: 0.9354  data: 0.0000  max mem: 35724
+Train: data epoch: [28] Total time: 0:00:04 (0.9358 s / it)
+Train: data epoch: [29]  [0/5]  eta: 0:00:16  lr: 0.000026  loss: 0.6991  time: 3.2394  data: 0.0000  max mem: 35724
+Train: data epoch: [29]  [4/5]  eta: 0:00:00  lr: 0.000026  loss: 0.5005  time: 0.9547  data: 0.0000  max mem: 35724
+Train: data epoch: [29] Total time: 0:00:04 (0.9551 s / it)
+2023-09-12 20:05:49,397 [INFO] Averaged stats: lr: 0.0000  loss: 0.5588
+2023-09-12 20:05:49,401 [INFO] Evaluating on val.
+2023-09-12 20:05:49,413 [INFO] Start training
+2023-09-12 20:05:49,431 [INFO] Start training epoch 30, 5 iters per inner epoch.
+Train: data epoch: [30]  [0/5]  eta: 0:00:16  lr: 0.000026  loss: 0.5033  time: 3.2157  data: 0.0000  max mem: 35724
+2023-09-12 20:05:54,087 [INFO] Averaged stats: lr: 0.0000  loss: 0.4885
+2023-09-12 20:05:54,091 [INFO] Evaluating on val.
+2023-09-12 20:05:54,103 [INFO] Start training
+2023-09-12 20:05:54,121 [INFO] Start training epoch 31, 5 iters per inner epoch.
+Train: data epoch: [30]  [4/5]  eta: 0:00:00  lr: 0.000026  loss: 0.6242  time: 0.9307  data: 0.0000  max mem: 35724
+Train: data epoch: [30] Total time: 0:00:04 (0.9310 s / it)
+Train: data epoch: [31]  [0/5]  eta: 0:00:16  lr: 0.000026  loss: 0.4814  time: 3.3212  data: 0.0000  max mem: 35724
+2023-09-12 20:05:58,903 [INFO] Averaged stats: lr: 0.0000  loss: 0.4741
+2023-09-12 20:05:58,907 [INFO] Evaluating on val.
+2023-09-12 20:05:58,919 [INFO] Start training
+2023-09-12 20:05:58,937 [INFO] Start training epoch 32, 5 iters per inner epoch.
+Train: data epoch: [31]  [4/5]  eta: 0:00:00  lr: 0.000025  loss: 0.5364  time: 0.9558  data: 0.0000  max mem: 35724
+Train: data epoch: [31] Total time: 0:00:04 (0.9562 s / it)
+Train: data epoch: [32]  [0/5]  eta: 0:00:16  lr: 0.000025  loss: 0.6031  time: 3.3033  data: 0.0000  max mem: 35724
+2023-09-12 20:06:03,733 [INFO] Averaged stats: lr: 0.0000  loss: 0.4584
+2023-09-12 20:06:03,737 [INFO] Evaluating on val.
+2023-09-12 20:06:03,751 [INFO] Start training
+2023-09-12 20:06:03,773 [INFO] Start training epoch 33, 5 iters per inner epoch.
+Train: data epoch: [32]  [4/5]  eta: 0:00:00  lr: 0.000025  loss: 0.3163  time: 0.9586  data: 0.0000  max mem: 35724
+Train: data epoch: [32] Total time: 0:00:04 (0.9589 s / it)
+Train: data epoch: [33]  [0/5]  eta: 0:00:16  lr: 0.000025  loss: 0.4647  time: 3.3655  data: 0.0000  max mem: 35724
+2023-09-12 20:06:08,583 [INFO] Averaged stats: lr: 0.0000  loss: 0.4080
+2023-09-12 20:06:08,587 [INFO] Evaluating on val.
+2023-09-12 20:06:08,602 [INFO] Start training
+2023-09-12 20:06:08,620 [INFO] Start training epoch 34, 5 iters per inner epoch.
+Train: data epoch: [33]  [4/5]  eta: 0:00:00  lr: 0.000025  loss: 0.4438  time: 0.9616  data: 0.0000  max mem: 35724
+Train: data epoch: [33] Total time: 0:00:04 (0.9620 s / it)
+Train: data epoch: [34]  [0/5]  eta: 0:00:16  lr: 0.000025  loss: 0.4466  time: 3.2531  data: 0.0000  max mem: 35724
+Train: data epoch: [34]  [4/5]  eta: 0:00:00  lr: 0.000025  loss: 0.4406  time: 0.9469  data: 0.0000  max mem: 35724
+Train: data epoch: [34] Total time: 0:00:04 (0.9473 s / it)
+2023-09-12 20:06:13,358 [INFO] Averaged stats: lr: 0.0000  loss: 0.3885
+2023-09-12 20:06:13,362 [INFO] Evaluating on val.
+2023-09-12 20:06:13,375 [INFO] Start training
+2023-09-12 20:06:13,394 [INFO] Start training epoch 35, 5 iters per inner epoch.
+Train: data epoch: [35]  [0/5]  eta: 0:00:17  lr: 0.000025  loss: 0.3735  time: 3.4400  data: 0.0000  max mem: 35724
+2023-09-12 20:06:18,325 [INFO] Averaged stats: lr: 0.0000  loss: 0.3862
+2023-09-12 20:06:18,328 [INFO] Evaluating on val.
+2023-09-12 20:06:18,341 [INFO] Start training
+2023-09-12 20:06:18,359 [INFO] Start training epoch 36, 5 iters per inner epoch.
+Train: data epoch: [35]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 0.3567  time: 0.9856  data: 0.0000  max mem: 35724
+Train: data epoch: [35] Total time: 0:00:04 (0.9860 s / it)
+Train: data epoch: [36]  [0/5]  eta: 0:00:16  lr: 0.000024  loss: 0.4552  time: 3.3000  data: 0.0000  max mem: 35724
+Train: data epoch: [36]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 0.2290  time: 0.9545  data: 0.0000  max mem: 35724
+Train: data epoch: [36] Total time: 0:00:04 (0.9549 s / it)
+2023-09-12 20:06:23,134 [INFO] Averaged stats: lr: 0.0000  loss: 0.3552
+2023-09-12 20:06:23,138 [INFO] Evaluating on val.
+2023-09-12 20:06:23,151 [INFO] Start training
+2023-09-12 20:06:23,169 [INFO] Start training epoch 37, 5 iters per inner epoch.
+Train: data epoch: [37]  [0/5]  eta: 0:00:16  lr: 0.000024  loss: 0.1758  time: 3.2808  data: 0.0000  max mem: 35724
+Train: data epoch: [37]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 0.3755  time: 0.9522  data: 0.0000  max mem: 35724
+Train: data epoch: [37] Total time: 0:00:04 (0.9525 s / it)
+2023-09-12 20:06:27,933 [INFO] Averaged stats: lr: 0.0000  loss: 0.3236
+2023-09-12 20:06:27,936 [INFO] Evaluating on val.
+2023-09-12 20:06:27,949 [INFO] Start training
+2023-09-12 20:06:27,967 [INFO] Start training epoch 38, 5 iters per inner epoch.
+Train: data epoch: [38]  [0/5]  eta: 0:00:16  lr: 0.000024  loss: 0.3202  time: 3.2748  data: 0.0000  max mem: 35724
+2023-09-12 20:06:32,725 [INFO] Averaged stats: lr: 0.0000  loss: 0.3383
+2023-09-12 20:06:32,729 [INFO] Evaluating on val.
+2023-09-12 20:06:32,742 [INFO] Start training
+2023-09-12 20:06:32,761 [INFO] Start training epoch 39, 5 iters per inner epoch.
+Train: data epoch: [38]  [4/5]  eta: 0:00:00  lr: 0.000023  loss: 0.3238  time: 0.9512  data: 0.0000  max mem: 35724
+Train: data epoch: [38] Total time: 0:00:04 (0.9515 s / it)
+Train: data epoch: [39]  [0/5]  eta: 0:00:16  lr: 0.000023  loss: 0.3505  time: 3.3049  data: 0.0000  max mem: 35724
+Train: data epoch: [39]  [4/5]  eta: 0:00:00  lr: 0.000023  loss: 0.3098  time: 0.9511  data: 0.0000  max mem: 35724
+Train: data epoch: [39] Total time: 0:00:04 (0.9514 s / it)
+2023-09-12 20:06:37,518 [INFO] Averaged stats: lr: 0.0000  loss: 0.3199
+2023-09-12 20:06:37,522 [INFO] Evaluating on val.
+2023-09-12 20:06:37,536 [INFO] Start training
+2023-09-12 20:06:37,555 [INFO] Start training epoch 40, 5 iters per inner epoch.
+Train: data epoch: [40]  [0/5]  eta: 0:00:16  lr: 0.000023  loss: 0.2634  time: 3.2449  data: 0.0000  max mem: 35724
+Train: data epoch: [40]  [4/5]  eta: 0:00:00  lr: 0.000023  loss: 0.3364  time: 0.9379  data: 0.0000  max mem: 35724
+Train: data epoch: [40] Total time: 0:00:04 (0.9383 s / it)
+2023-09-12 20:06:42,247 [INFO] Averaged stats: lr: 0.0000  loss: 0.2775
+2023-09-12 20:06:42,252 [INFO] Evaluating on val.
+2023-09-12 20:06:42,265 [INFO] Start training
+2023-09-12 20:06:42,283 [INFO] Start training epoch 41, 5 iters per inner epoch.
+Train: data epoch: [41]  [0/5]  eta: 0:00:15  lr: 0.000023  loss: 0.3072  time: 3.1809  data: 0.0000  max mem: 35724
+2023-09-12 20:06:46,943 [INFO] Averaged stats: lr: 0.0000  loss: 0.2787
+2023-09-12 20:06:46,947 [INFO] Evaluating on val.
+2023-09-12 20:06:46,960 [INFO] Start training
+2023-09-12 20:06:46,979 [INFO] Start training epoch 42, 5 iters per inner epoch.
+Train: data epoch: [41]  [4/5]  eta: 0:00:00  lr: 0.000023  loss: 0.1527  time: 0.9314  data: 0.0000  max mem: 35724
+Train: data epoch: [41] Total time: 0:00:04 (0.9317 s / it)
+Train: data epoch: [42]  [0/5]  eta: 0:00:16  lr: 0.000022  loss: 0.3364  time: 3.2603  data: 0.0000  max mem: 35724
+Train: data epoch: [42]  [4/5]  eta: 0:00:00  lr: 0.000022  loss: 0.1398  time: 0.9422  data: 0.0000  max mem: 35724
+Train: data epoch: [42] Total time: 0:00:04 (0.9426 s / it)
+2023-09-12 20:06:51,692 [INFO] Averaged stats: lr: 0.0000  loss: 0.2591
+2023-09-12 20:06:51,696 [INFO] Evaluating on val.
+2023-09-12 20:06:51,709 [INFO] Start training
+2023-09-12 20:06:51,728 [INFO] Start training epoch 43, 5 iters per inner epoch.
+Train: data epoch: [43]  [0/5]  eta: 0:00:16  lr: 0.000022  loss: 0.2039  time: 3.2128  data: 0.0000  max mem: 35724
+2023-09-12 20:06:56,454 [INFO] Averaged stats: lr: 0.0000  loss: 0.2604
+2023-09-12 20:06:56,471 [INFO] Evaluating on val.
+2023-09-12 20:06:56,501 [INFO] Start training
+2023-09-12 20:06:56,521 [INFO] Start training epoch 44, 5 iters per inner epoch.
+Train: data epoch: [43]  [4/5]  eta: 0:00:00  lr: 0.000022  loss: 0.3015  time: 0.9449  data: 0.0000  max mem: 35724
+Train: data epoch: [43] Total time: 0:00:04 (0.9452 s / it)
+Train: data epoch: [44]  [0/5]  eta: 0:00:16  lr: 0.000022  loss: 0.3332  time: 3.2619  data: 0.0000  max mem: 35724
+Train: data epoch: [44]  [4/5]  eta: 0:00:00  lr: 0.000022  loss: 0.3159  time: 0.9405  data: 0.0000  max mem: 35724
+Train: data epoch: [44] Total time: 0:00:04 (0.9409 s / it)
+2023-09-12 20:07:01,226 [INFO] Averaged stats: lr: 0.0000  loss: 0.2505
+2023-09-12 20:07:01,230 [INFO] Evaluating on val.
+2023-09-12 20:07:01,242 [INFO] Start training
+2023-09-12 20:07:01,261 [INFO] Start training epoch 45, 5 iters per inner epoch.
+Train: data epoch: [45]  [0/5]  eta: 0:00:16  lr: 0.000022  loss: 0.1610  time: 3.2438  data: 0.0000  max mem: 35724
+Train: data epoch: [45]  [4/5]  eta: 0:00:00  lr: 0.000021  loss: 0.2675  time: 0.9507  data: 0.0000  max mem: 35724
+Train: data epoch: [45] Total time: 0:00:04 (0.9510 s / it)
+2023-09-12 20:07:06,017 [INFO] Averaged stats: lr: 0.0000  loss: 0.2279
+2023-09-12 20:07:06,021 [INFO] Evaluating on val.
+2023-09-12 20:07:06,033 [INFO] Start training
+2023-09-12 20:07:06,051 [INFO] Start training epoch 46, 5 iters per inner epoch.
+Train: data epoch: [46]  [0/5]  eta: 0:00:16  lr: 0.000021  loss: 0.2548  time: 3.2218  data: 0.0000  max mem: 35724
+2023-09-12 20:07:10,753 [INFO] Averaged stats: lr: 0.0000  loss: 0.2263
+2023-09-12 20:07:10,757 [INFO] Evaluating on val.
+2023-09-12 20:07:10,770 [INFO] Start training
+2023-09-12 20:07:10,788 [INFO] Start training epoch 47, 5 iters per inner epoch.
+Train: data epoch: [46]  [4/5]  eta: 0:00:00  lr: 0.000021  loss: 0.2241  time: 0.9398  data: 0.0000  max mem: 35724
+Train: data epoch: [46] Total time: 0:00:04 (0.9402 s / it)
+Train: data epoch: [47]  [0/5]  eta: 0:00:16  lr: 0.000021  loss: 0.2337  time: 3.2335  data: 0.0000  max mem: 35724
+Train: data epoch: [47]  [4/5]  eta: 0:00:00  lr: 0.000021  loss: 0.2455  time: 0.9452  data: 0.0000  max mem: 35724
+Train: data epoch: [47] Total time: 0:00:04 (0.9457 s / it)
+2023-09-12 20:07:15,517 [INFO] Averaged stats: lr: 0.0000  loss: 0.2055
+2023-09-12 20:07:15,521 [INFO] Evaluating on val.
+2023-09-12 20:07:15,536 [INFO] Start training
+2023-09-12 20:07:15,554 [INFO] Start training epoch 48, 5 iters per inner epoch.
+Train: data epoch: [48]  [0/5]  eta: 0:00:16  lr: 0.000021  loss: 0.1557  time: 3.3018  data: 0.0000  max mem: 35724
+2023-09-12 20:07:20,345 [INFO] Averaged stats: lr: 0.0000  loss: 0.1859
+2023-09-12 20:07:20,349 [INFO] Evaluating on val.
+2023-09-12 20:07:20,362 [INFO] Start training
+2023-09-12 20:07:20,381 [INFO] Start training epoch 49, 5 iters per inner epoch.
+Train: data epoch: [48]  [4/5]  eta: 0:00:00  lr: 0.000020  loss: 0.1757  time: 0.9577  data: 0.0000  max mem: 35724
+Train: data epoch: [48] Total time: 0:00:04 (0.9580 s / it)
+Train: data epoch: [49]  [0/5]  eta: 0:00:16  lr: 0.000020  loss: 0.1625  time: 3.2547  data: 0.0000  max mem: 35724
+2023-09-12 20:07:25,068 [INFO] Averaged stats: lr: 0.0000  loss: 0.1740
+2023-09-12 20:07:25,072 [INFO] Evaluating on val.
+2023-09-12 20:07:25,086 [INFO] Start training
+Train: data epoch: [49]  [4/5]  eta: 0:00:00  lr: 0.000020  loss: 0.1938  time: 0.9370  data: 0.0000  max mem: 35724
+Train: data epoch: [49] Total time: 0:00:04 (0.9374 s / it)
+2023-09-12 20:07:25,105 [INFO] Start training epoch 50, 5 iters per inner epoch.
+Train: data epoch: [50]  [0/5]  eta: 0:00:15  lr: 0.000020  loss: 0.1083  time: 3.1933  data: 0.0000  max mem: 35724
+Train: data epoch: [50]  [4/5]  eta: 0:00:00  lr: 0.000020  loss: 0.1822  time: 0.9636  data: 0.0000  max mem: 35724
+Train: data epoch: [50] Total time: 0:00:04 (0.9640 s / it)
+2023-09-12 20:07:29,925 [INFO] Averaged stats: lr: 0.0000  loss: 0.1751
+2023-09-12 20:07:29,930 [INFO] Evaluating on val.
+2023-09-12 20:07:29,942 [INFO] Start training
+2023-09-12 20:07:29,960 [INFO] Start training epoch 51, 5 iters per inner epoch.
+Train: data epoch: [51]  [0/5]  eta: 0:00:16  lr: 0.000020  loss: 0.1417  time: 3.3942  data: 0.0000  max mem: 35724
+2023-09-12 20:07:34,815 [INFO] Averaged stats: lr: 0.0000  loss: 0.1666
+2023-09-12 20:07:34,819 [INFO] Evaluating on val.
+2023-09-12 20:07:34,832 [INFO] Start training
+2023-09-12 20:07:34,852 [INFO] Start training epoch 52, 5 iters per inner epoch.
+Train: data epoch: [51]  [4/5]  eta: 0:00:00  lr: 0.000019  loss: 0.2197  time: 0.9704  data: 0.0000  max mem: 35724
+Train: data epoch: [51] Total time: 0:00:04 (0.9708 s / it)
+Train: data epoch: [52]  [0/5]  eta: 0:00:16  lr: 0.000019  loss: 0.1483  time: 3.2647  data: 0.0000  max mem: 35724
+Train: data epoch: [52]  [4/5]  eta: 0:00:00  lr: 0.000019  loss: 0.1319  time: 0.9542  data: 0.0000  max mem: 35724
+Train: data epoch: [52] Total time: 0:00:04 (0.9545 s / it)
+2023-09-12 20:07:39,625 [INFO] Averaged stats: lr: 0.0000  loss: 0.1559
+2023-09-12 20:07:39,628 [INFO] Evaluating on val.
+2023-09-12 20:07:39,641 [INFO] Start training
+2023-09-12 20:07:39,659 [INFO] Start training epoch 53, 5 iters per inner epoch.
+Train: data epoch: [53]  [0/5]  eta: 0:00:16  lr: 0.000019  loss: 0.1503  time: 3.2820  data: 0.0000  max mem: 35724
+2023-09-12 20:07:44,452 [INFO] Averaged stats: lr: 0.0000  loss: 0.1575
+2023-09-12 20:07:44,455 [INFO] Evaluating on val.
+2023-09-12 20:07:44,468 [INFO] Start training
+2023-09-12 20:07:44,487 [INFO] Start training epoch 54, 5 iters per inner epoch.
+Train: data epoch: [53]  [4/5]  eta: 0:00:00  lr: 0.000019  loss: 0.1723  time: 0.9579  data: 0.0000  max mem: 35724
+Train: data epoch: [53] Total time: 0:00:04 (0.9583 s / it)
+Train: data epoch: [54]  [0/5]  eta: 0:00:16  lr: 0.000019  loss: 0.1137  time: 3.2714  data: 0.0000  max mem: 35724
+Train: data epoch: [54]  [4/5]  eta: 0:00:00  lr: 0.000018  loss: 0.2042  time: 0.9398  data: 0.0000  max mem: 35724
+Train: data epoch: [54] Total time: 0:00:04 (0.9401 s / it)
+2023-09-12 20:07:49,188 [INFO] Averaged stats: lr: 0.0000  loss: 0.1456
+2023-09-12 20:07:49,192 [INFO] Evaluating on val.
+2023-09-12 20:07:49,204 [INFO] Start training
+2023-09-12 20:07:49,223 [INFO] Start training epoch 55, 5 iters per inner epoch.
+Train: data epoch: [55]  [0/5]  eta: 0:00:16  lr: 0.000018  loss: 0.1775  time: 3.3595  data: 0.0000  max mem: 35724
+Train: data epoch: [55]  [4/5]  eta: 0:00:00  lr: 0.000018  loss: 0.1086  time: 0.9626  data: 0.0000  max mem: 35724
+Train: data epoch: [55] Total time: 0:00:04 (0.9629 s / it)
+2023-09-12 20:07:54,038 [INFO] Averaged stats: lr: 0.0000  loss: 0.1443
+2023-09-12 20:07:54,041 [INFO] Evaluating on val.
+2023-09-12 20:07:54,054 [INFO] Start training
+2023-09-12 20:07:54,072 [INFO] Start training epoch 56, 5 iters per inner epoch.
+Train: data epoch: [56]  [0/5]  eta: 0:00:16  lr: 0.000018  loss: 0.1506  time: 3.3423  data: 0.0000  max mem: 35724
+2023-09-12 20:07:58,855 [INFO] Averaged stats: lr: 0.0000  loss: 0.1173
+2023-09-12 20:07:58,859 [INFO] Evaluating on val.
+2023-09-12 20:07:58,871 [INFO] Start training
+2023-09-12 20:07:58,889 [INFO] Start training epoch 57, 5 iters per inner epoch.
+Train: data epoch: [56]  [4/5]  eta: 0:00:00  lr: 0.000018  loss: 0.0891  time: 0.9561  data: 0.0000  max mem: 35724
+Train: data epoch: [56] Total time: 0:00:04 (0.9565 s / it)
+Train: data epoch: [57]  [0/5]  eta: 0:00:17  lr: 0.000018  loss: 0.1410  time: 3.4771  data: 0.0000  max mem: 35724
+Train: data epoch: [57]  [4/5]  eta: 0:00:00  lr: 0.000018  loss: 0.1005  time: 0.9965  data: 0.0000  max mem: 35724
+Train: data epoch: [57] Total time: 0:00:04 (0.9969 s / it)
+2023-09-12 20:08:03,874 [INFO] Averaged stats: lr: 0.0000  loss: 0.1277
+2023-09-12 20:08:03,878 [INFO] Evaluating on val.
+2023-09-12 20:08:03,891 [INFO] Start training
+2023-09-12 20:08:03,909 [INFO] Start training epoch 58, 5 iters per inner epoch.
+Train: data epoch: [58]  [0/5]  eta: 0:00:16  lr: 0.000018  loss: 0.1380  time: 3.3143  data: 0.0000  max mem: 35724
+2023-09-12 20:08:08,722 [INFO] Averaged stats: lr: 0.0000  loss: 0.1165
+2023-09-12 20:08:08,725 [INFO] Evaluating on val.
+2023-09-12 20:08:08,739 [INFO] Start training
+2023-09-12 20:08:08,757 [INFO] Start training epoch 59, 5 iters per inner epoch.
+Train: data epoch: [58]  [4/5]  eta: 0:00:00  lr: 0.000017  loss: 0.1045  time: 0.9621  data: 0.0000  max mem: 35724
+Train: data epoch: [58] Total time: 0:00:04 (0.9624 s / it)
+Train: data epoch: [59]  [0/5]  eta: 0:00:16  lr: 0.000017  loss: 0.1420  time: 3.2773  data: 0.0000  max mem: 35724
+Train: data epoch: [59]  [4/5]  eta: 0:00:00  lr: 0.000017  loss: 0.1499  time: 0.9437  data: 0.0000  max mem: 35724
+Train: data epoch: [59] Total time: 0:00:04 (0.9441 s / it)
+2023-09-12 20:08:13,478 [INFO] Averaged stats: lr: 0.0000  loss: 0.1415
+2023-09-12 20:08:13,481 [INFO] Evaluating on val.
+2023-09-12 20:08:13,495 [INFO] Start training
+2023-09-12 20:08:13,513 [INFO] Start training epoch 60, 5 iters per inner epoch.
+Train: data epoch: [60]  [0/5]  eta: 0:00:16  lr: 0.000017  loss: 0.1007  time: 3.2487  data: 0.0000  max mem: 35724
+Train: data epoch: [60]  [4/5]  eta: 0:00:00  lr: 0.000017  loss: 0.1239  time: 0.9472  data: 0.0000  max mem: 35724
+Train: data epoch: [60] Total time: 0:00:04 (0.9476 s / it)
+2023-09-12 20:08:18,252 [INFO] Averaged stats: lr: 0.0000  loss: 0.1146
+2023-09-12 20:08:18,255 [INFO] Evaluating on val.
+2023-09-12 20:08:18,268 [INFO] Start training
+2023-09-12 20:08:18,286 [INFO] Start training epoch 61, 5 iters per inner epoch.
+Train: data epoch: [61]  [0/5]  eta: 0:00:16  lr: 0.000017  loss: 0.0814  time: 3.2160  data: 0.0000  max mem: 35724
+2023-09-12 20:08:22,991 [INFO] Averaged stats: lr: 0.0000  loss: 0.1193
+2023-09-12 20:08:22,995 [INFO] Evaluating on val.
+2023-09-12 20:08:23,009 [INFO] Start training
+2023-09-12 20:08:23,027 [INFO] Start training epoch 62, 5 iters per inner epoch.
+Train: data epoch: [61]  [4/5]  eta: 0:00:00  lr: 0.000016  loss: 0.1222  time: 0.9405  data: 0.0000  max mem: 35724
+Train: data epoch: [61] Total time: 0:00:04 (0.9408 s / it)
+Train: data epoch: [62]  [0/5]  eta: 0:00:16  lr: 0.000016  loss: 0.1076  time: 3.2691  data: 0.0000  max mem: 35724
+Train: data epoch: [62]  [4/5]  eta: 0:00:00  lr: 0.000016  loss: 0.1533  time: 0.9403  data: 0.0000  max mem: 35724
+Train: data epoch: [62] Total time: 0:00:04 (0.9407 s / it)
+2023-09-12 20:08:27,731 [INFO] Averaged stats: lr: 0.0000  loss: 0.1087
+2023-09-12 20:08:27,735 [INFO] Evaluating on val.
+2023-09-12 20:08:27,748 [INFO] Start training
+2023-09-12 20:08:27,766 [INFO] Start training epoch 63, 5 iters per inner epoch.
+Train: data epoch: [63]  [0/5]  eta: 0:00:16  lr: 0.000016  loss: 0.1176  time: 3.2084  data: 0.0000  max mem: 35724
+2023-09-12 20:08:32,450 [INFO] Averaged stats: lr: 0.0000  loss: 0.1042
+2023-09-12 20:08:32,454 [INFO] Evaluating on val.
+2023-09-12 20:08:32,466 [INFO] Start training
+2023-09-12 20:08:32,484 [INFO] Start training epoch 64, 5 iters per inner epoch.
+Train: data epoch: [63]  [4/5]  eta: 0:00:00  lr: 0.000016  loss: 0.0883  time: 0.9363  data: 0.0000  max mem: 35724
+Train: data epoch: [63] Total time: 0:00:04 (0.9366 s / it)
+Train: data epoch: [64]  [0/5]  eta: 0:00:16  lr: 0.000016  loss: 0.0878  time: 3.2690  data: 0.0000  max mem: 35724
+Train: data epoch: [64]  [4/5]  eta: 0:00:00  lr: 0.000016  loss: 0.1025  time: 0.9459  data: 0.0000  max mem: 35724
+Train: data epoch: [64] Total time: 0:00:04 (0.9462 s / it)
+2023-09-12 20:08:37,216 [INFO] Averaged stats: lr: 0.0000  loss: 0.0999
+2023-09-12 20:08:37,220 [INFO] Evaluating on val.
+2023-09-12 20:08:37,232 [INFO] Start training
+2023-09-12 20:08:37,250 [INFO] Start training epoch 65, 5 iters per inner epoch.
+Train: data epoch: [65]  [0/5]  eta: 0:00:16  lr: 0.000015  loss: 0.0927  time: 3.2424  data: 0.0000  max mem: 35724
+Train: data epoch: [65]  [4/5]  eta: 0:00:00  lr: 0.000015  loss: 0.0806  time: 0.9298  data: 0.0000  max mem: 35724
+Train: data epoch: [65] Total time: 0:00:04 (0.9301 s / it)
+2023-09-12 20:08:41,902 [INFO] Averaged stats: lr: 0.0000  loss: 0.0996
+2023-09-12 20:08:41,906 [INFO] Evaluating on val.
+2023-09-12 20:08:41,919 [INFO] Start training
+2023-09-12 20:08:41,937 [INFO] Start training epoch 66, 5 iters per inner epoch.
+Train: data epoch: [66]  [0/5]  eta: 0:00:15  lr: 0.000015  loss: 0.0866  time: 3.1729  data: 0.0000  max mem: 35724
+2023-09-12 20:08:46,610 [INFO] Averaged stats: lr: 0.0000  loss: 0.0909
+2023-09-12 20:08:46,615 [INFO] Evaluating on val.
+2023-09-12 20:08:46,628 [INFO] Start training
+2023-09-12 20:08:46,649 [INFO] Start training epoch 67, 5 iters per inner epoch.
+Train: data epoch: [66]  [4/5]  eta: 0:00:00  lr: 0.000015  loss: 0.0952  time: 0.9341  data: 0.0000  max mem: 35724
+Train: data epoch: [66] Total time: 0:00:04 (0.9345 s / it)
+Train: data epoch: [67]  [0/5]  eta: 0:00:16  lr: 0.000015  loss: 0.0997  time: 3.2101  data: 0.0000  max mem: 35724
+Train: data epoch: [67]  [4/5]  eta: 0:00:00  lr: 0.000015  loss: 0.0883  time: 0.9466  data: 0.0000  max mem: 35724
+Train: data epoch: [67] Total time: 0:00:04 (0.9470 s / it)
+2023-09-12 20:08:51,384 [INFO] Averaged stats: lr: 0.0000  loss: 0.0917
+2023-09-12 20:08:51,390 [INFO] Evaluating on val.
+2023-09-12 20:08:51,405 [INFO] Start training
+2023-09-12 20:08:51,423 [INFO] Start training epoch 68, 5 iters per inner epoch.
+Train: data epoch: [68]  [0/5]  eta: 0:00:16  lr: 0.000015  loss: 0.0859  time: 3.2513  data: 0.0000  max mem: 35724
+Train: data epoch: [68]  [4/5]  eta: 0:00:00  lr: 0.000014  loss: 0.0751  time: 0.9470  data: 0.0000  max mem: 35724
+Train: data epoch: [68] Total time: 0:00:04 (0.9473 s / it)
+2023-09-12 20:08:56,160 [INFO] Averaged stats: lr: 0.0000  loss: 0.0897
+2023-09-12 20:08:56,164 [INFO] Evaluating on val.
+2023-09-12 20:08:56,176 [INFO] Start training
+2023-09-12 20:08:56,195 [INFO] Start training epoch 69, 5 iters per inner epoch.
+Train: data epoch: [69]  [0/5]  eta: 0:00:16  lr: 0.000014  loss: 0.0974  time: 3.2410  data: 0.0000  max mem: 35724
+2023-09-12 20:09:00,867 [INFO] Averaged stats: lr: 0.0000  loss: 0.0911
+2023-09-12 20:09:00,871 [INFO] Evaluating on val.
+2023-09-12 20:09:00,884 [INFO] Start training
+2023-09-12 20:09:00,902 [INFO] Start training epoch 70, 5 iters per inner epoch.
+Train: data epoch: [69]  [4/5]  eta: 0:00:00  lr: 0.000014  loss: 0.1114  time: 0.9341  data: 0.0000  max mem: 35724
+Train: data epoch: [69] Total time: 0:00:04 (0.9344 s / it)
+Train: data epoch: [70]  [0/5]  eta: 0:00:15  lr: 0.000014  loss: 0.0981  time: 3.1794  data: 0.0000  max mem: 35724
+Train: data epoch: [70]  [4/5]  eta: 0:00:00  lr: 0.000014  loss: 0.0827  time: 0.9349  data: 0.0000  max mem: 35724
+Train: data epoch: [70] Total time: 0:00:04 (0.9352 s / it)
+2023-09-12 20:09:05,579 [INFO] Averaged stats: lr: 0.0000  loss: 0.0917
+2023-09-12 20:09:05,584 [INFO] Evaluating on val.
+2023-09-12 20:09:05,598 [INFO] Start training
+2023-09-12 20:09:05,616 [INFO] Start training epoch 71, 5 iters per inner epoch.
+Train: data epoch: [71]  [0/5]  eta: 0:00:16  lr: 0.000014  loss: 0.0857  time: 3.2215  data: 0.0000  max mem: 35724
+Train: data epoch: [71]  [4/5]  eta: 0:00:00  lr: 0.000014  loss: 0.0804  time: 0.9419  data: 0.0000  max mem: 35724
+Train: data epoch: [71] Total time: 0:00:04 (0.9423 s / it)
+2023-09-12 20:09:10,328 [INFO] Averaged stats: lr: 0.0000  loss: 0.0831
+2023-09-12 20:09:10,332 [INFO] Evaluating on val.
+2023-09-12 20:09:10,344 [INFO] Start training
+2023-09-12 20:09:10,362 [INFO] Start training epoch 72, 5 iters per inner epoch.
+Train: data epoch: [72]  [0/5]  eta: 0:00:16  lr: 0.000014  loss: 0.0839  time: 3.3110  data: 0.0000  max mem: 35724
+2023-09-12 20:09:15,114 [INFO] Averaged stats: lr: 0.0000  loss: 0.0937
+2023-09-12 20:09:15,118 [INFO] Evaluating on val.
+2023-09-12 20:09:15,130 [INFO] Start training
+2023-09-12 20:09:15,148 [INFO] Start training epoch 73, 5 iters per inner epoch.
+Train: data epoch: [72]  [4/5]  eta: 0:00:00  lr: 0.000013  loss: 0.1032  time: 0.9497  data: 0.0000  max mem: 35724
+Train: data epoch: [72] Total time: 0:00:04 (0.9501 s / it)
+Train: data epoch: [73]  [0/5]  eta: 0:00:16  lr: 0.000013  loss: 0.0979  time: 3.2275  data: 0.0000  max mem: 35724
+Train: data epoch: [73]  [4/5]  eta: 0:00:00  lr: 0.000013  loss: 0.0832  time: 0.9415  data: 0.0000  max mem: 35724
+Train: data epoch: [73] Total time: 0:00:04 (0.9418 s / it)
+2023-09-12 20:09:19,858 [INFO] Averaged stats: lr: 0.0000  loss: 0.0878
+2023-09-12 20:09:19,862 [INFO] Evaluating on val.
+2023-09-12 20:09:19,875 [INFO] Start training
+2023-09-12 20:09:19,893 [INFO] Start training epoch 74, 5 iters per inner epoch.
+Train: data epoch: [74]  [0/5]  eta: 0:00:16  lr: 0.000013  loss: 0.1311  time: 3.2035  data: 0.0000  max mem: 35724
+2023-09-12 20:09:24,571 [INFO] Averaged stats: lr: 0.0000  loss: 0.0850
+2023-09-12 20:09:24,575 [INFO] Evaluating on val.
+2023-09-12 20:09:24,587 [INFO] Start training
+2023-09-12 20:09:24,606 [INFO] Start training epoch 75, 5 iters per inner epoch.
+Train: data epoch: [74]  [4/5]  eta: 0:00:00  lr: 0.000013  loss: 0.0759  time: 0.9352  data: 0.0000  max mem: 35724
+Train: data epoch: [74] Total time: 0:00:04 (0.9355 s / it)
+Train: data epoch: [75]  [0/5]  eta: 0:00:16  lr: 0.000013  loss: 0.0997  time: 3.3203  data: 0.0000  max mem: 35724
+Train: data epoch: [75]  [4/5]  eta: 0:00:00  lr: 0.000013  loss: 0.1164  time: 0.9686  data: 0.0000  max mem: 35724
+Train: data epoch: [75] Total time: 0:00:04 (0.9689 s / it)
+2023-09-12 20:09:29,451 [INFO] Averaged stats: lr: 0.0000  loss: 0.0897
+2023-09-12 20:09:29,456 [INFO] Evaluating on val.
+2023-09-12 20:09:29,474 [INFO] Start training
+2023-09-12 20:09:29,493 [INFO] Start training epoch 76, 5 iters per inner epoch.
+Train: data epoch: [76]  [0/5]  eta: 0:00:16  lr: 0.000013  loss: 0.0735  time: 3.2586  data: 0.0000  max mem: 35724
+Train: data epoch: [76]  [4/5]  eta: 0:00:00  lr: 0.000013  loss: 0.0869  time: 0.9419  data: 0.0000  max mem: 35724
+Train: data epoch: [76] Total time: 0:00:04 (0.9422 s / it)
+2023-09-12 20:09:34,206 [INFO] Averaged stats: lr: 0.0000  loss: 0.0786
+2023-09-12 20:09:34,209 [INFO] Evaluating on val.
+2023-09-12 20:09:34,223 [INFO] Start training
+2023-09-12 20:09:34,241 [INFO] Start training epoch 77, 5 iters per inner epoch.
+Train: data epoch: [77]  [0/5]  eta: 0:00:16  lr: 0.000012  loss: 0.1055  time: 3.2489  data: 0.0000  max mem: 35724
+2023-09-12 20:09:38,990 [INFO] Averaged stats: lr: 0.0000  loss: 0.0869
+2023-09-12 20:09:38,994 [INFO] Evaluating on val.
+2023-09-12 20:09:39,008 [INFO] Start training
+2023-09-12 20:09:39,026 [INFO] Start training epoch 78, 5 iters per inner epoch.
+Train: data epoch: [77]  [4/5]  eta: 0:00:00  lr: 0.000012  loss: 0.0729  time: 0.9495  data: 0.0000  max mem: 35724
+Train: data epoch: [77] Total time: 0:00:04 (0.9498 s / it)
+Train: data epoch: [78]  [0/5]  eta: 0:00:16  lr: 0.000012  loss: 0.0799  time: 3.2475  data: 0.0000  max mem: 35724
+Train: data epoch: [78]  [4/5]  eta: 0:00:00  lr: 0.000012  loss: 0.0761  time: 0.9485  data: 0.0000  max mem: 35724
+Train: data epoch: [78] Total time: 0:00:04 (0.9489 s / it)
+2023-09-12 20:09:43,771 [INFO] Averaged stats: lr: 0.0000  loss: 0.0779
+2023-09-12 20:09:43,775 [INFO] Evaluating on val.
+2023-09-12 20:09:43,789 [INFO] Start training
+2023-09-12 20:09:43,811 [INFO] Start training epoch 79, 5 iters per inner epoch.
+Train: data epoch: [79]  [0/5]  eta: 0:00:16  lr: 0.000012  loss: 0.0742  time: 3.2193  data: 0.0000  max mem: 35724
+Train: data epoch: [79]  [4/5]  eta: 0:00:00  lr: 0.000012  loss: 0.0769  time: 0.9330  data: 0.0000  max mem: 35724
+Train: data epoch: [79] Total time: 0:00:04 (0.9334 s / it)
+2023-09-12 20:09:48,478 [INFO] Averaged stats: lr: 0.0000  loss: 0.0760
+2023-09-12 20:09:48,482 [INFO] Evaluating on val.
+2023-09-12 20:09:48,495 [INFO] Start training
+2023-09-12 20:09:48,513 [INFO] Start training epoch 80, 5 iters per inner epoch.
+Train: data epoch: [80]  [0/5]  eta: 0:00:16  lr: 0.000012  loss: 0.0980  time: 3.2714  data: 0.0000  max mem: 35724
+2023-09-12 20:09:53,234 [INFO] Averaged stats: lr: 0.0000  loss: 0.0799
+2023-09-12 20:09:53,238 [INFO] Evaluating on val.
+2023-09-12 20:09:53,251 [INFO] Start training
+2023-09-12 20:09:53,269 [INFO] Start training epoch 81, 5 iters per inner epoch.
+Train: data epoch: [80]  [4/5]  eta: 0:00:00  lr: 0.000012  loss: 0.0812  time: 0.9439  data: 0.0000  max mem: 35724
+Train: data epoch: [80] Total time: 0:00:04 (0.9442 s / it)
+Train: data epoch: [81]  [0/5]  eta: 0:00:16  lr: 0.000012  loss: 0.0924  time: 3.2089  data: 0.0000  max mem: 35724
+Train: data epoch: [81]  [4/5]  eta: 0:00:00  lr: 0.000012  loss: 0.0622  time: 0.9426  data: 0.0000  max mem: 35724
+Train: data epoch: [81] Total time: 0:00:04 (0.9430 s / it)
+2023-09-12 20:09:57,985 [INFO] Averaged stats: lr: 0.0000  loss: 0.0772
+2023-09-12 20:09:57,989 [INFO] Evaluating on val.
+2023-09-12 20:09:58,001 [INFO] Start training
+2023-09-12 20:09:58,020 [INFO] Start training epoch 82, 5 iters per inner epoch.
+Train: data epoch: [82]  [0/5]  eta: 0:00:15  lr: 0.000012  loss: 0.0730  time: 3.1802  data: 0.0000  max mem: 35724
+2023-09-12 20:10:02,719 [INFO] Averaged stats: lr: 0.0000  loss: 0.0754
+2023-09-12 20:10:02,723 [INFO] Evaluating on val.
+2023-09-12 20:10:02,735 [INFO] Start training
+2023-09-12 20:10:02,757 [INFO] Start training epoch 83, 5 iters per inner epoch.
+Train: data epoch: [82]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0671  time: 0.9394  data: 0.0000  max mem: 35724
+Train: data epoch: [82] Total time: 0:00:04 (0.9397 s / it)
+Train: data epoch: [83]  [0/5]  eta: 0:00:17  lr: 0.000011  loss: 0.0651  time: 3.4012  data: 0.0000  max mem: 35724
+Train: data epoch: [83]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0706  time: 0.9692  data: 0.0000  max mem: 35724
+Train: data epoch: [83] Total time: 0:00:04 (0.9695 s / it)
+2023-09-12 20:10:07,606 [INFO] Averaged stats: lr: 0.0000  loss: 0.0717
+2023-09-12 20:10:07,610 [INFO] Evaluating on val.
+2023-09-12 20:10:07,622 [INFO] Start training
+2023-09-12 20:10:07,640 [INFO] Start training epoch 84, 5 iters per inner epoch.
+Train: data epoch: [84]  [0/5]  eta: 0:00:15  lr: 0.000011  loss: 0.0716  time: 3.1491  data: 0.0000  max mem: 35724
+Train: data epoch: [84]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0824  time: 0.9286  data: 0.0000  max mem: 35724
+Train: data epoch: [84] Total time: 0:00:04 (0.9290 s / it)
+2023-09-12 20:10:12,286 [INFO] Averaged stats: lr: 0.0000  loss: 0.0744
+2023-09-12 20:10:12,292 [INFO] Evaluating on val.
+2023-09-12 20:10:12,306 [INFO] Start training
+2023-09-12 20:10:12,324 [INFO] Start training epoch 85, 5 iters per inner epoch.
+Train: data epoch: [85]  [0/5]  eta: 0:00:16  lr: 0.000011  loss: 0.0583  time: 3.2259  data: 0.0000  max mem: 35724
+2023-09-12 20:10:17,104 [INFO] Averaged stats: lr: 0.0000  loss: 0.0674
+2023-09-12 20:10:17,108 [INFO] Evaluating on val.
+2023-09-12 20:10:17,121 [INFO] Start training
+2023-09-12 20:10:17,139 [INFO] Start training epoch 86, 5 iters per inner epoch.
+Train: data epoch: [85]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0633  time: 0.9555  data: 0.0000  max mem: 35724
+Train: data epoch: [85] Total time: 0:00:04 (0.9559 s / it)
+Train: data epoch: [86]  [0/5]  eta: 0:00:16  lr: 0.000011  loss: 0.0656  time: 3.2434  data: 0.0000  max mem: 35724
+Train: data epoch: [86]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0824  time: 0.9344  data: 0.0000  max mem: 35724
+Train: data epoch: [86] Total time: 0:00:04 (0.9348 s / it)
+2023-09-12 20:10:21,813 [INFO] Averaged stats: lr: 0.0000  loss: 0.0719
+2023-09-12 20:10:21,817 [INFO] Evaluating on val.
+2023-09-12 20:10:21,830 [INFO] Start training
+2023-09-12 20:10:21,848 [INFO] Start training epoch 87, 5 iters per inner epoch.
+Train: data epoch: [87]  [0/5]  eta: 0:00:15  lr: 0.000011  loss: 0.0628  time: 3.1891  data: 0.0000  max mem: 35724
+Train: data epoch: [87]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0729  time: 0.9387  data: 0.0000  max mem: 35724
+Train: data epoch: [87] Total time: 0:00:04 (0.9391 s / it)
+2023-09-12 20:10:26,545 [INFO] Averaged stats: lr: 0.0000  loss: 0.0674
+2023-09-12 20:10:26,549 [INFO] Evaluating on val.
+2023-09-12 20:10:26,561 [INFO] Start training
+2023-09-12 20:10:26,580 [INFO] Start training epoch 88, 5 iters per inner epoch.
+Train: data epoch: [88]  [0/5]  eta: 0:00:15  lr: 0.000011  loss: 0.0705  time: 3.1765  data: 0.0000  max mem: 35724
+2023-09-12 20:10:31,239 [INFO] Averaged stats: lr: 0.0000  loss: 0.0652
+2023-09-12 20:10:31,244 [INFO] Evaluating on val.
+2023-09-12 20:10:31,256 [INFO] Start training
+2023-09-12 20:10:31,274 [INFO] Start training epoch 89, 5 iters per inner epoch.
+Train: data epoch: [88]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0681  time: 0.9315  data: 0.0000  max mem: 35724
+Train: data epoch: [88] Total time: 0:00:04 (0.9318 s / it)
+Train: data epoch: [89]  [0/5]  eta: 0:00:15  lr: 0.000011  loss: 0.0654  time: 3.1737  data: 0.0000  max mem: 35724
+Train: data epoch: [89]  [4/5]  eta: 0:00:00  lr: 0.000011  loss: 0.0520  time: 0.9384  data: 0.0000  max mem: 35724
+Train: data epoch: [89] Total time: 0:00:04 (0.9388 s / it)
+2023-09-12 20:10:35,969 [INFO] Averaged stats: lr: 0.0000  loss: 0.0641
+2023-09-12 20:10:35,974 [INFO] Evaluating on val.
+2023-09-12 20:10:35,987 [INFO] Start training
+2023-09-12 20:10:36,005 [INFO] Start training epoch 90, 5 iters per inner epoch.
+Train: data epoch: [90]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0651  time: 3.2261  data: 0.0000  max mem: 35724
+2023-09-12 20:10:40,749 [INFO] Averaged stats: lr: 0.0000  loss: 0.0703
+2023-09-12 20:10:40,754 [INFO] Evaluating on val.
+2023-09-12 20:10:40,767 [INFO] Start training
+2023-09-12 20:10:40,785 [INFO] Start training epoch 91, 5 iters per inner epoch.
+Train: data epoch: [90]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0851  time: 0.9483  data: 0.0000  max mem: 35724
+Train: data epoch: [90] Total time: 0:00:04 (0.9487 s / it)
+Train: data epoch: [91]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0612  time: 3.2600  data: 0.0000  max mem: 35724
+Train: data epoch: [91]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0581  time: 0.9457  data: 0.0000  max mem: 35724
+Train: data epoch: [91] Total time: 0:00:04 (0.9461 s / it)
+2023-09-12 20:10:45,516 [INFO] Averaged stats: lr: 0.0000  loss: 0.0636
+2023-09-12 20:10:45,520 [INFO] Evaluating on val.
+2023-09-12 20:10:45,534 [INFO] Start training
+2023-09-12 20:10:45,552 [INFO] Start training epoch 92, 5 iters per inner epoch.
+Train: data epoch: [92]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0594  time: 3.2375  data: 0.0000  max mem: 35724
+Train: data epoch: [92]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0594  time: 0.9254  data: 0.0000  max mem: 35724
+Train: data epoch: [92] Total time: 0:00:04 (0.9257 s / it)
+2023-09-12 20:10:50,181 [INFO] Averaged stats: lr: 0.0000  loss: 0.0626
+2023-09-12 20:10:50,185 [INFO] Evaluating on val.
+2023-09-12 20:10:50,198 [INFO] Start training
+2023-09-12 20:10:50,217 [INFO] Start training epoch 93, 5 iters per inner epoch.
+Train: data epoch: [93]  [0/5]  eta: 0:00:15  lr: 0.000010  loss: 0.0712  time: 3.1992  data: 0.0000  max mem: 35724
+2023-09-12 20:10:55,043 [INFO] Averaged stats: lr: 0.0000  loss: 0.0642
+2023-09-12 20:10:55,048 [INFO] Evaluating on val.
+2023-09-12 20:10:55,060 [INFO] Start training
+2023-09-12 20:10:55,079 [INFO] Start training epoch 94, 5 iters per inner epoch.
+Train: data epoch: [93]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0543  time: 0.9649  data: 0.0000  max mem: 35724
+Train: data epoch: [93] Total time: 0:00:04 (0.9652 s / it)
+Train: data epoch: [94]  [0/5]  eta: 0:00:15  lr: 0.000010  loss: 0.0655  time: 3.1997  data: 0.0000  max mem: 35724
+Train: data epoch: [94]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0656  time: 0.9334  data: 0.0000  max mem: 35724
+Train: data epoch: [94] Total time: 0:00:04 (0.9338 s / it)
+2023-09-12 20:10:59,749 [INFO] Averaged stats: lr: 0.0000  loss: 0.0653
+2023-09-12 20:10:59,753 [INFO] Evaluating on val.
+2023-09-12 20:10:59,768 [INFO] Start training
+2023-09-12 20:10:59,786 [INFO] Start training epoch 95, 5 iters per inner epoch.
+Train: data epoch: [95]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0554  time: 3.2474  data: 0.0000  max mem: 35724
+Train: data epoch: [95]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0700  time: 0.9372  data: 0.0000  max mem: 35724
+Train: data epoch: [95] Total time: 0:00:04 (0.9375 s / it)
+2023-09-12 20:11:04,474 [INFO] Averaged stats: lr: 0.0000  loss: 0.0638
+2023-09-12 20:11:04,479 [INFO] Evaluating on val.
+2023-09-12 20:11:04,493 [INFO] Start training
+2023-09-12 20:11:04,511 [INFO] Start training epoch 96, 5 iters per inner epoch.
+Train: data epoch: [96]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0778  time: 3.3047  data: 0.0000  max mem: 35724
+2023-09-12 20:11:09,305 [INFO] Averaged stats: lr: 0.0000  loss: 0.0671
+2023-09-12 20:11:09,309 [INFO] Evaluating on val.
+2023-09-12 20:11:09,322 [INFO] Start training
+2023-09-12 20:11:09,340 [INFO] Start training epoch 97, 5 iters per inner epoch.
+Train: data epoch: [96]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0606  time: 0.9583  data: 0.0000  max mem: 35724
+Train: data epoch: [96] Total time: 0:00:04 (0.9586 s / it)
+Train: data epoch: [97]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0564  time: 3.2545  data: 0.0000  max mem: 35724
+Train: data epoch: [97]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0578  time: 0.9440  data: 0.0000  max mem: 35724
+Train: data epoch: [97] Total time: 0:00:04 (0.9443 s / it)
+2023-09-12 20:11:14,062 [INFO] Averaged stats: lr: 0.0000  loss: 0.0619
+2023-09-12 20:11:14,066 [INFO] Evaluating on val.
+2023-09-12 20:11:14,078 [INFO] Start training
+2023-09-12 20:11:14,096 [INFO] Start training epoch 98, 5 iters per inner epoch.
+Train: data epoch: [98]  [0/5]  eta: 0:00:17  lr: 0.000010  loss: 0.0610  time: 3.4598  data: 0.0000  max mem: 35724
+2023-09-12 20:11:19,047 [INFO] Averaged stats: lr: 0.0000  loss: 0.0620
+2023-09-12 20:11:19,051 [INFO] Evaluating on val.
+2023-09-12 20:11:19,063 [INFO] Start training
+2023-09-12 20:11:19,082 [INFO] Start training epoch 99, 5 iters per inner epoch.
+Train: data epoch: [98]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0608  time: 0.9896  data: 0.0000  max mem: 35724
+Train: data epoch: [98] Total time: 0:00:04 (0.9900 s / it)
+Train: data epoch: [99]  [0/5]  eta: 0:00:16  lr: 0.000010  loss: 0.0612  time: 3.2961  data: 0.0000  max mem: 35724
+Train: data epoch: [99]  [4/5]  eta: 0:00:00  lr: 0.000010  loss: 0.0650  time: 0.9587  data: 0.0000  max mem: 35724
+Train: data epoch: [99] Total time: 0:00:04 (0.9590 s / it)
+2023-09-12 20:11:23,878 [INFO] Averaged stats: lr: 0.0000  loss: 0.0600
+2023-09-12 20:11:23,882 [INFO] Evaluating on val.
+2023-09-12 20:11:23,895 [INFO] Training time 0:08:00

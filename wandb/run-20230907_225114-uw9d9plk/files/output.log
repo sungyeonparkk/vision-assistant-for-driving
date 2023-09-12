@@ -1,0 +1,125 @@
+
+| distributed init (rank 0, world 1): env://
+2023-09-07 22:51:20,527 [INFO]
+=====  Running Parameters    =====
+2023-09-07 22:51:20,528 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 3,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-07 22:51:20,528 [INFO]
+======  Dataset Attributes  ======
+2023-09-07 22:51:20,528 [INFO]
+======== bdd_instruct =======
+2023-09-07 22:51:20,528 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-07 22:51:20,528 [INFO]
+======  Model Attributes  ======
+2023-09-07 22:51:20,529 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-07 22:51:20,529 [INFO] Building datasets...
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 99, in main
+    datasets = task.build_datasets(cfg)
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 60, in build_datasets
+    dataset = builder.build_datasets()
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/base_dataset_builder.py", line 56, in build_datasets
+    datasets = self.build()  # dataset['train'/'val'/'test']
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/instruct_builder.py", line 43, in build
+    vis_processor=self.vis_processors[split],
+KeyError: 'val'
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 99, in main
+    datasets = task.build_datasets(cfg)
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 60, in build_datasets
+    dataset = builder.build_datasets()
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/base_dataset_builder.py", line 56, in build_datasets
+    datasets = self.build()  # dataset['train'/'val'/'test']
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/instruct_builder.py", line 43, in build
+    vis_processor=self.vis_processors[split],
+KeyError: 'val'

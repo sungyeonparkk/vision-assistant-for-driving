@@ -1,0 +1,146 @@
+
+| distributed init (rank 0, world 1): env://
+2023-09-07 23:04:11,301 [INFO]
+=====  Running Parameters    =====
+2023-09-07 23:04:11,301 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 3,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-07 23:04:11,302 [INFO]
+======  Dataset Attributes  ======
+2023-09-07 23:04:11,302 [INFO]
+======== bdd_instruct =======
+2023-09-07 23:04:11,302 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-07 23:04:11,302 [INFO]
+======  Model Attributes  ======
+2023-09-07 23:04:11,302 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-07 23:04:11,303 [INFO] Building datasets...
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 99, in main
+    datasets = task.build_datasets(cfg)
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 60, in build_datasets
+    dataset = builder.build_datasets()
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/base_dataset_builder.py", line 56, in build_datasets
+    datasets = self.build()  # dataset['train'/'val'/'test']
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/instruct_builder.py", line 30, in build
+    build_info = self.config.build_info[split]
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 375, in __getitem__
+    self._format_and_raise(key=key, value=None, cause=e)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/base.py", line 231, in _format_and_raise
+    format_and_raise(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/_utils.py", line 899, in format_and_raise
+    _raise(ex, cause)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/_utils.py", line 797, in _raise
+    raise ex.with_traceback(sys.exc_info()[2])  # set env var OC_CAUSE=1 for full trace
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 369, in __getitem__
+    return self._get_impl(key=key, default_value=_DEFAULT_MARKER_)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 442, in _get_impl
+    node = self._get_child(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/basecontainer.py", line 73, in _get_child
+    child = self._get_node(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 480, in _get_node
+    raise ConfigKeyError(f"Missing key {key!s}")
+omegaconf.errors.ConfigKeyError: Missing key val
+    full_key: datasets.bdd_instruct.build_info.val
+    object_type=dict
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 99, in main
+    datasets = task.build_datasets(cfg)
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 60, in build_datasets
+    dataset = builder.build_datasets()
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/base_dataset_builder.py", line 56, in build_datasets
+    datasets = self.build()  # dataset['train'/'val'/'test']
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/instruct_builder.py", line 30, in build
+    build_info = self.config.build_info[split]
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 375, in __getitem__
+    self._format_and_raise(key=key, value=None, cause=e)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/base.py", line 231, in _format_and_raise
+    format_and_raise(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/_utils.py", line 899, in format_and_raise
+    _raise(ex, cause)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/_utils.py", line 797, in _raise
+    raise ex.with_traceback(sys.exc_info()[2])  # set env var OC_CAUSE=1 for full trace
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 369, in __getitem__
+    return self._get_impl(key=key, default_value=_DEFAULT_MARKER_)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 442, in _get_impl
+    node = self._get_child(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/basecontainer.py", line 73, in _get_child
+    child = self._get_node(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/omegaconf/dictconfig.py", line 480, in _get_node
+    raise ConfigKeyError(f"Missing key {key!s}")
+omegaconf.errors.ConfigKeyError: Missing key val
+    full_key: datasets.bdd_instruct.build_info.val
+    object_type=dict

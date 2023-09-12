@@ -1,0 +1,267 @@
+2023-09-11 19:17:38,710 INFO    StreamThr :30313 [internal.py:wandb_internal():86] W&B internal server running at pid: 30313, started at: 2023-09-11 19:17:38.709790
+2023-09-11 19:17:38,711 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status
+2023-09-11 19:17:38,714 INFO    WriterThread:30313 [datastore.py:open_for_write():85] open: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/run-nydr30vu.wandb
+2023-09-11 19:17:38,714 DEBUG   SenderThread:30313 [sender.py:send():379] send: header
+2023-09-11 19:17:38,714 DEBUG   SenderThread:30313 [sender.py:send():379] send: run
+2023-09-11 19:17:39,299 INFO    SenderThread:30313 [dir_watcher.py:__init__():211] watching files in: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files
+2023-09-11 19:17:39,299 INFO    SenderThread:30313 [sender.py:_start_run_threads():1121] run started: nydr30vu with start time 1694427458.710019
+2023-09-11 19:17:39,300 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: summary_record
+2023-09-11 19:17:39,300 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-09-11 19:17:39,307 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: check_version
+2023-09-11 19:17:39,307 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: check_version
+2023-09-11 19:17:39,413 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: run_start
+2023-09-11 19:17:39,417 DEBUG   HandlerThread:30313 [system_info.py:__init__():31] System info init
+2023-09-11 19:17:39,417 DEBUG   HandlerThread:30313 [system_info.py:__init__():46] System info init done
+2023-09-11 19:17:39,417 INFO    HandlerThread:30313 [system_monitor.py:start():181] Starting system monitor
+2023-09-11 19:17:39,417 INFO    SystemMonitor:30313 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-09-11 19:17:39,418 INFO    HandlerThread:30313 [system_monitor.py:probe():201] Collecting system info
+2023-09-11 19:17:39,418 INFO    SystemMonitor:30313 [interfaces.py:start():190] Started cpu monitoring
+2023-09-11 19:17:39,419 INFO    SystemMonitor:30313 [interfaces.py:start():190] Started disk monitoring
+2023-09-11 19:17:39,421 INFO    SystemMonitor:30313 [interfaces.py:start():190] Started gpu monitoring
+2023-09-11 19:17:39,421 INFO    SystemMonitor:30313 [interfaces.py:start():190] Started memory monitoring
+2023-09-11 19:17:39,422 INFO    SystemMonitor:30313 [interfaces.py:start():190] Started network monitoring
+2023-09-11 19:17:40,300 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_created():271] file/dir created: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-summary.json
+2023-09-11 19:17:41,596 DEBUG   HandlerThread:30313 [system_info.py:probe():195] Probing system
+2023-09-11 19:17:41,633 DEBUG   HandlerThread:30313 [gitlib.py:_init_repo():53] git repository is invalid
+2023-09-11 19:17:41,633 DEBUG   HandlerThread:30313 [system_info.py:probe():240] Probing system done
+2023-09-11 19:17:41,633 DEBUG   HandlerThread:30313 [system_monitor.py:probe():210] {'os': 'Linux-5.4.0-88-generic-x86_64-with-glibc2.31', 'python': '3.9.17', 'heartbeatAt': '2023-09-11T10:17:41.596721', 'startedAt': '2023-09-11T10:17:38.704872', 'docker': None, 'cuda': None, 'args': ('--cfg-path', './train_configs/drive_finetune.yaml'), 'state': 'running', 'program': '/root/vision-assistant-for-driving/train.py', 'codePath': 'train.py', 'host': 'workspace-hsqbn1x6udbn-0', 'username': 'root', 'executable': '/root/miniconda3/envs/videollama2/bin/python', 'cpu_count': 128, 'cpu_count_logical': 256, 'cpu_freq': {'current': 3007.66958984375, 'min': 1500.0, 'max': 2250.0}, 'cpu_freq_per_core': [{'current': 3391.482, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.965, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.125, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.411, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.594, 'min': 1500.0, 'max': 2250.0}, {'current': 3373.797, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.241, 'min': 1500.0, 'max': 2250.0}, {'current': 3384.079, 'min': 1500.0, 'max': 2250.0}, {'current': 3379.84, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.738, 'min': 1500.0, 'max': 2250.0}, {'current': 2559.045, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.216, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.298, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.583, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.678, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.283, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.811, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.259, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.121, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.265, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.585, 'min': 1500.0, 'max': 2250.0}, {'current': 3062.824, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.262, 'min': 1500.0, 'max': 2250.0}, {'current': 3369.304, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.05, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.056, 'min': 1500.0, 'max': 2250.0}, {'current': 2553.001, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.925, 'min': 1500.0, 'max': 2250.0}, {'current': 3381.613, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.54, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.382, 'min': 1500.0, 'max': 2250.0}, {'current': 3363.164, 'min': 1500.0, 'max': 2250.0}, {'current': 3375.442, 'min': 1500.0, 'max': 2250.0}, {'current': 3321.911, 'min': 1500.0, 'max': 2250.0}, {'current': 2599.976, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.76, 'min': 1500.0, 'max': 2250.0}, {'current': 3063.2, 'min': 1500.0, 'max': 2250.0}, {'current': 2624.762, 'min': 1500.0, 'max': 2250.0}, {'current': 2683.742, 'min': 1500.0, 'max': 2250.0}, {'current': 2260.884, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.174, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.655, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.586, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.877, 'min': 1500.0, 'max': 2250.0}, {'current': 3379.104, 'min': 1500.0, 'max': 2250.0}, {'current': 2631.453, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.681, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.709, 'min': 1500.0, 'max': 2250.0}, {'current': 2318.365, 'min': 1500.0, 'max': 2250.0}, {'current': 3378.379, 'min': 1500.0, 'max': 2250.0}, {'current': 2339.083, 'min': 1500.0, 'max': 2250.0}, {'current': 2344.879, 'min': 1500.0, 'max': 2250.0}, {'current': 3394.258, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.672, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.421, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.587, 'min': 1500.0, 'max': 2250.0}, {'current': 2406.201, 'min': 1500.0, 'max': 2250.0}, {'current': 3384.053, 'min': 1500.0, 'max': 2250.0}, {'current': 3387.084, 'min': 1500.0, 'max': 2250.0}, {'current': 2331.797, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.428, 'min': 1500.0, 'max': 2250.0}, {'current': 2382.99, 'min': 1500.0, 'max': 2250.0}, {'current': 3401.299, 'min': 1500.0, 'max': 2250.0}, {'current': 3013.875, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.909, 'min': 1500.0, 'max': 2250.0}, {'current': 3396.278, 'min': 1500.0, 'max': 2250.0}, {'current': 2427.888, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.99, 'min': 1500.0, 'max': 2250.0}, {'current': 2484.249, 'min': 1500.0, 'max': 2250.0}, {'current': 3368.98, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.348, 'min': 1500.0, 'max': 2250.0}, {'current': 1728.217, 'min': 1500.0, 'max': 2250.0}, {'current': 2484.924, 'min': 1500.0, 'max': 2250.0}, {'current': 2429.303, 'min': 1500.0, 'max': 2250.0}, {'current': 3399.336, 'min': 1500.0, 'max': 2250.0}, {'current': 3396.747, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.183, 'min': 1500.0, 'max': 2250.0}, {'current': 3396.218, 'min': 1500.0, 'max': 2250.0}, {'current': 3400.126, 'min': 1500.0, 'max': 2250.0}, {'current': 2799.893, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.871, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.813, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.923, 'min': 1500.0, 'max': 2250.0}, {'current': 3399.511, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.916, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.402, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.641, 'min': 1500.0, 'max': 2250.0}, {'current': 3384.689, 'min': 1500.0, 'max': 2250.0}, {'current': 3400.062, 'min': 1500.0, 'max': 2250.0}, {'current': 3382.432, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.372, 'min': 1500.0, 'max': 2250.0}, {'current': 3395.654, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.117, 'min': 1500.0, 'max': 2250.0}, {'current': 3394.231, 'min': 1500.0, 'max': 2250.0}, {'current': 2465.669, 'min': 1500.0, 'max': 2250.0}, {'current': 3382.488, 'min': 1500.0, 'max': 2250.0}, {'current': 1576.205, 'min': 1500.0, 'max': 2250.0}, {'current': 2790.331, 'min': 1500.0, 'max': 2250.0}, {'current': 3222.531, 'min': 1500.0, 'max': 2250.0}, {'current': 2385.432, 'min': 1500.0, 'max': 2250.0}, {'current': 1741.123, 'min': 1500.0, 'max': 2250.0}, {'current': 2536.108, 'min': 1500.0, 'max': 2250.0}, {'current': 1742.224, 'min': 1500.0, 'max': 2250.0}, {'current': 1744.23, 'min': 1500.0, 'max': 2250.0}, {'current': 1696.195, 'min': 1500.0, 'max': 2250.0}, {'current': 1695.91, 'min': 1500.0, 'max': 2250.0}, {'current': 3394.878, 'min': 1500.0, 'max': 2250.0}, {'current': 2428.496, 'min': 1500.0, 'max': 2250.0}, {'current': 2389.216, 'min': 1500.0, 'max': 2250.0}, {'current': 2341.627, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.179, 'min': 1500.0, 'max': 2250.0}, {'current': 2379.47, 'min': 1500.0, 'max': 2250.0}, {'current': 2482.308, 'min': 1500.0, 'max': 2250.0}, {'current': 2477.472, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.422, 'min': 1500.0, 'max': 2250.0}, {'current': 2435.72, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.069, 'min': 1500.0, 'max': 2250.0}, {'current': 1697.444, 'min': 1500.0, 'max': 2250.0}, {'current': 1694.313, 'min': 1500.0, 'max': 2250.0}, {'current': 3396.488, 'min': 1500.0, 'max': 2250.0}, {'current': 3368.65, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.473, 'min': 1500.0, 'max': 2250.0}, {'current': 3083.317, 'min': 1500.0, 'max': 2250.0}, {'current': 2398.46, 'min': 1500.0, 'max': 2250.0}, {'current': 2396.571, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.753, 'min': 1500.0, 'max': 2250.0}, {'current': 3384.513, 'min': 1500.0, 'max': 2250.0}, {'current': 1694.671, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.414, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.149, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.372, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.149, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.684, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.514, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.155, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.46, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.817, 'min': 1500.0, 'max': 2250.0}, {'current': 3373.401, 'min': 1500.0, 'max': 2250.0}, {'current': 2473.117, 'min': 1500.0, 'max': 2250.0}, {'current': 3382.569, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.261, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.803, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.043, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.346, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.2, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.995, 'min': 1500.0, 'max': 2250.0}, {'current': 3378.587, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.881, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.595, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.493, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.559, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.413, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.868, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.063, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.424, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.882, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.522, 'min': 1500.0, 'max': 2250.0}, {'current': 3347.476, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.12, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.562, 'min': 1500.0, 'max': 2250.0}, {'current': 3399.74, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.449, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.265, 'min': 1500.0, 'max': 2250.0}, {'current': 3380.271, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.901, 'min': 1500.0, 'max': 2250.0}, {'current': 3356.448, 'min': 1500.0, 'max': 2250.0}, {'current': 2980.499, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.413, 'min': 1500.0, 'max': 2250.0}, {'current': 3360.213, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.988, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.933, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.746, 'min': 1500.0, 'max': 2250.0}, {'current': 2308.22, 'min': 1500.0, 'max': 2250.0}, {'current': 3395.378, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.741, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.851, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.71, 'min': 1500.0, 'max': 2250.0}, {'current': 3375.059, 'min': 1500.0, 'max': 2250.0}, {'current': 3375.347, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.04, 'min': 1500.0, 'max': 2250.0}, {'current': 3376.766, 'min': 1500.0, 'max': 2250.0}, {'current': 3385.846, 'min': 1500.0, 'max': 2250.0}, {'current': 2779.342, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.037, 'min': 1500.0, 'max': 2250.0}, {'current': 3379.229, 'min': 1500.0, 'max': 2250.0}, {'current': 3005.89, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.746, 'min': 1500.0, 'max': 2250.0}, {'current': 3407.072, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.819, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.358, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.062, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.365, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.905, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.01, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.306, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.874, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.796, 'min': 1500.0, 'max': 2250.0}, {'current': 3387.863, 'min': 1500.0, 'max': 2250.0}, {'current': 3384.247, 'min': 1500.0, 'max': 2250.0}, {'current': 2322.395, 'min': 1500.0, 'max': 2250.0}, {'current': 3402.764, 'min': 1500.0, 'max': 2250.0}, {'current': 2384.89, 'min': 1500.0, 'max': 2250.0}, {'current': 3384.605, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.373, 'min': 1500.0, 'max': 2250.0}, {'current': 2331.921, 'min': 1500.0, 'max': 2250.0}, {'current': 2340.588, 'min': 1500.0, 'max': 2250.0}, {'current': 3388.016, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.756, 'min': 1500.0, 'max': 2250.0}, {'current': 3387.873, 'min': 1500.0, 'max': 2250.0}, {'current': 2329.817, 'min': 1500.0, 'max': 2250.0}, {'current': 3378.265, 'min': 1500.0, 'max': 2250.0}, {'current': 2337.366, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.171, 'min': 1500.0, 'max': 2250.0}, {'current': 2472.837, 'min': 1500.0, 'max': 2250.0}, {'current': 2503.248, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.415, 'min': 1500.0, 'max': 2250.0}, {'current': 2344.799, 'min': 1500.0, 'max': 2250.0}, {'current': 2534.74, 'min': 1500.0, 'max': 2250.0}, {'current': 2339.077, 'min': 1500.0, 'max': 2250.0}, {'current': 3379.285, 'min': 1500.0, 'max': 2250.0}, {'current': 2392.639, 'min': 1500.0, 'max': 2250.0}, {'current': 3393.419, 'min': 1500.0, 'max': 2250.0}, {'current': 2372.654, 'min': 1500.0, 'max': 2250.0}, {'current': 2361.547, 'min': 1500.0, 'max': 2250.0}, {'current': 1697.447, 'min': 1500.0, 'max': 2250.0}, {'current': 2360.622, 'min': 1500.0, 'max': 2250.0}, {'current': 2991.768, 'min': 1500.0, 'max': 2250.0}, {'current': 2339.421, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.295, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.016, 'min': 1500.0, 'max': 2250.0}, {'current': 3395.6, 'min': 1500.0, 'max': 2250.0}, {'current': 3391.793, 'min': 1500.0, 'max': 2250.0}, {'current': 3387.266, 'min': 1500.0, 'max': 2250.0}, {'current': 2487.789, 'min': 1500.0, 'max': 2250.0}, {'current': 3397.576, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.358, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.574, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.521, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.597, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.692, 'min': 1500.0, 'max': 2250.0}, {'current': 3387.651, 'min': 1500.0, 'max': 2250.0}, {'current': 3381.321, 'min': 1500.0, 'max': 2250.0}, {'current': 3386.427, 'min': 1500.0, 'max': 2250.0}, {'current': 3390.436, 'min': 1500.0, 'max': 2250.0}, {'current': 3397.6, 'min': 1500.0, 'max': 2250.0}, {'current': 2459.19, 'min': 1500.0, 'max': 2250.0}, {'current': 2372.356, 'min': 1500.0, 'max': 2250.0}, {'current': 3381.782, 'min': 1500.0, 'max': 2250.0}, {'current': 3392.435, 'min': 1500.0, 'max': 2250.0}, {'current': 1751.651, 'min': 1500.0, 'max': 2250.0}, {'current': 3383.905, 'min': 1500.0, 'max': 2250.0}, {'current': 3389.284, 'min': 1500.0, 'max': 2250.0}, {'current': 2400.601, 'min': 1500.0, 'max': 2250.0}, {'current': 2447.313, 'min': 1500.0, 'max': 2250.0}, {'current': 2425.91, 'min': 1500.0, 'max': 2250.0}, {'current': 2436.847, 'min': 1500.0, 'max': 2250.0}], 'disk': {'total': 1757.8287315368652, 'used': 584.9988174438477}, 'gpu': 'NVIDIA A100-SXM4-40GB', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA A100-SXM4-40GB', 'memory_total': 42505273344}], 'memory': {'total': 1007.6952285766602}}
+2023-09-11 19:17:41,634 INFO    HandlerThread:30313 [system_monitor.py:probe():211] Finished collecting system info
+2023-09-11 19:17:41,634 INFO    HandlerThread:30313 [system_monitor.py:probe():214] Publishing system info
+2023-09-11 19:17:41,634 DEBUG   HandlerThread:30313 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-09-11 19:17:41,634 DEBUG   HandlerThread:30313 [system_info.py:_save_pip():67] Saving pip packages done
+2023-09-11 19:17:41,634 DEBUG   HandlerThread:30313 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-09-11 19:17:42,300 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_created():271] file/dir created: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/requirements.txt
+2023-09-11 19:17:42,301 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_created():271] file/dir created: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/conda-environment.yaml
+2023-09-11 19:17:44,891 DEBUG   HandlerThread:30313 [system_info.py:_save_conda():86] Saving conda packages done
+2023-09-11 19:17:44,893 INFO    HandlerThread:30313 [system_monitor.py:probe():216] Finished publishing system info
+2023-09-11 19:17:44,895 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:17:44,895 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: keepalive
+2023-09-11 19:17:44,896 DEBUG   SenderThread:30313 [sender.py:send():379] send: files
+2023-09-11 19:17:44,896 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-metadata.json with policy now
+2023-09-11 19:17:44,900 DEBUG   SenderThread:30313 [sender.py:send():379] send: telemetry
+2023-09-11 19:17:44,938 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:17:44,939 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:17:45,301 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/conda-environment.yaml
+2023-09-11 19:17:45,302 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_created():271] file/dir created: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-metadata.json
+2023-09-11 19:17:45,302 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_created():271] file/dir created: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:17:45,665 INFO    wandb-upload_0:30313 [upload_job.py:push():131] Uploaded file /tmp/tmpk7uc299wwandb/tbywulwq-wandb-metadata.json
+2023-09-11 19:17:47,302 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:17:48,302 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:17:50,057 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:17:55,061 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:17:59,905 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:17:59,905 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:18:00,180 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:05,181 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:10,187 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:11,309 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/config.yaml
+2023-09-11 19:18:14,906 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:18:14,907 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:18:16,280 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:21,281 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:23,382 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:18:24,382 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:18:26,383 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:18:27,095 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:29,901 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:18:29,902 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:18:32,148 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:37,149 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:39,422 DEBUG   SystemMonitor:30313 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-09-11 19:18:39,425 DEBUG   SenderThread:30313 [sender.py:send():379] send: stats
+2023-09-11 19:18:42,427 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:44,901 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:18:44,902 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:18:48,214 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:53,214 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:58,216 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:18:59,901 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:18:59,902 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:19:03,279 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:08,280 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:09,427 DEBUG   SenderThread:30313 [sender.py:send():379] send: stats
+2023-09-11 19:19:13,429 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:14,901 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:19:14,902 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:19:19,126 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:24,218 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:24,402 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:29,280 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:29,902 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:19:29,902 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:19:35,180 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:38,407 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:39,498 DEBUG   SenderThread:30313 [sender.py:send():379] send: stats
+2023-09-11 19:19:40,502 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:41,670 DEBUG   SenderThread:30313 [sender.py:send():379] send: telemetry
+2023-09-11 19:19:42,499 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:43,499 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:44,901 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-11 19:19:44,902 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: stop_status
+2023-09-11 19:19:45,789 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:46,500 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/config.yaml
+2023-09-11 19:19:46,500 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:47,500 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:48,501 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:49,365 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: partial_history
+2023-09-11 19:19:49,366 DEBUG   SenderThread:30313 [sender.py:send():379] send: history
+2023-09-11 19:19:49,366 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: summary_record
+2023-09-11 19:19:49,366 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-09-11 19:19:49,501 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:49,501 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-summary.json
+2023-09-11 19:19:50,501 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:51,397 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:51,502 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:53,503 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:54,008 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: partial_history
+2023-09-11 19:19:54,008 DEBUG   SenderThread:30313 [sender.py:send():379] send: history
+2023-09-11 19:19:54,009 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: summary_record
+2023-09-11 19:19:54,009 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-09-11 19:19:54,503 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-summary.json
+2023-09-11 19:19:55,503 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:56,504 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:57,039 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:58,746 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: partial_history
+2023-09-11 19:19:58,747 DEBUG   SenderThread:30313 [sender.py:send():379] send: history
+2023-09-11 19:19:58,747 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: summary_record
+2023-09-11 19:19:58,749 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-09-11 19:19:58,784 DEBUG   SenderThread:30313 [sender.py:send():379] send: exit
+2023-09-11 19:19:58,784 INFO    SenderThread:30313 [sender.py:send_exit():584] handling exit code: 0
+2023-09-11 19:19:58,784 INFO    SenderThread:30313 [sender.py:send_exit():586] handling runtime: 139
+2023-09-11 19:19:58,785 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-09-11 19:19:58,785 INFO    SenderThread:30313 [sender.py:send_exit():592] send defer
+2023-09-11 19:19:58,785 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,785 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 0
+2023-09-11 19:19:58,785 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,785 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 0
+2023-09-11 19:19:58,785 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 1
+2023-09-11 19:19:58,785 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,786 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 1
+2023-09-11 19:19:58,786 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,786 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 1
+2023-09-11 19:19:58,786 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 2
+2023-09-11 19:19:58,786 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,786 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 2
+2023-09-11 19:19:58,786 INFO    HandlerThread:30313 [system_monitor.py:finish():190] Stopping system monitor
+2023-09-11 19:19:58,786 DEBUG   SystemMonitor:30313 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-09-11 19:19:58,787 DEBUG   SystemMonitor:30313 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-09-11 19:19:58,790 INFO    HandlerThread:30313 [interfaces.py:finish():202] Joined cpu monitor
+2023-09-11 19:19:58,790 INFO    HandlerThread:30313 [interfaces.py:finish():202] Joined disk monitor
+2023-09-11 19:19:58,801 INFO    HandlerThread:30313 [interfaces.py:finish():202] Joined gpu monitor
+2023-09-11 19:19:58,801 INFO    HandlerThread:30313 [interfaces.py:finish():202] Joined memory monitor
+2023-09-11 19:19:58,801 INFO    HandlerThread:30313 [interfaces.py:finish():202] Joined network monitor
+2023-09-11 19:19:58,801 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,802 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 2
+2023-09-11 19:19:58,802 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 3
+2023-09-11 19:19:58,802 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,802 DEBUG   SenderThread:30313 [sender.py:send():379] send: stats
+2023-09-11 19:19:58,802 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 3
+2023-09-11 19:19:58,803 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,803 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 3
+2023-09-11 19:19:58,803 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 4
+2023-09-11 19:19:58,804 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,804 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 4
+2023-09-11 19:19:58,804 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,804 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 4
+2023-09-11 19:19:58,804 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 5
+2023-09-11 19:19:58,804 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,804 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 5
+2023-09-11 19:19:58,804 DEBUG   SenderThread:30313 [sender.py:send():379] send: summary
+2023-09-11 19:19:58,804 INFO    SenderThread:30313 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2023-09-11 19:19:58,805 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,805 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 5
+2023-09-11 19:19:58,805 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 6
+2023-09-11 19:19:58,805 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,805 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 6
+2023-09-11 19:19:58,805 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,805 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 6
+2023-09-11 19:19:58,805 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 7
+2023-09-11 19:19:58,805 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: status_report
+2023-09-11 19:19:58,805 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:58,805 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 7
+2023-09-11 19:19:58,805 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:58,806 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 7
+2023-09-11 19:19:59,505 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:19:59,505 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-summary.json
+2023-09-11 19:19:59,785 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: poll_exit
+2023-09-11 19:19:59,871 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 8
+2023-09-11 19:19:59,871 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: poll_exit
+2023-09-11 19:19:59,871 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:59,871 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 8
+2023-09-11 19:19:59,872 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:59,872 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 8
+2023-09-11 19:19:59,872 INFO    SenderThread:30313 [job_builder.py:build():281] Attempting to build job artifact
+2023-09-11 19:19:59,872 INFO    SenderThread:30313 [job_builder.py:_get_source_type():411] no source found
+2023-09-11 19:19:59,872 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 9
+2023-09-11 19:19:59,872 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:19:59,872 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 9
+2023-09-11 19:19:59,873 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:19:59,873 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 9
+2023-09-11 19:19:59,873 INFO    SenderThread:30313 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-09-11 19:20:00,505 INFO    Thread-12 :30313 [dir_watcher.py:_on_file_modified():288] file/dir modified: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:20:00,506 INFO    SenderThread:30313 [dir_watcher.py:finish():388] scan: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files
+2023-09-11 19:20:00,506 INFO    SenderThread:30313 [dir_watcher.py:finish():402] scan save: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log output.log
+2023-09-11 19:20:00,506 INFO    SenderThread:30313 [dir_watcher.py:finish():402] scan save: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/conda-environment.yaml conda-environment.yaml
+2023-09-11 19:20:00,509 INFO    SenderThread:30313 [dir_watcher.py:finish():402] scan save: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/config.yaml config.yaml
+2023-09-11 19:20:00,510 INFO    SenderThread:30313 [dir_watcher.py:finish():402] scan save: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/requirements.txt requirements.txt
+2023-09-11 19:20:00,510 INFO    SenderThread:30313 [dir_watcher.py:finish():402] scan save: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-summary.json wandb-summary.json
+2023-09-11 19:20:00,513 INFO    SenderThread:30313 [dir_watcher.py:finish():402] scan save: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-metadata.json wandb-metadata.json
+2023-09-11 19:20:00,513 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 10
+2023-09-11 19:20:00,514 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:20:00,514 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 10
+2023-09-11 19:20:00,520 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:20:00,522 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 10
+2023-09-11 19:20:00,522 INFO    SenderThread:30313 [file_pusher.py:finish():159] shutting down file pusher
+2023-09-11 19:20:00,785 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: poll_exit
+2023-09-11 19:20:00,786 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: poll_exit
+2023-09-11 19:20:01,045 INFO    wandb-upload_1:30313 [upload_job.py:push():131] Uploaded file /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/conda-environment.yaml
+2023-09-11 19:20:01,104 INFO    wandb-upload_0:30313 [upload_job.py:push():131] Uploaded file /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/output.log
+2023-09-11 19:20:01,173 INFO    wandb-upload_2:30313 [upload_job.py:push():131] Uploaded file /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/config.yaml
+2023-09-11 19:20:01,186 INFO    wandb-upload_3:30313 [upload_job.py:push():131] Uploaded file /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/requirements.txt
+2023-09-11 19:20:01,190 INFO    wandb-upload_4:30313 [upload_job.py:push():131] Uploaded file /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/files/wandb-summary.json
+2023-09-11 19:20:01,391 INFO    Thread-11 :30313 [sender.py:transition_state():612] send defer: 11
+2023-09-11 19:20:01,391 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:20:01,391 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 11
+2023-09-11 19:20:01,392 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:20:01,392 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 11
+2023-09-11 19:20:01,392 INFO    SenderThread:30313 [file_pusher.py:join():164] waiting for file pusher
+2023-09-11 19:20:01,392 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 12
+2023-09-11 19:20:01,392 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:20:01,392 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 12
+2023-09-11 19:20:01,392 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:20:01,392 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 12
+2023-09-11 19:20:01,392 INFO    SenderThread:30313 [file_stream.py:finish():593] file stream finish called
+2023-09-11 19:20:01,787 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: poll_exit
+2023-09-11 19:20:02,117 INFO    SenderThread:30313 [file_stream.py:finish():597] file stream finish is done
+2023-09-11 19:20:02,117 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 13
+2023-09-11 19:20:02,117 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: poll_exit
+2023-09-11 19:20:02,117 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:20:02,118 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 13
+2023-09-11 19:20:02,118 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:20:02,118 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 13
+2023-09-11 19:20:02,118 INFO    SenderThread:30313 [sender.py:transition_state():612] send defer: 14
+2023-09-11 19:20:02,118 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: defer
+2023-09-11 19:20:02,118 INFO    HandlerThread:30313 [handler.py:handle_request_defer():170] handle defer: 14
+2023-09-11 19:20:02,118 DEBUG   SenderThread:30313 [sender.py:send():379] send: final
+2023-09-11 19:20:02,118 DEBUG   SenderThread:30313 [sender.py:send():379] send: footer
+2023-09-11 19:20:02,118 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: defer
+2023-09-11 19:20:02,119 INFO    SenderThread:30313 [sender.py:send_request_defer():608] handle sender defer: 14
+2023-09-11 19:20:02,119 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: poll_exit
+2023-09-11 19:20:02,119 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: poll_exit
+2023-09-11 19:20:02,120 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: poll_exit
+2023-09-11 19:20:02,120 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: poll_exit
+2023-09-11 19:20:02,120 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: server_info
+2023-09-11 19:20:02,120 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: server_info
+2023-09-11 19:20:02,123 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: get_summary
+2023-09-11 19:20:02,123 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: sampled_history
+2023-09-11 19:20:02,123 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: job_info
+2023-09-11 19:20:02,329 DEBUG   SenderThread:30313 [sender.py:send_request():406] send_request: job_info
+2023-09-11 19:20:02,330 INFO    MainThread:30313 [wandb_run.py:_footer_history_summary_info():3481] rendering history
+2023-09-11 19:20:02,330 INFO    MainThread:30313 [wandb_run.py:_footer_history_summary_info():3513] rendering summary
+2023-09-11 19:20:02,330 INFO    MainThread:30313 [wandb_run.py:_footer_sync_info():3440] logging synced files
+2023-09-11 19:20:02,331 DEBUG   HandlerThread:30313 [handler.py:handle_request():144] handle_request: shutdown
+2023-09-11 19:20:02,331 INFO    HandlerThread:30313 [handler.py:finish():861] shutting down handler
+2023-09-11 19:20:03,124 INFO    WriterThread:30313 [datastore.py:close():294] close: /root/vision-assistant-for-driving/wandb/run-20230911_191738-nydr30vu/run-nydr30vu.wandb
+2023-09-11 19:20:03,330 INFO    SenderThread:30313 [sender.py:finish():1552] shutting down sender
+2023-09-11 19:20:03,330 INFO    SenderThread:30313 [file_pusher.py:finish():159] shutting down file pusher
+2023-09-11 19:20:03,330 INFO    SenderThread:30313 [file_pusher.py:join():164] waiting for file pusher

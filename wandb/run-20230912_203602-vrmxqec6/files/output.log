@@ -1,0 +1,241 @@
+| distributed init (rank 0, world 1): env://
+Loading VIT
+2023-09-12 20:36:10,888 [INFO]
+=====  Running Parameters    =====
+2023-09-12 20:36:10,889 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 100,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-12 20:36:10,889 [INFO]
+======  Dataset Attributes  ======
+2023-09-12 20:36:10,889 [INFO]
+======== bdd_instruct =======
+2023-09-12 20:36:10,890 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-12 20:36:10,890 [INFO]
+======  Model Attributes  ======
+2023-09-12 20:36:10,890 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-12 20:36:10,890 [INFO] Building datasets...
+Loading VIT Done
+Loading Q-Former
+2023-09-12 20:36:37,438 [INFO] freeze vision encoder
+2023-09-12 20:36:40,280 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-12 20:36:40,294 [INFO] freeze Qformer
+2023-09-12 20:36:40,295 [INFO] Loading Q-Former Done
+2023-09-12 20:36:40,295 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-12 20:36:40,383 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:21<00:00, 10.70s/it]
+2023-09-12 20:37:57,358 [INFO] Loading LLAMA Done
+2023-09-12 20:37:57,358 [INFO] Loading LLAMA proj
+2023-09-12 20:37:57,383 [INFO] LLAMA proj is not frozen
+2023-09-12 20:37:57,384 [INFO] Loading llama_proj Done
+2023-09-12 20:37:58,437 [INFO] video_Qformer is not frozen
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+2023-09-12 20:37:58,999 [INFO] Start training
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+2023-09-12 20:38:03,571 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2023-09-12 20:38:03,571 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-12 20:38:03,571 [INFO] Loaded 10 records for val split from the dataset.
+2023-09-12 20:38:03,586 [INFO] number of trainable parameters: 22104064
+2023-09-12 20:38:03,587 [INFO] Start training epoch 0, 5 iters per inner epoch.
+2023-09-12 20:38:06,470 [INFO] Reducer buckets have been rebuilt in this iteration.
+Train: data epoch: [0]  [0/5]  eta: 0:00:14  lr: 0.000001  loss: 2.2720  time: 2.8147  data: 0.0000  max mem: 33011
+2023-09-12 20:38:07,953 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-12 20:38:07,955 [INFO] Evaluating on val.
+2023-09-12 20:38:07,967 [INFO] Start training
+2023-09-12 20:38:07,986 [INFO] Start training epoch 1, 5 iters per inner epoch.
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.8727  data: 0.0000  max mem: 35719
+Train: data epoch: [0] Total time: 0:00:04 (0.8730 s / it)
+Train: data epoch: [1]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.9663  time: 3.1995  data: 0.0000  max mem: 35719
+2023-09-12 20:38:12,582 [INFO] Averaged stats: lr: 0.0000  loss: 1.8879
+2023-09-12 20:38:12,584 [INFO] Evaluating on val.
+2023-09-12 20:38:12,596 [INFO] Start training
+2023-09-12 20:38:12,615 [INFO] Start training epoch 2, 5 iters per inner epoch.
+Train: data epoch: [1]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.9333  time: 0.9189  data: 0.0000  max mem: 35719
+Train: data epoch: [1] Total time: 0:00:04 (0.9192 s / it)
+Train: data epoch: [2]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.7643  time: 3.2074  data: 0.0000  max mem: 35719
+Train: data epoch: [2]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.8292  time: 0.9306  data: 0.0000  max mem: 35719
+Train: data epoch: [2] Total time: 0:00:04 (0.9310 s / it)
+2023-09-12 20:38:17,270 [INFO] Averaged stats: lr: 0.0000  loss: 1.7928
+2023-09-12 20:38:17,272 [INFO] Evaluating on val.
+2023-09-12 20:38:17,285 [INFO] Start training
+2023-09-12 20:38:17,303 [INFO] Start training epoch 3, 5 iters per inner epoch.
+Train: data epoch: [3]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.6741  time: 3.1716  data: 0.0000  max mem: 35719
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 378, in train
+    train_stats = self.train_epoch(cur_epoch)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 444, in train_epoch
+    return self.task.train_epoch(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 122, in train_epoch
+    return self._train_inner_loop(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 231, in _train_inner_loop
+    scaler.scale(loss).backward()
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 378, in train
+    train_stats = self.train_epoch(cur_epoch)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 444, in train_epoch
+    return self.task.train_epoch(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 122, in train_epoch
+    return self._train_inner_loop(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 231, in _train_inner_loop
+    scaler.scale(loss).backward()
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/_tensor.py", line 487, in backward
+    torch.autograd.backward(
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/autograd/__init__.py", line 200, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

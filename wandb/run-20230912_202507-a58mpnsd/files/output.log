@@ -1,0 +1,304 @@
+| distributed init (rank 0, world 1): env://
+Loading VIT
+2023-09-12 20:25:15,907 [INFO]
+=====  Running Parameters    =====
+2023-09-12 20:25:15,909 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 100,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-12 20:25:15,909 [INFO]
+======  Dataset Attributes  ======
+2023-09-12 20:25:15,909 [INFO]
+======== bdd_instruct =======
+2023-09-12 20:25:15,909 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-12 20:25:15,910 [INFO]
+======  Model Attributes  ======
+2023-09-12 20:25:15,910 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-12 20:25:15,911 [INFO] Building datasets...
+2023-09-12 20:25:44,875 [INFO] freeze vision encoder
+Loading VIT Done
+Loading Q-Former
+2023-09-12 20:25:47,884 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-12 20:25:47,900 [INFO] freeze Qformer
+2023-09-12 20:25:47,900 [INFO] Loading Q-Former Done
+2023-09-12 20:25:47,900 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-12 20:25:47,988 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:16<00:00,  8.32s/it]
+2023-09-12 20:26:57,343 [INFO] Loading LLAMA Done
+2023-09-12 20:26:57,343 [INFO] Loading LLAMA proj
+2023-09-12 20:26:57,359 [INFO] LLAMA proj is not frozen
+2023-09-12 20:26:57,359 [INFO] Loading llama_proj Done
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+2023-09-12 20:26:58,404 [INFO] video_Qformer is not frozen
+2023-09-12 20:26:58,600 [INFO] Start training
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+2023-09-12 20:27:04,706 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2023-09-12 20:27:04,706 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-12 20:27:04,706 [INFO] Loaded 10 records for val split from the dataset.
+2023-09-12 20:27:04,721 [INFO] number of trainable parameters: 22104064
+2023-09-12 20:27:04,722 [INFO] Start training epoch 0, 5 iters per inner epoch.
+2023-09-12 20:27:07,205 [INFO] Reducer buckets have been rebuilt in this iteration.
+Train: data epoch: [0]  [0/5]  eta: 0:00:12  lr: 0.000001  loss: 2.2720  time: 2.4805  data: 0.0000  max mem: 32989
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.7945  data: 0.0000  max mem: 35722
+Train: data epoch: [0] Total time: 0:00:03 (0.7948 s / it)
+None
+2023-09-12 20:27:08,697 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-12 20:27:08,699 [INFO] Evaluating on val.
+2023-09-12 20:27:08,710 [INFO] Start training
+2023-09-12 20:27:08,729 [INFO] Start training epoch 1, 5 iters per inner epoch.
+Train: data epoch: [1]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.9663  time: 3.1844  data: 0.0000  max mem: 35722
+2023-09-12 20:27:13,319 [INFO] Averaged stats: lr: 0.0000  loss: 1.8879
+2023-09-12 20:27:13,322 [INFO] Evaluating on val.
+2023-09-12 20:27:13,334 [INFO] Start training
+2023-09-12 20:27:13,352 [INFO] Start training epoch 2, 5 iters per inner epoch.
+Train: data epoch: [1]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.9333  time: 0.9177  data: 0.0000  max mem: 35722
+Train: data epoch: [1] Total time: 0:00:04 (0.9180 s / it)
+None
+Train: data epoch: [2]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.7643  time: 3.2477  data: 0.0000  max mem: 35722
+2023-09-12 20:27:18,074 [INFO] Averaged stats: lr: 0.0000  loss: 1.7928
+2023-09-12 20:27:18,078 [INFO] Evaluating on val.
+2023-09-12 20:27:18,092 [INFO] Start training
+2023-09-12 20:27:18,110 [INFO] Start training epoch 3, 5 iters per inner epoch.
+Train: data epoch: [2]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.8292  time: 0.9439  data: 0.0000  max mem: 35722
+Train: data epoch: [2] Total time: 0:00:04 (0.9443 s / it)
+None
+Train: data epoch: [3]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.6741  time: 3.1728  data: 0.0000  max mem: 35722
+Train: data epoch: [3]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.6887  time: 0.9348  data: 0.0000  max mem: 35722
+Train: data epoch: [3] Total time: 0:00:04 (0.9353 s / it)
+None
+2023-09-12 20:27:22,787 [INFO] Averaged stats: lr: 0.0000  loss: 1.7303
+2023-09-12 20:27:22,789 [INFO] Evaluating on val.
+2023-09-12 20:27:22,803 [INFO] Start training
+2023-09-12 20:27:22,821 [INFO] Start training epoch 4, 5 iters per inner epoch.
+Train: data epoch: [4]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5905  time: 3.2201  data: 0.0000  max mem: 35722
+2023-09-12 20:27:27,496 [INFO] Averaged stats: lr: 0.0000  loss: 1.6811
+2023-09-12 20:27:27,498 [INFO] Evaluating on val.
+2023-09-12 20:27:27,510 [INFO] Start training
+2023-09-12 20:27:27,528 [INFO] Start training epoch 5, 5 iters per inner epoch.
+Train: data epoch: [4]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.7931  time: 0.9344  data: 0.0000  max mem: 35722
+Train: data epoch: [4] Total time: 0:00:04 (0.9347 s / it)
+None
+Train: data epoch: [5]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.6205  time: 3.1403  data: 0.0000  max mem: 35722
+2023-09-12 20:27:32,138 [INFO] Averaged stats: lr: 0.0000  loss: 1.6230
+Train: data epoch: [5]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.5089  time: 0.9215  data: 0.0000  max mem: 35722
+Train: data epoch: [5] Total time: 0:00:04 (0.9218 s / it)
+None
+2023-09-12 20:27:32,140 [INFO] Evaluating on val.
+2023-09-12 20:27:32,152 [INFO] Start training
+2023-09-12 20:27:32,170 [INFO] Start training epoch 6, 5 iters per inner epoch.
+Train: data epoch: [6]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5200  time: 3.3720  data: 0.0000  max mem: 35722
+Train: data epoch: [6]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4715  time: 0.9702  data: 0.0000  max mem: 35722
+Train: data epoch: [6] Total time: 0:00:04 (0.9705 s / it)
+None
+2023-09-12 20:27:37,023 [INFO] Averaged stats: lr: 0.0000  loss: 1.5721
+2023-09-12 20:27:37,026 [INFO] Evaluating on val.
+2023-09-12 20:27:37,039 [INFO] Start training
+2023-09-12 20:27:37,057 [INFO] Start training epoch 7, 5 iters per inner epoch.
+Train: data epoch: [7]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5845  time: 3.3330  data: 0.0000  max mem: 35722
+2023-09-12 20:27:41,825 [INFO] Averaged stats: lr: 0.0000  loss: 1.5338
+2023-09-12 20:27:41,829 [INFO] Evaluating on val.
+2023-09-12 20:27:41,843 [INFO] Start training
+2023-09-12 20:27:41,861 [INFO] Start training epoch 8, 5 iters per inner epoch.
+Train: data epoch: [7]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4863  time: 0.9530  data: 0.0000  max mem: 35722
+Train: data epoch: [7] Total time: 0:00:04 (0.9534 s / it)
+None
+Train: data epoch: [8]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.6832  time: 3.3043  data: 0.0000  max mem: 35722
+Train: data epoch: [8]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.4265  time: 0.9572  data: 0.0000  max mem: 35722
+Train: data epoch: [8] Total time: 0:00:04 (0.9576 s / it)
+None
+2023-09-12 20:27:46,650 [INFO] Averaged stats: lr: 0.0000  loss: 1.4794
+2023-09-12 20:27:46,654 [INFO] Evaluating on val.
+2023-09-12 20:27:46,669 [INFO] Start training
+2023-09-12 20:27:46,688 [INFO] Start training epoch 9, 5 iters per inner epoch.
+Train: data epoch: [9]  [0/5]  eta: 0:00:16  lr: 0.000030  loss: 1.5141  time: 3.2184  data: 0.0000  max mem: 35722
+2023-09-12 20:27:51,331 [INFO] Averaged stats: lr: 0.0000  loss: 1.4311
+2023-09-12 20:27:51,334 [INFO] Evaluating on val.
+2023-09-12 20:27:51,346 [INFO] Start training
+2023-09-12 20:27:51,365 [INFO] Start training epoch 10, 5 iters per inner epoch.
+Train: data epoch: [9]  [4/5]  eta: 0:00:00  lr: 0.000030  loss: 1.3966  time: 0.9282  data: 0.0000  max mem: 35722
+Train: data epoch: [9] Total time: 0:00:04 (0.9286 s / it)
+None
+Train: data epoch: [10]  [0/5]  eta: 0:00:15  lr: 0.000030  loss: 1.1973  time: 3.1366  data: 0.0000  max mem: 35722
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 378, in train
+    train_stats = self.train_epoch(cur_epoch)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 444, in train_epoch
+    return self.task.train_epoch(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 118, in train_epoch
+    return self._train_inner_loop(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 234, in _train_inner_loop
+    scaler.step(optimizer)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py", line 374, in step
+    retval = self._maybe_opt_step(optimizer, optimizer_state, *args, **kwargs)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py", line 289, in _maybe_opt_step
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py", line 289, in <genexpr>
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 378, in train
+    train_stats = self.train_epoch(cur_epoch)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 444, in train_epoch
+    return self.task.train_epoch(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 118, in train_epoch
+    return self._train_inner_loop(
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 234, in _train_inner_loop
+    scaler.step(optimizer)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py", line 374, in step
+    retval = self._maybe_opt_step(optimizer, optimizer_state, *args, **kwargs)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py", line 289, in _maybe_opt_step
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py", line 289, in <genexpr>
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+KeyboardInterrupt

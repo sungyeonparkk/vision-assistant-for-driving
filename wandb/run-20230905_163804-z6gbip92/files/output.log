@@ -1,0 +1,213 @@
+| distributed init (rank 0, world 1): env://
+Loading VIT
+2023-09-05 16:38:10,699 [INFO]
+=====  Running Parameters    =====
+2023-09-05 16:38:10,700 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 3,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-05 16:38:10,700 [INFO]
+======  Dataset Attributes  ======
+2023-09-05 16:38:10,700 [INFO]
+======== bdd_instruct =======
+2023-09-05 16:38:10,700 [INFO] {
+    "build_info": {
+        "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+        "videos_dir": "/root/BDD-X/"
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-05 16:38:10,701 [INFO]
+======  Model Attributes  ======
+2023-09-05 16:38:10,701 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-05 16:38:10,701 [INFO] Building datasets...
+Loading VIT Done
+Loading Q-Former
+2023-09-05 16:38:53,372 [INFO] freeze vision encoder
+2023-09-05 16:38:56,202 [INFO] load checkpoint from https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP2/blip2_pretrained_flant5xxl.pth
+2023-09-05 16:38:56,293 [INFO] freeze Qformer
+2023-09-05 16:38:56,294 [INFO] Loading Q-Former Done
+2023-09-05 16:38:56,294 [INFO] Loading LLAMA Tokenizer
+Using pad_token, but it is not set yet.
+2023-09-05 16:38:56,390 [INFO] Loading LLAMA Model
+
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:15<00:00,  7.89s/it]
+2023-09-05 16:40:07,984 [INFO] Loading LLAMA Done
+2023-09-05 16:40:07,984 [INFO] Loading LLAMA proj
+2023-09-05 16:40:07,998 [INFO] LLAMA proj is not frozen
+2023-09-05 16:40:07,998 [INFO] Loading llama_proj Done
+Load first Checkpoint: /root/ckpt/VL_LLaMA_2_7B_Finetuned.pth
+2023-09-05 16:40:09,021 [INFO] video_Qformer is not frozen
+2023-09-05 16:40:09,309 [INFO] Start training
+2023-09-05 16:40:13,356 [INFO] dataset_ratios not specified, datasets will be concatenated (map-style datasets) or chained (webdataset.DataPipeline).
+2023-09-05 16:40:13,356 [INFO] Loaded 10 records for train split from the dataset.
+2023-09-05 16:40:13,371 [INFO] number of trainable parameters: 22104064
+2023-09-05 16:40:13,372 [INFO] Start training epoch 0, 5 iters per inner epoch.
+here
+module.video_query_tokens
+module.llama_proj.weight
+module.llama_proj.bias
+module.video_frame_position_embedding.weight
+module.video_Qformer.bert.embeddings.LayerNorm.weight
+module.video_Qformer.bert.embeddings.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.attention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.query.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.key.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.self.value.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.dense.bias
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.crossattention.output.LayerNorm.bias
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.intermediate_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.dense.bias
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight
+module.video_Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias
+2023-09-05 16:40:16,416 [INFO] Reducer buckets have been rebuilt in this iteration.
+Train: data epoch: [0]  [0/5]  eta: 0:00:15  lr: 0.000001  loss: 2.2720  time: 3.0409  data: 0.0000  max mem: 32990
+2023-09-05 16:40:17,952 [INFO] Averaged stats: lr: 0.0000  loss: 2.0897
+2023-09-05 16:40:17,956 [INFO] No validation splits found.
+2023-09-05 16:40:17,979 [INFO] Saving checkpoint at epoch 0 to /output/20230905163/checkpoint_0.pth.
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 408, in train
+    self._save_checkpoint(cur_epoch, is_best=False, wandb=wandb)
+  File "/root/vision-assistant-for-driving/video_llama/common/dist_utils.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 604, in _save_checkpoint
+    wandb.save(save_obj)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 341, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 331, in wrapper
+    return func(self, *args, **kwargs)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1784, in save
+    return self._save(glob_str, base_path, policy)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1799, in _save
+    raise ValueError("Must call wandb.save(glob_str) with glob_str a str")
+ValueError: Must call wandb.save(glob_str) with glob_str a str
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 110, in main
+    runner.train(wandb)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 408, in train
+    self._save_checkpoint(cur_epoch, is_best=False, wandb=wandb)
+  File "/root/vision-assistant-for-driving/video_llama/common/dist_utils.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "/root/vision-assistant-for-driving/video_llama/runners/runner_base.py", line 604, in _save_checkpoint
+    wandb.save(save_obj)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 341, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 331, in wrapper
+    return func(self, *args, **kwargs)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1784, in save
+    return self._save(glob_str, base_path, policy)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1799, in _save
+    raise ValueError("Must call wandb.save(glob_str) with glob_str a str")
+ValueError: Must call wandb.save(glob_str) with glob_str a str
+Train: data epoch: [0]  [4/5]  eta: 0:00:00  lr: 0.000024  loss: 1.9258  time: 0.9156  data: 0.0000  max mem: 35723
+Train: data epoch: [0] Total time: 0:00:04 (0.9160 s / it)
+{'lr': '0.000', 'loss': '2.090'}

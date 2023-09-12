@@ -1,0 +1,131 @@
+
+| distributed init (rank 0, world 1): env://
+2023-09-11 19:09:35,522 [INFO]
+=====  Running Parameters    =====
+2023-09-11 19:09:35,523 [INFO] {
+    "amp": true,
+    "batch_size_eval": 2,
+    "batch_size_train": 2,
+    "device": "cuda",
+    "dist_backend": "nccl",
+    "dist_url": "env://",
+    "distributed": true,
+    "evaluate": false,
+    "gpu": 0,
+    "init_lr": 3e-05,
+    "iters_per_epoch": 5,
+    "lr_sched": "linear_warmup_cosine_lr",
+    "max_epoch": 3,
+    "min_lr": 1e-05,
+    "num_workers": 4,
+    "output_dir": "/output/",
+    "rank": 0,
+    "resume_ckpt_path": null,
+    "seed": 42,
+    "task": "video_text_pretrain",
+    "train_splits": [
+        "train"
+    ],
+    "valid_splits": [
+        "val"
+    ],
+    "warmup_lr": 1e-06,
+    "warmup_steps": 5,
+    "weight_decay": 0.05,
+    "world_size": 1
+}
+2023-09-11 19:09:35,523 [INFO]
+======  Dataset Attributes  ======
+2023-09-11 19:09:35,523 [INFO]
+======== bdd_instruct =======
+2023-09-11 19:09:35,524 [INFO] {
+    "build_info": {
+        "train": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        },
+        "val": {
+            "anno_dir": "/root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json",
+            "videos_dir": "/root/BDD-X/"
+        }
+    },
+    "data_type": "video",
+    "model_type": "llama_v2",
+    "num_video_query_token": 32,
+    "text_processor": {
+        "train": {
+            "name": "blip_caption"
+        },
+        "val": {
+            "name": "blip_caption"
+        }
+    },
+    "tokenizer_name": "/root/ckpt/llama-2-7b-chat-hf",
+    "vis_processor": {
+        "train": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        },
+        "val": {
+            "image_size": 224,
+            "n_frms": 8,
+            "name": "alpro_video_train"
+        }
+    }
+}
+2023-09-11 19:09:35,524 [INFO]
+======  Model Attributes  ======
+2023-09-11 19:09:35,524 [INFO] {
+    "arch": "video_llama",
+    "ckpt": "/root/ckpt/VL_LLaMA_2_7B_Finetuned.pth",
+    "drop_path_rate": 0,
+    "equip_audio_branch": false,
+    "freeze_qformer": true,
+    "freeze_vit": true,
+    "frozen_audio_Qformer": true,
+    "frozen_llama_proj": false,
+    "frozen_video_Qformer": false,
+    "fusion_head_layers": 2,
+    "fusion_header_type": "seqTransf",
+    "image_size": 224,
+    "llama_model": "/root/ckpt/llama-2-7b-chat-hf",
+    "max_frame_pos": 32,
+    "max_txt_len": 320,
+    "model_type": "pretrain_llama_v2",
+    "num_query_token": 32,
+    "prompt": "",
+    "use_grad_checkpoint": false,
+    "vit_precision": "fp16"
+}
+2023-09-11 19:09:35,524 [INFO] Building datasets...
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/wandb/sdk/lib/exit_hooks.py", line 41, in exc_handler
+    def exc_handler(
+KeyboardInterrupt
+Original exception was:
+Traceback (most recent call last):
+  File "/root/vision-assistant-for-driving/train.py", line 114, in <module>
+    main()
+  File "/root/vision-assistant-for-driving/train.py", line 99, in main
+    datasets = task.build_datasets(cfg)
+  File "/root/vision-assistant-for-driving/video_llama/tasks/base_task.py", line 60, in build_datasets
+    dataset = builder.build_datasets()
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/base_dataset_builder.py", line 56, in build_datasets
+    datasets = self.build()  # dataset['train'/'val'/'test']
+  File "/root/vision-assistant-for-driving/video_llama/datasets/builders/instruct_builder.py", line 42, in build
+    datasets[split] = dataset_cls(
+  File "/root/vision-assistant-for-driving/video_llama/datasets/datasets/bdd_instruct_dataset.py", line 76, in __init__
+    self.IMAGE_PATCH_TOKEN_ID = self.tokenizer.get_vocab()[
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/transformers/models/llama/tokenization_llama.py", line 115, in get_vocab
+    vocab = {self.convert_ids_to_tokens(i): i for i in range(self.vocab_size)}
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/transformers/models/llama/tokenization_llama.py", line 115, in <dictcomp>
+    vocab = {self.convert_ids_to_tokens(i): i for i in range(self.vocab_size)}
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/transformers/tokenization_utils.py", line 903, in convert_ids_to_tokens
+    return self._convert_id_to_token(ids)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/transformers/models/llama/tokenization_llama.py", line 129, in _convert_id_to_token
+    token = self.sp_model.IdToPiece(index)
+  File "/root/miniconda3/envs/videollama2/lib/python3.9/site-packages/sentencepiece/__init__.py", line 1042, in _batched_func
+    if type(arg) is list:
+KeyboardInterrupt

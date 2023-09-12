@@ -1,0 +1,1 @@
+{"lr": 0.0, "loss": 1.333, "epoch": 11, "_timestamp": 1694541532.9754834, "_runtime": 250.76562333106995, "_step": 22, "agg_metrics": -1.3269274234771729, "best_epoch": 10.0, "_wandb": {"runtime": 256}}
