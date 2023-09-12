@@ -82,10 +82,6 @@ def main():
 
     cfg = Config(parse_args())
 
-    # Start wandb
-    run_name = f"{job_id}_{cfg.get_config()['run']['task']}_max-epoch={cfg.get_config()['run']['max_epoch']}_batch-size-train={cfg.get_config()['run']['batch_size_train']}"
-    wandb.init(project="video-llama-drive", name=run_name, group="DDP")
-
     init_distributed_mode(cfg.run_cfg)
 
     setup_seeds(cfg)
@@ -103,11 +99,16 @@ def main():
 
     model = task.build_model(cfg)
 
-    wandb.watch(model)
-
     runner = get_runner_class(cfg)(
         cfg=cfg, job_id=job_id, task=task, model=model, datasets=datasets
     )
+
+    # Start wandb
+    run_name = f"{job_id}_{cfg.get_config()['run']['task']}_max-epoch={cfg.get_config()['run']['max_epoch']}_batch-size-train={cfg.get_config()['run']['batch_size_train']}"
+    wandb.init(project="video-llama-drive", name=run_name, group="DDP")
+
+    wandb.watch(model)
+
     runner.train(wandb)
 
 
