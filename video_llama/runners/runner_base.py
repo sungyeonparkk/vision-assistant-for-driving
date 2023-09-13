@@ -275,6 +275,7 @@ class RunnerBase:
             )
 
             self._dataloaders = {k: v for k, v in zip(split_names, dataloaders)}
+            print(self._dataloaders.keys())
 
         return self._dataloaders
 
@@ -365,7 +366,7 @@ class RunnerBase:
 
     def train(self, wandb):
         start_time = time.time()
-        best_agg_metric = 0
+        best_agg_metric = -1000
         best_epoch = 0
 
         self.log_config()
@@ -392,6 +393,7 @@ class RunnerBase:
                     val_log = self.eval_epoch(
                         split_name=split_name, cur_epoch=cur_epoch
                     )
+                    print(val_log)
                     if val_log is not None:
                         if is_main_process():
                             assert (
@@ -401,13 +403,35 @@ class RunnerBase:
                             agg_metrics = val_log["agg_metrics"]
                             if agg_metrics > best_agg_metric and split_name == "val":
                                 best_epoch, best_agg_metric = cur_epoch, agg_metrics
-
                                 self._save_checkpoint(
                                     cur_epoch, is_best=True, wandb=wandb
                                 )
 
                             val_log.update({"best_epoch": best_epoch})
+                            for k, v in val_log.items():
+                                if type(v) == list:
+                                    v_detach = []
+                                    for t in v:
+                                        if type(t) == torch.Tensor:
+                                            v_detach.append(
+                                                float(t.cpu().detach().numpy())
+                                            )
+                                    val_log[k] = v_detach
+                                else:
+                                    if type(v) == torch.Tensor:
+                                        val_log[k] = float(v.cpu().detach().numpy())
+
                             self.log_stats(val_log, split_name)
+
+                            val_logged_stats = dict()
+                            for key, value in val_log.items():
+                                try:
+                                    val_logged_stats[key] = float(value)
+                                except:
+                                    pass
+
+                            val_logged_stats["epoch"] = cur_epoch
+                            wandb.log(val_logged_stats)
 
             else:
                 # if no validation split is provided, we just save the checkpoint at the end of each epoch.
@@ -482,9 +506,9 @@ class RunnerBase:
             dataset=self.datasets[split_name],
         )
         results = self.task.evaluation(model, data_loader)
-
         if results is not None:
             return self.task.after_evaluation(
+                agg_metrics=-torch.mean(torch.stack(results)),
                 val_result=results,
                 split_name=split_name,
                 epoch=cur_epoch,
