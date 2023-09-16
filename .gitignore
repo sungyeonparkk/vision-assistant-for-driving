@@ -1,3 +1,4 @@
-*.mp4
-*.jpg
 *.pth
+*.pyc
+__pycache__/
+wandb
