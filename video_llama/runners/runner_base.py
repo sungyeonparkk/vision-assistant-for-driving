@@ -498,10 +498,10 @@ class RunnerBase:
             model=model,
             dataset=self.datasets[split_name],
         )
-        results = self.task.evaluation(model, data_loader)
+        results, f1 = self.task.evaluation(model, data_loader)
         if results is not None:
             return self.task.after_evaluation(
-                agg_metrics=-torch.mean(torch.stack(results)),
+                agg_metrics=f1,
                 val_result=results,
                 split_name=split_name,
                 epoch=cur_epoch,

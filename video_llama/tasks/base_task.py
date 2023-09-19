@@ -72,8 +72,12 @@ class BaseTask:
         return loss
 
     def valid_step(self, model, samples):
-        loss = model(samples)["loss"]
-        return loss
+
+        with torch.no_grad():
+            loss = model(samples)["loss"]
+            f1 = model(samples)["f1"]
+
+        return loss, f1
 
     def before_evaluation(self, model, dataset, **kwargs):
         model.before_evaluation(dataset=dataset, task_type=type(self))

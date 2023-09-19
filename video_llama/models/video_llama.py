@@ -17,6 +17,9 @@ import copy
 from video_llama.models.Qformer import BertConfig, BertLMHeadModel
 from video_llama.models.ImageBind.models.imagebind_model import ImageBindModel,ModalityType
 from video_llama.models.ImageBind.models import imagebind_model
+
+import evaluate
+
 # from flamingo_pytorch import PerceiverResampler
 @registry.register_model("video_llama")
 class VideoLLAMA(Blip2Base):
@@ -425,6 +428,21 @@ class VideoLLAMA(Blip2Base):
         return inputs_llama, atts_llama
 
     def forward(self, samples):
+        def compute_f1(prediction, truth):
+            pred_tokens = prediction.flatten().cpu().detach().numpy()
+            truth_tokens = truth.flatten().cpu().detach().numpy()
+            
+            common_tokens = set(pred_tokens) & set(truth_tokens)
+            
+            # if there are no common tokens then f1 = 0
+            if len(common_tokens) == 0:
+                return 0
+            
+            prec = len(common_tokens) / len(pred_tokens)
+            rec = len(common_tokens) / (truth_tokens != -100).sum().item()
+            
+            return 2 * (prec * rec) / (prec + rec)
+
         if 'conv_type' in samples.keys() and samples['conv_type']=='multi':
             
             im_patch_token_id = self.IMAGE_PATCH_TOKEN_ID
@@ -474,7 +492,22 @@ class VideoLLAMA(Blip2Base):
                     labels=targets,
                 )
             loss = outputs.loss
-            return {"loss": loss}
+
+            print("CALC METRIC")
+            print(outputs.logits.shape)
+            print(torch.argmax(outputs.logits, dim=-1).shape)
+            print(samples["labels"].shape)
+            print("============================================")
+            
+            f1 = compute_f1(prediction=torch.argmax(outputs.logits, dim=-1), truth=samples["labels"])
+            print(f1)
+
+            print(outputs.logits)
+            print(torch.argmax(outputs.logits, dim=-1))
+            print(samples["labels"])
+            print("++++++++++++++++++++++++++++++++++++++++++++")
+
+            return {"loss": loss, "f1": f1}
         else:
             image = samples["image"]
 
@@ -536,7 +569,21 @@ class VideoLLAMA(Blip2Base):
                 )
             loss = outputs.loss
 
-        return {"loss": loss}
+        print("CALC METRIC_ELSE")
+        print(outputs.logits.shape)
+        print(torch.argmax(outputs.logits, dim=-1).shape)
+        print(samples["labels"].shape)
+        print("============================================")
+            
+        f1 = compute_f1(prediction=torch.argmax(outputs.logits, dim=-1), truth=samples["labels"])
+        print(f1)
+
+        print(outputs.logits)
+        print(torch.argmax(outputs.logits, dim=-1))
+        print(samples["labels"])
+        print("++++++++++++++++++++++++++++++++++++++++++++")
+        
+        return {"loss": loss, "f1":f1}
 
     @classmethod
     def from_config(cls, cfg):
