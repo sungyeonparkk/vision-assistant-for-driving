@@ -84,7 +84,7 @@ class BDD_Instruct_Dataset(BaseDataset):
         self.model_type = model_type
 
     def _get_video_path(self, sample):
-        rel_video_fp = sample["video_id"] + ".mov"
+        rel_video_fp = sample["video_id"]
         full_video_fp = os.path.join(self.vis_root, rel_video_fp)
         return full_video_fp
 
