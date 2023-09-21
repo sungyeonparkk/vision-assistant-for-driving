@@ -4,6 +4,8 @@ timm
 einops
 opencv_python
 torchvision
+scipy
+accelerate
 
 bitsandbytes
 omegaconf
