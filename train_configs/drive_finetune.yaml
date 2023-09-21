@@ -3,7 +3,7 @@ model:
   model_type: pretrain_llama_v2
   freeze_vit: True
   freeze_qformer: True
-
+  low_resource: True
 
   # Q-Former
   num_query_token: 32
@@ -15,7 +15,7 @@ model:
 #  imagebind_ckpt_path: # "ckpt/imagebind_huge.pth"
 
   # The ckpt of vision branch after stage1 pretrained, 
-  ckpt: /input/video-llama-ckpt-2/ckpt/VL_LLaMA_2_7B_Finetuned.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
+  ckpt: /input/video-llama-ckpt-2/ckpt/finetune_llama2_bddx_v1.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
 
 
   # only train vision branch
@@ -48,7 +48,7 @@ datasets:
     data_type: video
     build_info:
       train:
-        anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v3.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+        anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-reasoning-v1.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
         videos_dir: /input/BDD-X-1/
     vis_processor:
       train:
@@ -116,7 +116,7 @@ run:
   warmup_lr: 1e-6
 
   weight_decay: 0.05
-  max_epoch: 3
+  max_epoch: 5
   iters_per_epoch: 1000
   batch_size_train: 2
   batch_size_eval: 2
