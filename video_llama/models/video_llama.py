@@ -439,7 +439,7 @@ class VideoLLAMA(Blip2Base):
                 return 0
             
             prec = len(common_tokens) / len(pred_tokens)
-            rec = len(common_tokens) / (truth_tokens != -100).sum().item()
+            rec = len(common_tokens) / len(truth_tokens)
             
             return 2 * (prec * rec) / (prec + rec)
 
@@ -504,7 +504,7 @@ class VideoLLAMA(Blip2Base):
 
             print(outputs.logits)
             print(torch.argmax(outputs.logits, dim=-1))
-            print(samples["labels"])
+            # print(samples["labels"])
             print("++++++++++++++++++++++++++++++++++++++++++++")
 
             return {"loss": loss, "f1": f1}
@@ -580,7 +580,7 @@ class VideoLLAMA(Blip2Base):
 
         print(outputs.logits)
         print(torch.argmax(outputs.logits, dim=-1))
-        print(samples["labels"])
+        # print(samples["labels"])
         print("++++++++++++++++++++++++++++++++++++++++++++")
         
         return {"loss": loss, "f1":f1}

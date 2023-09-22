@@ -96,16 +96,10 @@ class BaseTask:
 
         results = []
 
-        print("Data Loader : ", data_loader)
-        print("Metric logger : ", metric_logger)
         for samples in metric_logger.log_every(data_loader, print_freq, header):
-            print("==================")
-            print(samples)
             samples = prepare_sample(samples, cuda_enabled=cuda_enabled)
-            print(samples)
 
             eval_output = self.valid_step(model=model, samples=samples)
-            print(eval_output)
             results.extend(eval_output)
 
         if is_dist_avail_and_initialized():
