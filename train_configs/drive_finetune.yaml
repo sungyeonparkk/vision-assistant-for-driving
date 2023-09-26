@@ -15,7 +15,7 @@ model:
 #  imagebind_ckpt_path: # "ckpt/imagebind_huge.pth"
 
   # The ckpt of vision branch after stage1 pretrained, 
-  ckpt: /input/video-llama-ckpt-2/ckpt/finetune_llama2_bddx_v1.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
+  ckpt: /input/video-llama-ckpt-2/ckpt/finetune_llama2_bddx_v2.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
 
 
   # only train vision branch
@@ -48,8 +48,8 @@ datasets:
     data_type: video
     build_info:
       train:
-        anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-reasoning-v1.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-        videos_dir: /input/BDD-X-1/
+        anno_dir: /root/vision-assistant-for-driving/data/HAD_train_data/HAD-instruct-v1.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+        videos_dir: /input/HAD-1/
     vis_processor:
       train:
         name: "alpro_video_train"
