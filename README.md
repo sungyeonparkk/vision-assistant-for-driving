@@ -4,7 +4,6 @@
 
 # VLAAD: Vision-and-Language-Assistant-for-Autonomous-Driving
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Vision-and-Language-Assistant-for-Autonomous-Driving(VLAAD), enabling communication between human driver and vehicle. 
 This repo contains:
