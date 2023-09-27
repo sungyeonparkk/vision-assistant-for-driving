@@ -42,17 +42,14 @@ Example output of 20 seconds long video
 </p>
 
 ## Data Release
-
-<center>
   
 | Base Dataset  | Instruction Dataset |      Size    |   Released  |
-|:---------:|:-------------:|:-------------:|:------:|:--------------------------------------------:|:----------:|
-| [BDD,](https://bdd-data.berkeley.edu/)  [BDD-X](https://github.com/JinkyuKimUCB/explainable-deep-driving)  |  [- Detailed description 3K](./data/BDD_train_data/BDD-Instruct-desc-v3.json)  [- Complex reasoning 35K](./data/BDD_train_data/BDD-instruct-reasoning-v1.json)  | 40seconds long videos and textual descriptions and explanations  BDD: 100K videos BDD-X: 6,970 videos | O |
-| [HAD HRI](https://usa.honda-ri.com/had)  |  [- Detailed description 1K](./data/HAD_train_data/HAD-instruct-description-v1.json)  [- Complex reasoning 11K](./data/HAD_train_data/HAD-instruct_reasoning_v1.json)  [- Conversation 12K](./data/HAD_train_data/HAD-instruct-conversation_v1.json)  | 5,850 videos of 20 seconds long | O |
+|:-------------:|:-------------------:|:-------------:|:----------:|
+| [BDD,](https://bdd-data.berkeley.edu/)  [BDD-X](https://github.com/JinkyuKimUCB/explainable-deep-driving)  | [- Detailed description 3K](./data/BDD_train_data/BDD-Instruct-desc-v3.json)  [- Complex reasoning 35K](./data/BDD_train_data/BDD-instruct-reasoning-v1.json)  | 40 seconds long videos with textual expalnation and description (BDD-X: 6,970, BDD: 100K videos) | O |
+| [HAD HRI](https://usa.honda-ri.com/had)  | [- Detailed description 1K](./data/HAD_train_data/HAD-instruct-description-v1.json)  [- Complex reasoning 11K](./data/HAD_train_data/HAD-instruct_reasoning_v1.json)  [- Conversation 12K](./data/HAD_train_data/HAD-instruct-conversation_v1.json)  | 5,850 videos of 20 seconds long | O |
 | [DRAMA](https://usa.honda-ri.com/drama)   |  - | 17,785 scenario clips with 2 seconds length | released soon |
 | [LOKI](https://usa.honda-ri.com/loki)   |  -  | 644 scenarios with average 12.6 seconds length | released soon |
 
-</center>
 
 Example of VLAAD instruction dataset
 
