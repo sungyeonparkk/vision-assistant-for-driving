@@ -128,7 +128,7 @@ def gradio_answer(chatbot, chat_state, img_list, num_beams, temperature):
     return chatbot, chat_state, img_list
 
 title = """
-<h1 align="center"><a href="https://github.com/DAMO-NLP-SG/Video-LLaMA"><img src="https://s1.ax1x.com/2023/05/22/p9oQ0FP.jpg", alt="Video-LLaMA" border="0" style="margin: 0 auto; height: 200px;" /></a> </h1>
+<h1 align="center"><a href="https://github.com/DAMO-NLP-SG/Video-LLaMA"><alt="VLAAD" border="0" style="margin: 0 auto; height: 200px;" /></a> </h1>
 
 <h1 align="center">Video-LLaMA: An Instruction-tuned Audio-Visual Language Model for Video Understanding</h1>
 
