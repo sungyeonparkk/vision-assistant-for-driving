@@ -31,7 +31,7 @@ Please keep an eye on our future release!
 
 ## Example Output
 Example output of 20 seconds long video 
-- Situation 1: stopped at stop sign on the road and move forward.
+- Situation 1: stopped at the road stop sign and then move forward.
 <p align="center" width="100%">
 <img src="figs/example_output1.png" alt="VLAAD_logo" style="width: 100%; min-width: 300px; display: block; margin: auto;">
 </p>
