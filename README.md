@@ -42,8 +42,6 @@ Example output of 20 seconds long video
 </p>
 
 ## Data Release
-
-<center>
   
 | Base Dataset  | Instruction Dataset |      Size    |   Released  |
 |:-------------:|:-------------------:|:-------------:|:----------:|
@@ -52,8 +50,6 @@ Example output of 20 seconds long video
 | [DRAMA](https://usa.honda-ri.com/drama)   |  - | 17,785 scenario clips with 2 seconds length | released soon |
 | [LOKI](https://usa.honda-ri.com/loki)   |  -  | 644 scenarios with average 12.6 seconds length | released soon |
 
-
-</center>
 
 Example of VLAAD instruction dataset
 
