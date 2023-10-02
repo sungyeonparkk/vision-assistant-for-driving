@@ -20,7 +20,7 @@ spec:
       - secretRef:
             name: wandb-secret
     volumeMounts:
-    - mountPath: "/data"
+    - mountPath: "/input"
       name: vision-assistant-pv
   volumes:
   - name: vision-assistant-pv
