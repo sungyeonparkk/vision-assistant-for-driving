@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: data-uploader-bg
+spec:
+  containers:
+  - name: data-uploader
+    imagePullPolicy: Always
+    image: registry.ferrari.snucse.org:30443/attention-x/data-uploader
+    # args: [ "--root_folder_id", "1l4xvjmG1PInd8bGJ6xAyNW1QxtGig-ah", "--dry_run", "False" ]
+    # Just spin & wait forever
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - name: google-credentials-volume
+      mountPath: /mount
+    - name: vision-assistant-pv
+      mountPath: "/input"
+    resources:
+      limits:
+        cpu: "50"
+        memory: "16Gi"
+  volumes:
+  - name: vision-assistant-pv
+    persistentVolumeClaim:
+      claimName: vision-assistant-pvc
+  - name: google-credentials-volume
+    secret:
+      secretName: google-credentials
