@@ -53,7 +53,7 @@ def download(file, root_dir, dry_run):
     fh = io.FileIO(path, mode='wb')
 
     # Use MediaIoBaseDownload to download in chunks
-    downloader = MediaIoBaseDownload(fh, request, chunksize=1024 * 1024 * 100)
+    downloader = MediaIoBaseDownload(fh, request, chunksize=1024 * 1024 * 10)
 
     done = False
     while not done:

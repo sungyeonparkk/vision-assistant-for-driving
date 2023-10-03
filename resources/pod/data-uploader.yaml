@@ -3,6 +3,7 @@ kind: Pod
 metadata:
   name: data-uploader-fg
 spec:
+  restartPolicy: Never
   containers:
   - name: data-uploader
     imagePullPolicy: Always
@@ -16,7 +17,7 @@ spec:
     resources:
       limits:
         cpu: "50"
-        memory: "16Gi"
+        memory: "128Gi"
   volumes:
   - name: vision-assistant-pv
     persistentVolumeClaim:
