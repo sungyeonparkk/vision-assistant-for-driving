@@ -1,0 +1,1 @@
+k create configMap train-config --from-file=??

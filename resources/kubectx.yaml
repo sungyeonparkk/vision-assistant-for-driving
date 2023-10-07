@@ -1,0 +1,30 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURBRENDQWVpZ0F3SUJBZ0lVVzFUcDU4RWZDaDlUczNDMmtFRlRKdVBweU5Zd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0dERVdNQlFHQTFVRUF4TU5hM1ZpWlhKdVpYUmxjeTFqWVRBZUZ3MHlNekE0TURJd01UTXdNREJhRncwegpNekEzTXpBd01UTXdNREJhTUJneEZqQVVCZ05WQkFNVERXdDFZbVZ5Ym1WMFpYTXRZMkV3Z2dFaU1BMEdDU3FHClNJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURzbC9vSWtGVStWeFgvcUw0YTU1aUhXKzRzRkFGcCtZakYKalBlZnhoMkY2dnNTcnhVeDdUVlJMeld5V1EvaHZ5dGpQTmlTV2ErZ0tHK1g0UHV4SGdUT29rQ3FsODdNMktLSQpMU0ZRY0FjNFBQTFg0OWMyZVViQ0VRNnU3WThaTStCYXhZeTZBN3hkb21sVzdDbnkvSXBpcy9IbzlDV2I2eUlMCmI5S1psV1A5VXhHcmVpTnpCK2ErUlN2MEc1ZFNYVFNINnd1cW4ybzQ2Uk1SbnpwK21WQWgvazhsa2ZIK2tra0EKdnl6UVlHSFRqbVppVVhEQ09NNnZtVzYwSnFjenJ0Q25KWlA1OE5sQzJhNHRIZkI2ZkxwZzNIMmJEdG5OMUZmUgpnQ0htM0JrOURnZHpMVTJ3Ty9xbDE4SXpXZTBYUkozVjlRQW5WT1BRVllMdGhoclBHRjZWQWdNQkFBR2pRakJBCk1BNEdBMVVkRHdFQi93UUVBd0lCQmpBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJTVFRoc2kKWU9TQnVybkFabCt1eStNWXJJUFQyakFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBNTFTY2s1QW9hekZBS3JMTQpnSGVuYjE5MzlLSnU1TnNGMGFhY2l0T3dKR1FwVmpJczA0YjM1TCt6NEtKaHZ1ZVk5ZUw3NWMxM0JROTVUVkh6CmRPVU5QdFlwbjludmNlYVBmRXU4cXg1MDQ1bzc3aCtJaHpBZHFZRXUwVUdLMEswaGhXa2VRM1pJL0R5Rk01V24KQTdjKy9jTERsOThiT0RzUk5wTHVoc1QwdVdrVmtiUk1lMlAzaFVsNXdNZENuaFNPOTlFbGFjMy9yNXhwZ3JIRQo2aFU5ekluWWQ3SWJyZ3NJM2FPbHlEWlQzcGxjTDc1eGF4NjBCU2pJZ2NHYjMvQ2hlRlozbXAwSU5xMHREd3VSCm5UcHlKWkIxV1p1SXRZSU91M0F4OUoyQW9QakQrcEtETURUZjQ2WVZDWG1sWm5aUHFvU05yMXNnSHh2RTdYeGMKUHJCM3dnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://147.46.15.75:6443
+  name: ferrari
+contexts:
+- context:
+    cluster: ferrari
+    namespace: cufft
+    user: snu
+  name: fo
+current-context: fo
+kind: Config
+preferences: {}
+users:
+- name: snu
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - oidc-login
+      - get-token
+      - --oidc-issuer-url=https://id.snucse.org/o
+      - --oidc-client-id=kubernetes-oidc
+      - --oidc-client-secret=kubernetes-oidc
+      command: kubectl
+      env: null
+      interactiveMode: IfAvailable
+      provideClusterInfo: false

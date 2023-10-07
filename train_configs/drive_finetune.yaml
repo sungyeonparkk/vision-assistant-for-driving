@@ -11,11 +11,11 @@ model:
   # If you want train models based on LLaMA-2-chat,
   # some ckpts could be download from our provided huggingface repo
   # i.e.  https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Finetuned
-  llama_model: /input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf  # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or 
+  llama_model: /input/ckpt/llama-2-7b-chat-hf  # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
 #  imagebind_ckpt_path: # "ckpt/imagebind_huge.pth"
 
   # The ckpt of vision branch after stage1 pretrained, 
-  ckpt: /input/video-llama-ckpt-2/ckpt/finetune_llama2_bddx_v2.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
+  ckpt: /input/ckpt/finetune_llama2_bddx_v2.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
 
 
   # only train vision branch
@@ -48,8 +48,8 @@ datasets:
     data_type: video
     build_info:
       train:
-        anno_dir: /root/vision-assistant-for-driving/data/HAD_train_data/HAD-instruct-v1.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-        videos_dir: /input/HAD-1/
+        anno_dir: /root/data/BDD_train_data/BDD-Instruct-v2-filtered-mov.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+        videos_dir: /input/BDD-X-Videos
     vis_processor:
       train:
         name: "alpro_video_train"
@@ -59,7 +59,7 @@ datasets:
       train:
         name: "blip_caption"
     num_video_query_token: 32
-    tokenizer_name: /input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or 
+    tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
     model_type: "llama_v2" # or "vicuna"  # need to set, as vicuna and llama_2_chat use different template  
 
   # webvid_instruct:

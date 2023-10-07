@@ -1,15 +1,17 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vision-assistant-experiment
+  name: vision-assistant-experiment-bg
 spec:
   restartPolicy: Never
   containers:
   - name: experiment-container
     image: "registry.ferrari.snucse.org:30443/attention-x/drive-vision-assistant-experiment:latest"
-    command: ["torchrun"]
-    args: [ "--nproc_per_node=1", "train.py", "--cfg-path", "/train-config/drive_finetune.yaml" ]
-    imagePullPolicy: Always # 변경사항이 없을 경우 IfNotPresent로 실행하면 돈을 아낄 수 있음
+    # Just spin & wait forever
+    # torchrun --nproc_per_node=1 train.py --cfg-path /train-config/drive_finetune.yaml
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    imagePullPolicy: IfNotPresent
     resources:
       limits:
         cpu: "50"
