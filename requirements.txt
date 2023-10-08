@@ -22,3 +22,5 @@ torchaudio
 openai
 python-dotenv
 wandb
+
+kubernetes
