@@ -3,7 +3,7 @@ import argparse
 import yaml
 from kubernetes import client, config, utils
 
-from resources.kubectl import load_context
+from kubectl import load_context
 
 context = load_context()
 

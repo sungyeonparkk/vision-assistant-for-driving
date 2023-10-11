@@ -4,7 +4,7 @@ import time
 import yaml
 from kubernetes import client, config
 
-from resources.kubectl import load_context
+from kubectl import load_context
 
 context = load_context()
 

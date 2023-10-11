@@ -1,4 +1,4 @@
-from resources.kubectl import load_context
+from kubectl import load_context
 from kubernetes import client, config
 
 context = load_context()
