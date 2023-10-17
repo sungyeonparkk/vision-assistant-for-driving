@@ -18,7 +18,51 @@ from video_llama.models.Qformer import BertConfig, BertLMHeadModel
 from video_llama.models.ImageBind.models.imagebind_model import ImageBindModel,ModalityType
 from video_llama.models.ImageBind.models import imagebind_model
 
-import evaluate
+from video_llama.cider_scorer import CiderScorer
+import pdb
+
+class Cider:
+    """
+    Main Class to compute the CIDEr metric 
+
+    """
+    def __init__(self, test=None, refs=None, n=4, sigma=6.0):
+        # set cider to sum over 1 to 4-grams
+        self._n = n
+        # set the standard deviation parameter for gaussian penalty
+        self._sigma = sigma
+
+    def compute_score(self, gts, res):
+        """
+        Main function to compute CIDEr score
+        :param  hypo_for_image (dict) : dictionary with key <image> and value <tokenized hypothesis / candidate sentence>
+                ref_for_image (dict)  : dictionary with key <image> and value <tokenized reference sentence>
+        :return: cider (float) : computed CIDEr score for the corpus 
+        """
+
+        assert(gts.keys() == res.keys())
+        imgIds = gts.keys()
+
+        cider_scorer = CiderScorer(n=self._n, sigma=self._sigma)
+
+        for id in imgIds:
+            hypo = res[id]
+            ref = gts[id]
+
+            # Sanity check.
+            assert(type(hypo) is list)
+            assert(len(hypo) == 1)
+            assert(type(ref) is list)
+            assert(len(ref) > 0)
+
+            cider_scorer += (hypo[0], ref)
+
+        (score, scores) = cider_scorer.compute_score()
+
+        return score, scores
+
+    def method(self):
+        return "CIDEr"
 
 # from flamingo_pytorch import PerceiverResampler
 @registry.register_model("video_llama")
@@ -442,6 +486,7 @@ class VideoLLAMA(Blip2Base):
             rec = len(common_tokens) / len(truth_tokens)
             
             return 2 * (prec * rec) / (prec + rec)
+        cider_calculator = Cider()
 
         if 'conv_type' in samples.keys() and samples['conv_type']=='multi':
             
@@ -500,6 +545,13 @@ class VideoLLAMA(Blip2Base):
             print("============================================")
             
             f1 = compute_f1(prediction=torch.argmax(outputs.logits, dim=-1), truth=samples["labels"])
+            cider_gts = dict()
+            cider_res = dict()
+            pred = torch.argmax(outputs.logits, dim=-1)
+            for i in range(samples["labels"].shape[0]):
+                cider_gts[i] = pred[i]
+                cider_res[i] = samples["lables"][i]
+            cider = cider_calculator.compute_score(gts = cider_gts, res = cider_res)
             print(f1)
 
             print(outputs.logits)
@@ -507,7 +559,7 @@ class VideoLLAMA(Blip2Base):
             # print(samples["labels"])
             print("++++++++++++++++++++++++++++++++++++++++++++")
 
-            return {"loss": loss, "f1": f1}
+            return {"loss": loss, "f1": f1, "cider": cider}
         else:
             image = samples["image"]
 

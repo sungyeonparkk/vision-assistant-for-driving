@@ -76,8 +76,9 @@ class BaseTask:
         with torch.no_grad():
             loss = model(samples)["loss"]
             f1 = model(samples)["f1"]
+            cider = model(samples)["cider"]
 
-        return loss, f1
+        return loss, f1, cider
 
     def before_evaluation(self, model, dataset, **kwargs):
         model.before_evaluation(dataset=dataset, task_type=type(self))
