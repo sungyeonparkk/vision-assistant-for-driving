@@ -37,7 +37,7 @@ class VideoTextPretrainTask(BaseTask):
             samples = next(data_loader)
             samples = prepare_sample(samples, cuda_enabled=cuda_enabled)
             
-            eval_output, f1 = self.valid_step(model=model, samples=samples)
+            eval_output, f1, cider = self.valid_step(model=model, samples=samples)
 
             try:
                 results.extend(eval_output)
@@ -51,4 +51,4 @@ class VideoTextPretrainTask(BaseTask):
         # if is_dist_avail_and_initialized():
         #     dist.barrier()
 
-        return results, f1
+        return results, f1, cider
