@@ -5,9 +5,12 @@ import warnings
 from video_llama.common.registry import registry
 from video_llama.datasets.builders.base_dataset_builder import BaseDatasetBuilder
 from video_llama.datasets.datasets.laion_dataset import LaionDataset
+
 from video_llama.datasets.datasets.llava_instruct_dataset import Instruct_Dataset
 from video_llama.datasets.datasets.video_instruct_dataset import Video_Instruct_Dataset
 from video_llama.datasets.datasets.bdd_instruct_dataset import BDD_Instruct_Dataset
+from video_llama.datasets.datasets.maplm_instruct_dataset import MAPLM_Instruct_Dataset
+from video_llama.datasets.datasets.drama_instruct_dataset import DRAMA_Instruct_Dataset
 
 
 @registry.register_builder("instruct")
@@ -85,4 +88,22 @@ class BDDInstruct_Builder(Instruct_Builder):
 
     DATASET_CONFIG_DICT = {
         "default": "configs/datasets/instruct/bdd_instruct.yaml",
+    }
+
+
+@registry.register_builder("maplm_instruct")
+class MAPLMInstruct_Builder(Instruct_Builder):
+    train_dataset_cls = MAPLM_Instruct_Dataset
+
+    DATASET_CONFIG_DICT = {
+        "default": "configs/datasets/instruct/maplm_instruct.yaml",
+    }
+
+
+@registry.register_builder("drama_instruct")
+class DRAMAInstruct_Builder(Instruct_Builder):
+    train_dataset_cls = DRAMA_Instruct_Dataset
+
+    DATASET_CONFIG_DICT = {
+        "default": "configs/datasets/instruct/drama_instruct.yaml",
     }

@@ -17,6 +17,8 @@ from video_llama.datasets.builders.instruct_builder import (
     WebvidInstruct_Builder,
     LlavaInstruct_Builder,
     BDDInstruct_Builder,
+    MAPLMInstruct_Builder,
+    DRAMAInstruct_Builder,
 )
 
 __all__ = [
@@ -27,6 +29,8 @@ __all__ = [
     "LlavaInstruct_Builder",
     "WebvidInstruct_Builder",
     "BDDInstruct_Builder",
+    "MAPLMInstruct_Builder",
+    "DRAMAInstruct_Builder",
 ]
 
 

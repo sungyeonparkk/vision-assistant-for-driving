@@ -66,8 +66,8 @@ class BDD_Instruct_Dataset(BaseDataset):
 
         self.num_video_query_token = num_video_query_token
         self.vis_root = vis_root
-        self.resize_size = 224
-        self.num_frm = 8
+        self.resize_size = 224  # vis_processor.image_size
+        self.num_frm = 8  # vis_processor.n_frms
         self.tokenizer = LlamaTokenizer.from_pretrained(
             tokenizer_name, use_fast=False, local_files_only=True
         )
