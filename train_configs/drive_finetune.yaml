@@ -7,7 +7,7 @@ model:
 
   # Q-Former
   num_query_token: 32
-
+ 
   # If you want train models based on LLaMA-2-chat,
   # some ckpts could be download from our provided huggingface repo
   # i.e.  https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Finetuned
@@ -15,7 +15,7 @@ model:
 #  imagebind_ckpt_path: # "ckpt/imagebind_huge.pth"
 
   # The ckpt of vision branch after stage1 pretrained, 
-  ckpt: /input/ckpt/finetune_llama2_bddx_v2.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
+  ckpt: /input/ckpt/VL_LLaMA_2_7B-Finetuned.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
 
 
   # only train vision branch
@@ -48,19 +48,55 @@ datasets:
     data_type: video
     build_info:
       train:
-        anno_dir: /root/data/BDD_train_data/BDD-Instruct-v2-filtered-mov.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-        videos_dir: /input/BDD-X-Videos
+        anno_dir: ./data/BDD_train_data/BDD-Instruct-10.json # /root/data/BDD_train_data/BDD-Instruct-v2-filtered-mov.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+        videos_dir: ./data/BDD_train_data/videos/ # /input/BDD-X-Videos
     vis_processor:
       train:
         name: "alpro_video_train"
-        n_frms: 8
+        n_frms: 32
         image_size: 224
     text_processor:
       train:
         name: "blip_caption"
     num_video_query_token: 32
-    tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
+    tokenizer_name: /Users/sungyeon-park/Library/CloudStorage/GoogleDrive-sy.park574@gmail.com/내 드라이브/Video-LLaMA-2/ckpt/llama-2-7b-chat-hf/ # /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
     model_type: "llama_v2" # or "vicuna"  # need to set, as vicuna and llama_2_chat use different template  
+
+  # drama_instruct:
+  #   data_type: video
+  #   build_info:
+  #     train:
+  #       anno_dir: ./data/DRAMA_train_data/DRAMA-instruct.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
+  #       videos_dir: ./data/DRAMA_train_data/video/
+  #   vis_processor:
+  #     train:
+  #       name: "alpro_video_train"
+  #       n_frms: 8
+  #       image_size: 224
+  #   text_processor:
+  #     train:
+  #       name: "blip_caption"
+  #   num_video_query_token: 32
+  #   tokenizer_name: /Users/sungyeon-park/Library/CloudStorage/GoogleDrive-sy.park574@gmail.com/내 드라이브/Video-LLaMA-2/ckpt/llama-2-7b-chat-hf/ # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
+  #   model_type: "llama_v2" # or "vicuna" 
+
+  # maplm_instruct:
+  #   data_type: images
+  #   build_info:
+  #     train:
+  #       anno_dir: ./data/MAPLM_train_data/MAPLM-instruct.json
+  #       videos_dir: ./data/MAPLM_train_data/video/
+  #   vis_processor:
+  #     train:
+  #       name: "blip2_image_train"
+  #       image_size: 224
+  #   text_processor:
+  #     train:
+  #       name: "blip_caption"
+  #   num_video_query_token: 32
+  #   tokenizer_name: /Users/sungyeon-park/Library/CloudStorage/GoogleDrive-sy.park574@gmail.com/내 드라이브/Video-LLaMA-2/ckpt/llama-2-7b-chat-hf/ # "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or "ckpt/llama-2-7b-chat-hf"  or "ckpt/llama-2-13b-chat-hf"
+  #   model_type: "llama_v2" # or "vicuna"  # need to set, as vicuna and llama_2_chat use different template
+
 
   # webvid_instruct:
   #   data_type: video
@@ -90,7 +126,7 @@ datasets:
   #     text_processor:
   #       train:
   #         name: "blip_caption"
-      
+
   # llava_instruct:
   #   data_type: images
   #   build_info:
