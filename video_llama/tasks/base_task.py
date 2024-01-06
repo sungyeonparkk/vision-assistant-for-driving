@@ -73,7 +73,13 @@ class BaseTask:
 
     def valid_step(self, model, samples):
         loss = model(samples)["loss"]
-        return loss
+        
+        metric_dict = dict()
+        for k, v in model(samples).items():
+            if k != "loss":
+                metric_dict[k] = v
+            
+        return loss, metric_dict
 
     def before_evaluation(self, model, dataset, **kwargs):
         model.before_evaluation(dataset=dataset, task_type=type(self))
