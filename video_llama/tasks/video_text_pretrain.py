@@ -32,16 +32,13 @@ class VideoTextPretrainTask(BaseTask):
 
         results = []
 
-        print("Data Loader : ", data_loader)
-        print("Metric logger : ", metric_logger)
         i = 0
         for samples in metric_logger.log_every(data_loader, print_freq, header):
             samples = next(data_loader)
             samples = prepare_sample(samples, cuda_enabled=cuda_enabled)
 
-            eval_output = self.valid_step(model=model, samples=samples)
-            print(results)
-            print(eval_output)
+            eval_output, metric_dict = self.valid_step(model=model, samples=samples)
+
             try:
                 results.extend(eval_output)
             except TypeError:
@@ -51,7 +48,8 @@ class VideoTextPretrainTask(BaseTask):
             if i >= 2:
                 break
 
+        # Presumed to be code for DDP. But code output error when it is uncommented. Refer to notion page.
         # if is_dist_avail_and_initialized():
         #     dist.barrier()
 
-        return results
+        return results, metric_dict

@@ -505,10 +505,15 @@ class RunnerBase:
             model=model,
             dataset=self.datasets[split_name],
         )
-        results = self.task.evaluation(model, data_loader)
+        results, metric_dict = self.task.evaluation(model, data_loader)
+        
+        # Pick which metric to use in validation
+        agg_metrics = -torch.mean(torch.stack(results)) # Default option
+        agg_metrics = metric_dict["CIDEr"]              # Change key to change metric. Refer (https://github.com/Aldenhovel/bleu-rouge-meteor-cider-spice-eval4imagecaption)
+        
         if results is not None:
             return self.task.after_evaluation(
-                agg_metrics=-torch.mean(torch.stack(results)),
+                agg_metrics=agg_metrics,
                 val_result=results,
                 split_name=split_name,
                 epoch=cur_epoch,
