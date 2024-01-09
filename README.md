@@ -45,8 +45,8 @@ Example output of 20 seconds long video
   
 | Base Dataset  | Instruction Dataset     |      Size    |   Released  |
 |:-------------:|:-----------------------:|:------------:|:----------:|
-| [BDD,](https://bdd-data.berkeley.edu/)  [BDD-X](https://github.com/JinkyuKimUCB/explainable-deep-driving)  | [- Detailed description 3K](./data/BDD_train_data/BDD-Instruct-desc-v3.json)<br>[- Complex reasoning 35K](./data/BDD_train_data/BDD-instruct-reasoning-v1.json)  | 40 seconds long videos with <br>textual expalnation and description <br>(BDD-X: 6,970, BDD: 100K videos) | O |
-| [HAD HRI](https://usa.honda-ri.com/had)  | [- Detailed description 1K](./data/HAD_train_data/HAD-instruct-description-v1.json)<br>[- Complex reasoning 11K](./data/HAD_train_data/HAD-instruct-reasoning-v1.json)<br>[- Conversation 12K](./data/HAD_train_data/HAD-instruct-conversation-v1.json)  | 5,850 videos of 20 seconds long | O |
+| [BDD,](https://bdd-data.berkeley.edu/)  [BDD-X](https://github.com/JinkyuKimUCB/explainable-deep-driving)  | [- Detailed description 3K](./data/BDD_train_data/BDD-Instruct-desc.json)<br>[- Complex reasoning 35K](./data/BDD_train_data/BDD-Instruct-reasoning.json)  | 40 seconds long videos with <br>textual expalnation and description <br>(BDD-X: 6,970, BDD: 100K videos) | O |
+| [HAD HRI](https://usa.honda-ri.com/had)  | [- Detailed description 1K](./data/HAD_train_data/HAD-Instruct-description.json)<br>[- Complex reasoning 11K](./data/HAD_train_data/HAD-Instruct-reasoning.json)<br>[- Conversation 12K](./data/HAD_train_data/HAD-Instruct-conversation.json)  | 5,850 videos of 20 seconds long | O |
 | [DRAMA](https://usa.honda-ri.com/drama)   |  - | 17,785 scenario clips <br>with 2 seconds length | released soon |
 | [LOKI](https://usa.honda-ri.com/loki)   |  -  | 644 scenarios with <br>average 12.6 seconds length | released soon |
 

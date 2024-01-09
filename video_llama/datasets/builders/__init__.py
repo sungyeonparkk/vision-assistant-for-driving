@@ -19,6 +19,7 @@ from video_llama.datasets.builders.instruct_builder import (
     BDDInstruct_Builder,
     MAPLMInstruct_Builder,
     DRAMAInstruct_Builder,
+    HADInstruct_Builder,
 )
 
 __all__ = [
