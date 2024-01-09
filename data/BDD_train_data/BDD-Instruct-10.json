@@ -1,34 +1,34 @@
 [
     {
-        "video_id": "02346f91-a62c5e01",
+        "video_id": "02346f91-a62c5e01.mov",
         "QA": {
             "q": "Explain the driver's behavior in the scene, including the road objects and the traffic.",
             "a": "First, the scene begins with the ego-car stationary at a standstill. The path in front of the ego-car is blocked due to traffic, which is also at a halt. In this phase, there are a handful of other vehicles around; a couple of cars right ahead, one of them being extremely close and another at some distance on the far right. There's also an additional car on the right side of our ego-car, albeit somewhat off to the side. \n\nNext, the traffic begins to gradually clear up, and the car\u2019s activity reflects that; the ego-car starts to inch slowly forward and veers slightly left. The vehicles ahead are moving forward at a sluggish pace which allows the ego-car to also proceed ahead. The car right in front of the ego-car doesn't seem to have moved much, but the car on the right which was at some distance, appears marginally closer on the horizontal axis. Meanwhile, the car on the ego-car\u2019s right disregards the rest and maintains its position. \n\nIn conclusion, the overall driver's behavior suggests their strict adherence to traffic rules and careful driving, manoeuvering slowly in response to the traffic movement and maintaining a safe distance from other vehicles."
         }
     },
     {
-        "video_id": "1a4c5d15-23123885",
+        "video_id": "1a4c5d15-23123885.mov",
         "QA": {
             "q": "Give an explanation of the contents of the driving scene with precision",
             "a": "Initially, the ego-car is stationary due to a pedestrian obstructing the path on the road. After the pedestrian moves out of the way, the car proceeds to drive forward, since the path is now free of any obstructions. Following this, the car starts to decrease its speed as it prepares to make a right turn in response to a stop sign, a veering road, and an intersection. The turn is made carefully, considering the merging of another road onto its path.\n\nSubsequently, the vehicle maneuvers to the left, following the natural curve of the road. Soon after, as it approaches a Y-intersection, the car turns in the right direction, choosing this path over the left, likely due to the driver's intended route.\n\nFinally, the ego-car continues to drive slowly forward, finding itself in a tight space between parked vehicles on both sides of the road with much snow on the ground. The narrow lane requires the driver to be cautious while proceeding, hence the reduced speed. Throughout the driving scene, the driver appropriately adjusts the vehicle's direction and speed based on the road conditions and other entities in the environment, ensuring a safe journey."
         }
     },
     {
-        "video_id": "083bc808-43718f9d",
+        "video_id": "083bc808-43718f9d.mov",
         "QA": {
             "q": "Offer an explanation of the driving scene presented.",
             "a": "The driving scene begins with the ego-car moving forward straight down the road due to green traffic lights, meaning the road ahead is clear to proceed. Next, the car gently drifts into the left lane as the traffic continues to move ahead, indicating that the driver intends to follow the flow of the traffic. Shortly, the driver decides to shift back to the right lane, possibly because the other cars in the left lane are starting to queue up in order to make a turn. This could mean that the driver wants to avoid potential delays and keep going at a steady pace. Finally, the car continues to drive forward in the right lane, as it is clear with no obstructions or interruptions. This likely indicates that the driver is aware of the road conditions and positions of other vehicles on the road, prioritizing safety and smooth flow."
         }
     },
     {
-        "video_id": "0e6538be-925b18a8",
+        "video_id": "0e6538be-925b18a8.mov",
         "QA": {
             "q": "Give an explanation of the contents of the driving scene with precision",
             "a": "The driving scene initially depicts the ego-car smoothly making its way down a clear road. This uninterrupted journey, however, doesn't last long as the car starts to reduce its speed, finally coming to a halt. The cause of this action is revealed to be a red traffic signal which mandates an immediate stop, highlighting the driver's adherence to road safety rules.\n\nThe stop isn't brief as the red light continues to dictate the pause in the car's trajectory. Adding to the halting period, the presence of pedestrians crossing the street assertively seconds the decision to wait. The driver showcases patience and respects the pedestrians' right to cross the road safely.\n\nFinally, the prolonged stop terminates as the formerly red traffic light flips to a green signal. In response, the car now steadily increases its speed and sets itself back on the journey down the road. The driver's actions suggest an attentiveness to the changing street lights and a willingness to respond swiftly yet safely to these changes in the driving environment."
         }
     },
     {
-        "video_id": "043026cb-a30ed3f0",
+        "video_id": "043026cb-a30ed3f0.mov",
         "QA": {
             "q": "Present a compact description of the driver's actions and cause to explain these actions.",
             "a": "The driver in the ego-car is moving forward as the traffic in their lane is flowing freely, despite the weather condition. The activation of the wipers indicates it is likely raining, and the driver is maintaining visibility through the windshield by using them. The driver's actions suggest a careful consideration of the road conditions and an intent to continue with the journey despite the inclement weather."

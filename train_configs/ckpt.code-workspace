@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "ckpt",
+			"path": "../../Library/CloudStorage/GoogleDrive-sy.park574@gmail.com/내 드라이브/Video-LLaMA-2/ckpt"
+		},
+		{
+			"name": "vision-assistant-for-driving",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

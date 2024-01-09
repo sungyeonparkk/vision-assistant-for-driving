@@ -9,6 +9,7 @@ from video_llama.datasets.datasets.laion_dataset import LaionDataset
 from video_llama.datasets.datasets.llava_instruct_dataset import Instruct_Dataset
 from video_llama.datasets.datasets.video_instruct_dataset import Video_Instruct_Dataset
 from video_llama.datasets.datasets.bdd_instruct_dataset import BDD_Instruct_Dataset
+from video_llama.datasets.datasets.had_instruct_dataset import HAD_Instruct_Dataset
 from video_llama.datasets.datasets.maplm_instruct_dataset import MAPLM_Instruct_Dataset
 from video_llama.datasets.datasets.drama_instruct_dataset import DRAMA_Instruct_Dataset
 
@@ -88,6 +89,15 @@ class BDDInstruct_Builder(Instruct_Builder):
 
     DATASET_CONFIG_DICT = {
         "default": "configs/datasets/instruct/bdd_instruct.yaml",
+    }
+
+
+@registry.register_builder("had_instruct")
+class HADInstruct_Builder(Instruct_Builder):
+    train_dataset_cls = HAD_Instruct_Dataset
+
+    DATASET_CONFIG_DICT = {
+        "default": "configs/datasets/instruct/had_instruct.yaml",
     }
 
 
