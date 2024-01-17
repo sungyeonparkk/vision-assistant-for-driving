@@ -593,9 +593,15 @@ class VideoLLAMA(Blip2Base):
             reference_json["images"] = []
             reference_json["annotations"] = []
             generated_json = []
+            
             for i in range(samples["labels"].shape[0]):
-                reference_text = self.llama_tokenizer.convert_ids_to_tokens(truth[i].tolist())
-                generated_text = self.llama_tokenizer.convert_ids_to_tokens(pred[i].tolist())
+                truth_i = truth[i]
+                truth_i = truth_i[truth_i != -100]
+                pred_i = pred[i]
+                pred_i = pred_i[pred_i != -100]
+            
+                reference_text = self.llama_tokenizer.decode(truth_i.tolist())
+                generated_text = self.llama_tokenizer.decode(pred_i.tolist())
                 
                 reference_json["images"].append({"id": str(i)})
                 reference_json["annotations"].append({"image_id": str(i), "id": str(i), "caption": reference_text})
