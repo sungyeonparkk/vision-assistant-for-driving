@@ -49,7 +49,7 @@ datasets:
     build_info:
       train:
         anno_dir: /input/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-        videos_dir: /input/BDD-X-sample/
+        videos_dir: /input/BDD-X-videos/
       val:
         anno_dir: /input/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
         videos_dir: /input/BDD-X-videos/
