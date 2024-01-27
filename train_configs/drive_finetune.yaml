@@ -46,72 +46,107 @@ datasets:
     data_type: video
     build_info:
       train:
-        anno_dir: ./data/BDD_train_data/BDD-Instruct.json # Reaoning/Description Only : BDD-Instruct-reasoning.json/BDD-Instruct-desc.json
+        anno_dir: ./data/BDD_train_data/BDD-instruct-train.json # Reaoning/Description Only : BDD-Instruct-reasoning.json/BDD-Instruct-desc.json
+        videos_dir: ./data/BDD_train_data/videos/
+      val:
+        anno_dir: ./data/BDD_train_data/BDD-instruct-val.json # Reaoning/Description Only : BDD-Instruct-reasoning.json/BDD-Instruct-desc.json
         videos_dir: ./data/BDD_train_data/videos/
     vis_processor:
       train:
         name: "alpro_video_train"
         n_frms: 32
         image_size: 224
+      val:
+        name: "alpro_video_train"
+        n_frms: 32
+        image_size: 224
     text_processor:
       train:
+        name: "blip_caption"
+      val:
         name: "blip_caption"
     num_video_query_token: 32
     tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
     model_type: "llama_v2"
 
-  # had_instruct:
-  #   data_type: video
-  #   build_info:
-  #     train:
-  #       anno_dir: ./data/HAD_train_data/HAD-instruct-v1.json
-  #       videos_dir: ./data/HAD_train_data/videos/ # /input/BDD-X-Videos
-  #   vis_processor:
-  #     train:
-  #       name: "alpro_video_train"
-  #       n_frms: 32
-  #       image_size: 224
-  #   text_processor:
-  #     train:
-  #       name: "blip_caption"
-  #   num_video_query_token: 32
-  #   tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
-  #   model_type: "llama_v2" # or "vicuna"  # need to set, as vicuna and llama_2_chat use different template
+#   had_instruct:
+#     data_type: video
+#     build_info:
+#       train:
+#         anno_dir: ./data/HAD_train_data/HAD-instruct-train.json
+#         videos_dir: ./data/HAD_train_data/videos/ # /input/BDD-X-Videos
+#       val:
+#         anno_dir: ./data/HAD_train_data/HAD-instruct-val.json
+#         videos_dir: ./data/HAD_train_data/videos/ # /input/BDD-X-Videos
+#     vis_processor:
+#       train:
+#         name: "alpro_video_train"
+#         n_frms: 32
+#         image_size: 224
+#       val:
+#         name: "alpro_video_train"
+#         n_frms: 32
+#         image_size: 224
+#     text_processor:
+#       train:
+#         name: "blip_caption"
+#       val:
+#         name: "blip_caption"
+#     num_video_query_token: 32
+#     tokenizer_name: /input/ckpt/llama-2-7b-chat-hf 
+#     model_type: "llama_v2" 
 
-  # drama_instruct:
-  #   data_type: video
-  #   build_info:
-  #     train:
-  #       anno_dir: ./data/DRAMA_train_data/DRAMA-Instruct.json
-  #       videos_dir: ./data/DRAMA_train_data/video/
-  #   vis_processor:
-  #     train:
-  #       name: "alpro_video_train"
-  #       n_frms: 8
-  #       image_size: 224
-  #   text_processor:
-  #     train:
-  #       name: "blip_caption"
-  #   num_video_query_token: 32
-  #   tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
-  #   model_type: "llama_v2"
+#   drama_instruct:
+#     data_type: video
+#     build_info:
+#       train:
+#         anno_dir: ./data/DRAMA_train_data/DRAMA-instruct-train.json
+#         videos_dir: ./data/DRAMA_train_data/video/
+#       val:
+#         anno_dir: ./data/DRAMA_train_data/DRAMA-instruct-val.json
+#         videos_dir: ./data/DRAMA_train_data/video/
+#     vis_processor:
+#       train:
+#         name: "alpro_video_train"
+#         n_frms: 8
+#         image_size: 224
+#       val:
+#         name: "alpro_video_train"
+#         n_frms: 8
+#         image_size: 224
+#     text_processor:
+#       train:
+#         name: "blip_caption"
+#       val:
+#         name: "blip_caption"
+#     num_video_query_token: 32
+#     tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
+#     model_type: "llama_v2"
 
-  # maplm_instruct:
-  #   data_type: images
-  #   build_info:
-  #     train:
-  #       anno_dir: ./data/MAPLM_train_data/MAPLM-instruct.json
-  #       videos_dir: ./data/MAPLM_train_data/video/
-  #   vis_processor:
-  #     train:
-  #       name: "blip2_image_train"
-  #       image_size: 224
-  #   text_processor:
-  #     train:
-  #       name: "blip_caption"
-  #   num_video_query_token: 8
-  #   tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
-  #   model_type: "llama_v2"
+#   maplm_instruct:
+#     data_type: images
+#     build_info:
+#       train:
+#         anno_dir: ./data/MAPLM_train_data/MAPLM-instruct-train.json
+#         videos_dir: ./data/MAPLM_train_data/video/
+#       val:
+#         anno_dir: ./data/MAPLM_train_data/MAPLM-instruct-val.json
+#         videos_dir: ./data/MAPLM_train_data/video/
+#     vis_processor:
+#       train:
+#         name: "blip2_image_train"
+#         image_size: 224
+#       val:
+#         name: "blip2_image_train"
+#         image_size: 224
+#     text_processor:
+#       train:
+#         name: "blip_caption"
+#       val:
+#         name: "blip_caption"
+#     num_video_query_token: 8
+#     tokenizer_name: /input/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or
+#     model_type: "llama_v2"
 
   # webvid_instruct:
   #   data_type: video
