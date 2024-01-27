@@ -22,6 +22,10 @@ from video_llama.models.ImageBind.models.imagebind_model import (
 )
 from video_llama.models.ImageBind.models import imagebind_model
 
+from pycocotools.coco import COCO
+from pycocoevalcap.eval import COCOEvalCap
+import json
+
 
 # from flamingo_pytorch import PerceiverResampler
 @registry.register_model("video_llama")
@@ -577,7 +581,45 @@ class VideoLLAMA(Blip2Base):
                     labels=targets,
                 )
             loss = outputs.loss
-            return {"loss": loss}
+            
+            output_dict = dict()
+            output_dict["loss"] = loss
+            
+            # TODO : output_dict["metric"] = metric 추가하기
+            pred = torch.argmax(outputs.logits, dim=-1)
+            truth = samples["labels"]
+            
+            reference_json = dict()
+            reference_json["images"] = []
+            reference_json["annotations"] = []
+            generated_json = []
+            
+            for i in range(samples["labels"].shape[0]):
+                truth_i = truth[i]
+                truth_i = truth_i[truth_i != -100]
+                pred_i = pred[i]
+                pred_i = pred_i[pred_i != -100]
+            
+                reference_text = self.llama_tokenizer.decode(truth_i.tolist())
+                generated_text = self.llama_tokenizer.decode(pred_i.tolist())
+                
+                reference_json["images"].append({"id": str(i)})
+                reference_json["annotations"].append({"image_id": str(i), "id": str(i), "caption": reference_text})
+                generated_json.append({"image_id": str(i), "caption": generated_text})
+            with open("reference_json.json", 'w') as outfile:
+                json.dump(reference_json, outfile)
+            with open("generated_json.json", 'w') as outfile:
+                json.dump(generated_json, outfile)
+                
+            coco = COCO("reference_json.json")
+            coco_result = coco.loadRes("generated_json.json")
+            coco_eval = COCOEvalCap(coco, coco_result)
+            coco_eval.evaluate()
+            
+            for metric, score in coco_eval.eval.items():
+                output_dict[metric] = score
+            
+            return output_dict
         else:
             image = samples["image"]
 
@@ -651,8 +693,39 @@ class VideoLLAMA(Blip2Base):
                     labels=targets,
                 )
             loss = outputs.loss
+            
+            output_dict = dict()
+            output_dict["loss"] = loss
+            
+            # TODO : output_dict["metric"] = metric 추가하기
+            pred = torch.argmax(outputs.logits, dim=-1)
+            truth = samples["labels"]
+            
+            reference_json = dict()
+            reference_json["images"] = []
+            reference_json["annotations"] = []
+            generated_json = []
+            for i in range(samples["labels"].shape[0]):
+                reference_text = self.llama_tokenizer.convert_ids_to_tokens(truth[i].tolist())
+                generated_text = self.llama_tokenizer.convert_ids_to_tokens(pred[i].tolist())
+                
+                reference_json["images"].append({"id": str(i)})
+                reference_json["annotations"].append({"image_id": str(i), "id": str(i), "caption": reference_text})
+                generated_json.append({"image_id": str(i), "caption": generated_text})
+            with open("reference_json.json", 'w') as outfile:
+                json.dump(reference_json, outfile)
+            with open("generated_json.json", 'w') as outfile:
+                json.dump(generated_json, outfile)
+                
+            coco = COCO("reference_json.json")
+            coco_result = coco.loadRes("generated_json.json")
+            coco_eval = COCOEvalCap(coco, coco_result)
+            coco_eval.evaluate()
+            
+            for metric, score in coco_eval.eval.items():
+                output_dict[metric] = score
 
-        return {"loss": loss}
+        return output_dict
 
     @classmethod
     def from_config(cls, cfg):

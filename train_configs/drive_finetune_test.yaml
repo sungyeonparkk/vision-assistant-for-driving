@@ -11,11 +11,11 @@ model:
   # If you want train models based on LLaMA-2-chat,
   # some ckpts could be download from our provided huggingface repo
   # i.e.  https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Finetuned
-  llama_model: /input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf  # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or 
+  llama_model: ./ckpt/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf # /input/ckpt/llama-2-7b-chat-hf  # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or 
 #  imagebind_ckpt_path: # "ckpt/imagebind_huge.pth"
 
   # The ckpt of vision branch after stage1 pretrained, 
-  ckpt: /input/video-llama-ckpt-2/ckpt/VL_LLaMA_2_7B_Finetuned.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
+  ckpt: ./ckpt/Video-LLaMA-2-7B-Finetuned # /input/ckpt/VL_LLaMA_2_7B_Finetuned.pth   # you can use our pretrained ckpt from https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-13B-Pretrained/
 
 
   # only train vision branch
@@ -44,48 +44,48 @@ model:
 
 
 datasets:
-  # bdd_instruct:
-  #   data_type: video
-  #   build_info:
-  #     train:
-  #       anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-  #       videos_dir: /input/BDD-X-sample/
-  #     val:
-  #       anno_dir: /root/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-10.json # ./vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-v2.json
-  #       videos_dir: /input/BDD-X-sample/
-  #   vis_processor:
-  #     train:
-  #       name: "alpro_video_train"
-  #       n_frms: 8
-  #       image_size: 224
-  #     val:
-  #       name: "alpro_video_train"
-  #       n_frms: 8
-  #       image_size: 224
-  #   text_processor:
-  #     train:
-  #       name: "blip_caption"
-  #     val:
-  #       name: "blip_caption"
-  #   num_video_query_token: 32
-  #   tokenizer_name: /input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf # "ckpt/llama-2-13b-chat-hf" or "ckpt/vicuna-13b/" or "ckpt/vicuna-7b/" or 
-  #   model_type: "llama_v2" # or "vicuna"  # need to set, as vicuna and llama_2_chat use different template  
-
-  maplm_instruct:
-    data_type: images
+  bdd_instruct:
+    data_type: video
     build_info:
-      anno_dir: /data/maplm_train_data/MAPLM-QA.json
-      videos_dir: /data/maplm_train_data/
+      train:
+        anno_dir: ./data/BDD_train_data/BDD-Instruct-sample.json # /input/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-sample.json 
+        videos_dir: ./data/BDD_train_data/videos
+      val:
+        anno_dir: ./data/BDD_train_data/BDD-Instruct-sample.json # /input/vision-assistant-for-driving/data/BDD_train_data/BDD-Instruct-sample.json
+        videos_dir: ./data/BDD_train_data/videos
     vis_processor:
       train:
-        name: "blip2_image_train"
+        name: "alpro_video_train"
+        n_frms: 32
+        image_size: 224
+      val:
+        name: "alpro_video_train"
+        n_frms: 32
         image_size: 224
     text_processor:
       train:
         name: "blip_caption"
+      val:
+        name: "blip_caption"
     num_video_query_token: 32
-    tokenizer_name: /input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf
-    model_type: "llama_v2"
+    tokenizer_name: ./ckpt/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf # /input/ckpt/llama-2-7b-chat-hf 
+    model_type: "llama_v2" # or "vicuna"  # need to set, as vicuna and llama_2_chat use different template  
+
+  # maplm_instruct:
+  #   data_type: images
+  #   build_info:
+  #     anno_dir: /data/maplm_train_data/MAPLM-QA.json
+  #     videos_dir: /data/maplm_train_data/
+  #   vis_processor:
+  #     train:
+  #       name: "blip2_image_train"
+  #       image_size: 224
+  #   text_processor:
+  #     train:
+  #       name: "blip_caption"
+  #   num_video_query_token: 32
+  #   tokenizer_name: /input/video-llama-ckpt-2/ckpt/llama-2-7b-chat-hf
+  #   model_type: "llama_v2"
 
   # webvid_instruct:
   #   data_type: video
@@ -156,7 +156,7 @@ run:
 
   evaluate: False 
   train_splits: ["train"]
-  # valid_splits: ["val"]
+  valid_splits: ["val"]
 
   device: "cuda"
   world_size: 1

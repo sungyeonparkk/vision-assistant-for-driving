@@ -1,0 +1,100 @@
+[
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "What can be inferred about the traffic situation and movements of our car and the vehicle in front?",
+            "a": "From the observed situation, it appears our car initially slowed to a stop due to a red light. This red light also caused a halt to the vehicle in front of us. Although there was a brief moment when our vehicle moved forward, this was in response to the car in front slightly moving forward as well. However, the light remained red, which means we returned to a complete stop."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "If the traffic light had turned green after our car inched forward, what might our car have done?",
+            "a": "Only assuming from the given situations, if the traffic light had turned green after we inched forward, our car would have most likely proceeded forward along the road, following the vehicle in front."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "What happens if the car in front suddenly turns right at the red light?",
+            "a": "If the car in front of us decided to make a sudden right turn at the red light, it would clear the lane in front of us. However, without a green light signal, we would still have to remain stationary until the traffic light changes. "
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "Why did our car inch forward when the car in front did the same, even though the light was still red?",
+            "a": "It's common in traffic that vehicles inch forward despite the red light, usually to prepare for when the light changes to green. Our car might have moved slightly forward to maintain an appropriate distance with the vehicle in front."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "What can we infer about the driver's attentiveness from these actions?",
+            "a": "The actions suggest that the driver is quite attentive to the traffic situation. They initially slowed to stop due to the red light and also reacted by inching forward when the vehicle in front moved forward, indicating that they are keeping an eye on the behavior of the vehicle ahead, as well as the traffic signals."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "What can be inferred about the traffic situation and movements of our car and the vehicle in front?",
+            "a": "From the observed situation, it appears our car initially slowed to a stop due to a red light. This red light also caused a halt to the vehicle in front of us. Although there was a brief moment when our vehicle moved forward, this was in response to the car in front slightly moving forward as well. However, the light remained red, which means we returned to a complete stop."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "If the traffic light had turned green after our car inched forward, what might our car have done?",
+            "a": "Only assuming from the given situations, if the traffic light had turned green after we inched forward, our car would have most likely proceeded forward along the road, following the vehicle in front."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "What happens if the car in front suddenly turns right at the red light?",
+            "a": "If the car in front of us decided to make a sudden right turn at the red light, it would clear the lane in front of us. However, without a green light signal, we would still have to remain stationary until the traffic light changes. "
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "Why did our car inch forward when the car in front did the same, even though the light was still red?",
+            "a": "It's common in traffic that vehicles inch forward despite the red light, usually to prepare for when the light changes to green. Our car might have moved slightly forward to maintain an appropriate distance with the vehicle in front."
+        }
+    },
+    {
+        "video_id": "06d54ae6-76749641.mov",
+        "QA": {
+            "q": "What can we infer about the driver's attentiveness from these actions?",
+            "a": "The actions suggest that the driver is quite attentive to the traffic situation. They initially slowed to stop due to the red light and also reacted by inching forward when the vehicle in front moved forward, indicating that they are keeping an eye on the behavior of the vehicle ahead, as well as the traffic signals."
+        }
+    },
+    {
+        "video_id": "01b4e4b9-fc7a5264.mov",
+        "QA": {
+            "q": "Why was the car moving slowly at the beginning?",
+            "a": "The car in front of our ego-car was moving slowly, which was why our car had to reduce its speed."
+        }
+    },
+    {
+        "video_id": "01b4e4b9-fc7a5264.mov",
+        "QA": {
+            "q": "Why did the car make a swerve movement?",
+            "a": "The ego-car made an attempt to pass the slow-moving car in front but swerved back because of other traffic blocking the overtake."
+        }
+    },
+    {
+        "video_id": "01b4e4b9-fc7a5264.mov",
+        "QA": {
+            "q": "When the car was trying to go around slow traffic, could it instantly get to the left lane?",
+            "a": "No. The car had to merge into the left lane slowly due to the slower traffic in its current lane."
+        }
+    },
+    {
+        "video_id": "01b4e4b9-fc7a5264.mov",
+        "QA": {
+            "q": "Did the car have to stop during its journey?",
+            "a": "Yes, the car had to stop and start several times because the traffic in front of it was stopping and starting."
+        }
+    }
+]

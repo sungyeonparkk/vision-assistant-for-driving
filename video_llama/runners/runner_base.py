@@ -200,6 +200,8 @@ class RunnerBase:
         Returns:
             dict: {split_name: (tuples of) dataloader}
         """
+        print("DTLDTST")
+        print(self.datasets)
         if self._dataloaders is None:
             # concatenate map-style datasets and chain wds.DataPipe datasets separately
             # training set becomes a tuple (ConcatDataset, ChainDataset), both are
@@ -390,10 +392,11 @@ class RunnerBase:
                 for split_name in self.valid_splits:
                     logging.info("Evaluating on {}.".format(split_name))
 
-                    val_log = self.eval_epoch(
+                    val_log, val_metric_dict = self.eval_epoch(
                         split_name=split_name, cur_epoch=cur_epoch
                     )
                     print(val_log)
+                    wandb.log(val_metric_dict)
                     if val_log is not None:
                         if is_main_process():
                             assert (
@@ -505,14 +508,20 @@ class RunnerBase:
             model=model,
             dataset=self.datasets[split_name],
         )
-        results = self.task.evaluation(model, data_loader)
+        results, metric_dict = self.task.evaluation(model, data_loader)
+        
+        # Pick which metric to use in validation
+        agg_metrics = -torch.mean(torch.stack(results)) # Default option
+        agg_metrics = metric_dict["CIDEr"]              # Change key to change metric. Refer (https://github.com/Aldenhovel/bleu-rouge-meteor-cider-spice-eval4imagecaption)
+        
         if results is not None:
+            print("RETURN========================================")
             return self.task.after_evaluation(
-                agg_metrics=-torch.mean(torch.stack(results)),
+                agg_metrics=agg_metrics,
                 val_result=results,
                 split_name=split_name,
                 epoch=cur_epoch,
-            )
+            ), metric_dict
 
     def unwrap_dist_model(self, model):
         if self.use_distributed:
